@@ -2,9 +2,7 @@
 //!
 //! Changes in this version:
 //! 1) Hero background changed to a plain, lighter grey (no gradient).
-//! 2) Added global CSS fallbacks to ensure code blocks are visible by default
-//!    (addresses cases where the CSS-only tab selector structure prevents
-//!    code panels from being shown because radio inputs are nested).
+
 //! 3) Improved placeholder styling for component previews so the "Live preview"
 //!    placeholder is clearer and includes a subtle hint when an actual preview
 //!    is not rendered server-side.
@@ -86,13 +84,7 @@ pub fn render() -> Markup {
     }
 }
 
-/// Generate retro hero CSS + a few global fallbacks for showcase usability.
-///
-/// Important: this file deliberately includes a small set of global fallbacks
-/// (below the hero styles) which are safe, non-destructive, and ensure the
-/// static prebuilt `output/` site remains usable in browsers even when the
-/// markup structure for the code-tabs is not ideal. The correct long-term fix
-/// is to update the `showcase.rs` markup so radio inputs are siblings of the
+/// Generate retro hero CSS.
 /// code blocks.
 pub fn retro_css() -> String {
     r#"
@@ -248,28 +240,7 @@ pub fn retro_css() -> String {
     font-style: normal;
 }
 
-/* Make code blocks visible by default as a robust fallback.
-   Root cause: the CSS-only tab switching assumes radio inputs are siblings
-   of code panels. In the generated markup the inputs were nested (inside
-   `.sh-code-tabs`) and the code panels were separate siblings of that
-   container, which broke the sibling selector used to toggle visibility.
 
-   The correct fix is to move the radio inputs so they are siblings of the
-   code panels (edit `showcase.rs`). As a non-destructive, backwards
-   compatible remediation we show code blocks by default and keep tab
-   styling behavior intact where it still works. */
-.sh-code-block {
-    display: block !important;
-    background: #0f1724;
-    color: #e6eef8;
-    padding: 1rem;
-    border-radius: 8px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-    font-size: 0.82rem;
-    overflow-x: auto;
-    line-height: 1.45;
-    margin-bottom: 0.75rem;
-}
 
 /* Improve readability for download button in code area */
 .sh-code-download {

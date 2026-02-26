@@ -3,8 +3,13 @@ name = "shallot"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+description = "Iron & Glass. A zero-JavaScript Rust UI component library."
+documentation = "https://docs.rs/shallot"
+repository = "https://github.com/shallot-rs/shallot"
+readme = "../README.md"
+keywords = ["ui", "components", "zero-js", "maud", "css"]
+categories = ["gui", "web-programming"]
 
 [dependencies]
 shallot_components = { path = "../shallot_components" }
 shallot_foundation = { path = "../shallot_foundation" }
-

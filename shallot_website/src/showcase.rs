@@ -10,11 +10,19 @@ use shallot_components::{
     avatar::Avatar,
     badge::Badge,
     border_beam::BorderBeam,
+    breadcrumbs::{BreadcrumbItem, Breadcrumbs},
     button::Button,
+    capdrop::CapDrop,
     card::Card,
     confetti::Confetti,
     input::Input,
+    liquid_button::LiquidButton,
+    progress::ProgressBar,
+    rating::Rating as StarRating,
+    refractive_gauge::RefractiveGauge,
+    shadow_elevator::{ShadowElevator, ShadowLevel},
     skeleton::Skeleton,
+    timeline::{Timeline, TimelineItem},
 };
 
 /// Component category
@@ -313,6 +321,52 @@ fn render_preview(name: &str) -> Markup {
                 span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;" {
                     "🎉"
                 }
+            }
+        },
+        "LiquidButton" => html! {
+            div aria-label=(format!("{} component preview: Animated liquid warp effect", name)) {
+                (LiquidButton::new("Liquid Effect").render())
+            }
+        },
+        "RefractiveGauge" => html! {
+            div style="width: 150px;" aria-label=(format!("{} component preview: Refractive CSS gauge", name)) {
+                (RefractiveGauge::new(75.0).render())
+            }
+        },
+        "ShadowElevator" => html! {
+            div style="display: flex; gap: 1rem;" aria-label=(format!("{} component preview: Dynamic elevation shadows", name)) {
+                (ShadowElevator::new(html! { "Elevated" }).level(ShadowLevel::Level4).render())
+            }
+        },
+        "Timeline" => html! {
+            div style="max-width: 200px;" aria-label=(format!("{} component preview: Chronological event list", name)) {
+                (Timeline::new(vec![
+                    TimelineItem::new("Step 1", "Started"),
+                    TimelineItem::new("Step 2", "In progress"),
+                ]).render())
+            }
+        },
+        "CapDrop" => html! {
+            div aria-label=(format!("{} component preview: Decorative drop cap", name)) {
+                (CapDrop::new("S", "hallot brings iron logic to the web.").render())
+            }
+        },
+        "Breadcrumbs" => html! {
+            div aria-label=(format!("{} component preview: Path navigation links", name)) {
+                (Breadcrumbs::new(vec![
+                    BreadcrumbItem { label: "Home", href: Some("/") },
+                    BreadcrumbItem { label: "Components", href: None },
+                ]).render())
+            }
+        },
+        "Rating" => html! {
+            div aria-label=(format!("{} component preview: Star rating visualization", name)) {
+                (StarRating::new(4).render())
+            }
+        },
+        "Progress" => html! {
+            div style="width: 200px;" aria-label=(format!("{} component preview: Visual progress bar", name)) {
+                (ProgressBar::new(65).render())
             }
         },
         _ => html! {

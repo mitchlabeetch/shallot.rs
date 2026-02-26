@@ -96,6 +96,8 @@ pub mod surface;
 pub mod util;
 
 // New form components
+pub mod copy_button;
+pub mod file_list;
 pub mod file_upload;
 // Date/time form components
 pub mod date_picker;
@@ -236,7 +238,11 @@ pub use skeleton::{
 
 pub use animated_beam::{animated_beam_css, beam_presets, AnimatedBeam, AnimatedBeamGroup};
 
-pub use button::{Button, ButtonSize, ButtonVariant};
+pub use button::{button_css, Button, ButtonSize, ButtonVariant};
+
+pub use alert::{alert_css, Alert, AlertKind};
+
+pub use fx::{fx_css, GlowCard, ShimmerButton, ShinyButton};
 
 pub use enhanced_button::{
     enhanced_button_css, AnimationType, AriaConfig, ButtonShape, EnhancedButton,
@@ -265,12 +271,12 @@ pub use form::{
     ValidationResult, Validator,
 };
 
-pub use collapsible::Collapsible;
+pub use collapsible::{collapsible_css, Collapsible};
 pub use footer::{footer_css, Footer, FooterColumn};
 pub use join::{join_css, Join, JoinGap, JoinVariant};
 pub use scroll_area::{scroll_area_css, ScrollArea};
 pub use slider::{slider_css, Slider, SliderSize, SliderVariant};
-pub use steps::Steps;
+pub use steps::{steps_css, Steps};
 
 // Re-added component exports
 pub use accordion::{accordion_css, Accordion, AccordionItem, AccordionVariant};
@@ -280,6 +286,8 @@ pub use avatar_group::{
 pub use color_picker::{color_picker_css, ColorPicker, ColorSwatch, ColorSwatches};
 pub use counter::{counter_css, Counter, CounterGroup, CounterLayout, CounterVariant, Statistic};
 pub use dialog::{dialog_css, ConfirmDialog, Dialog, DialogSize, DialogTrigger, DialogVariant};
+pub use drawer::{drawer_css, Drawer};
+pub use dropdown::{dropdown_css, Dropdown};
 pub use menu::{
     menu_css, DropdownMenu, DropdownPosition, Menu, MenuDivider, MenuItem, MenuVariant,
 };
@@ -289,6 +297,11 @@ pub use pagination::{
 pub use search_input::{
     search_input_css, SearchInput, SearchResult, SearchVariant, SearchWithResults,
 };
+
+pub use dock::{dock_css, Dock};
+pub use navbar::{navbar_css, Navbar};
+pub use navigation::navigation_css;
+pub use sidebar::{sidebar_css, Sidebar};
 pub use table::{table_css, ColumnAlign, SortDir, Table, TableColumn, TableRow, TableVariant};
 pub use tag_input::{tag_input_css, Tag, TagInput, TagList, TagVariant};
 pub use toggle_group::{
@@ -306,9 +319,14 @@ pub use magnetic_button::{
 
 pub use glitch_text::{glitch_text_css, GlitchColor, GlitchIntensity, GlitchText};
 
+pub use capdrop::{capdrop_css, CapDrop, CapDropSize, CapDropStyle};
+
 pub use parallax_section::{
     parallax_section_css, ParallaxDirection, ParallaxLayer, ParallaxSection, ParallaxSpeed,
 };
+pub use site_map::{site_map_css, SiteMap};
+pub use table_of_contents::{table_of_contents_css, TableOfContents};
+pub use video_player::{video_player_css, VideoPlayer};
 
 pub use tabs::{tabs_css, AnimatedTabs, Tab, TabAnimation, TabSize, TabVariant, Tabs};
 // Effects - Animation components
@@ -324,6 +342,34 @@ pub use typing_animation::{
     typing_animation_css, TypingAnimation, TypingAnimationVariant, TypingSpeed,
 };
 
+pub use bento::{bento_css, BentoCard, BentoCardSize, BentoGrid, BentoVariant};
+pub use breadcrumbs::{breadcrumbs_css, Breadcrumbs};
+pub use carousel::{carousel_css, Carousel};
+pub use timeline::{timeline_css, Timeline, TimelineItem};
+
+pub use liquid_button::{liquid_button_css, LiquidButton, LiquidButtonSize};
+pub use masked_image::{masked_image_css, MaskShape, MaskedImage};
+pub use mesh_gradient::{mesh_gradient_css, MeshGradientBackground};
+pub use refractive_gauge::{refractive_gauge_css, RefractiveGauge};
+pub use shadow_elevator::{shadow_elevator_css, ShadowElevator};
+
+pub use copy_button::{copy_button_css, CopyButton};
+pub use credit_card_input::{credit_card_input_css, CardType, CreditCardInput};
+pub use data_display::{data_display_css, Chip};
+pub use file_list::{file_list_css, FileList};
+pub use glass_select::{glass_select_css, GlassSelect};
+pub use icon::{icon_css, Icon, IconButton};
+pub use image_upload::{image_upload_css, ImageUpload};
+pub use multi_select::{multi_select_css, MultiSelect};
+pub use rich_text::{rich_text_css, RichText};
+pub use z_stack::{z_stack_css, ZStack};
+
+pub use feedback::{feedback_css, Spinner};
+pub use progress::{progress_css, ProgressBar};
+pub use progress_circle::{progress_circle_css, ProgressCircle};
+pub use rating::{rating_css, Rating as StarRating};
+pub use toast::{toast_css, Toast, ToastContainer};
+
 /// Generate all component CSS
 pub fn all_component_css() -> String {
     let mut css = String::new();
@@ -334,6 +380,28 @@ pub fn all_component_css() -> String {
 
     // Layout
     css.push_str(&layout_css());
+    css.push('\n');
+
+    // Navigation
+    css.push_str(&navbar_css());
+    css.push('\n');
+    css.push_str(&sidebar_css());
+    css.push('\n');
+    css.push_str(&dock_css());
+    css.push('\n');
+    css.push_str(&navigation_css());
+    css.push('\n');
+
+    // Alert
+    css.push_str(&alert_css());
+    css.push('\n');
+
+    // Button
+    css.push_str(&button_css());
+    css.push('\n');
+
+    // FX
+    css.push_str(&fx_css());
     css.push('\n');
 
     // Input
@@ -431,6 +499,12 @@ pub fn all_component_css() -> String {
     css.push_str(&menu_css());
     css.push('\n');
 
+    css.push_str(&drawer_css());
+    css.push('\n');
+
+    css.push_str(&dropdown_css());
+    css.push('\n');
+
     css.push_str(&pagination_css());
     css.push('\n');
 
@@ -506,6 +580,33 @@ pub fn all_component_css() -> String {
 
     css.push_str(&command_palette::command_palette_css());
     css.push('\n');
+
+    // Credit Card Input
+    css.push_str(&credit_card_input_css());
+    css.push('\n');
+
+    // Glass Select
+    css.push_str(&glass_select_css());
+    css.push('\n');
+
+    // Image Upload
+    css.push_str(&image_upload_css());
+    css.push('\n');
+
+    // Multi Select
+    css.push_str(&multi_select_css());
+    css.push('\n');
+
+    // Rich Text
+    css.push_str(&rich_text_css());
+    css.push('\n');
+
+    // Copy Button
+    css.push_str(&copy_button_css());
+    css.push('\n');
+
+    // File List
+    css.push_str(&file_list_css());
     css.push('\n');
 
     // New components - Layout
@@ -562,6 +663,21 @@ pub fn all_component_css() -> String {
     css.push_str(&magnetic_button_css());
     css.push('\n');
 
+    css.push_str(&liquid_button_css());
+    css.push('\n');
+
+    css.push_str(&masked_image_css());
+    css.push('\n');
+
+    css.push_str(&mesh_gradient_css());
+    css.push('\n');
+
+    css.push_str(&refractive_gauge_css());
+    css.push('\n');
+
+    css.push_str(&shadow_elevator_css());
+    css.push('\n');
+
     css.push_str(&glitch_text_css());
     css.push('\n');
 
@@ -581,6 +697,52 @@ pub fn all_component_css() -> String {
 
     // Scroll Area
     css.push_str(&scroll_area_css());
+    css.push('\n');
+
+    // Breadcrumbs
+    css.push_str(&breadcrumbs_css());
+    css.push('\n');
+
+    // Carousel
+    css.push_str(&carousel_css());
+    css.push('\n');
+
+    // Timeline
+    css.push_str(&timeline_css());
+    css.push('\n');
+
+    // Feedback & Notifications
+    css.push_str(&feedback_css());
+    css.push('\n');
+    css.push_str(&progress_css());
+    css.push('\n');
+    css.push_str(&toast_css());
+    css.push('\n');
+    css.push_str(&rating_css());
+    css.push('\n');
+
+    // Specialized Content
+    css.push_str(&capdrop_css());
+    css.push('\n');
+    css.push_str(&site_map_css());
+    css.push('\n');
+    css.push_str(&table_of_contents_css());
+    css.push('\n');
+    css.push_str(&video_player_css());
+    css.push('\n');
+
+    // Primitives & Specialized Content
+    css.push_str(&icon_css());
+    css.push('\n');
+    css.push_str(&data_display_css());
+    css.push('\n');
+    css.push_str(&z_stack_css());
+    css.push('\n');
+    css.push_str(&collapsible_css());
+    css.push('\n');
+    css.push_str(&steps_css());
+    css.push('\n');
+    css.push_str(&progress_circle_css());
     css.push('\n');
 
     // BorderBeam

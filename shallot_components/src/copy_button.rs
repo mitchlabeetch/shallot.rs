@@ -110,11 +110,11 @@ impl<'a> Render for CopyButton<'a> {
             button
                 type="button"
                 class=(classes)
-                disabled?=(self.disabled)
+                disabled?[self.disabled]
                 data-copy-text=(self.text_to_copy)
                 data-label=(label)
                 data-success-label=(success_label)
-                aria-label={"Copy: " (self.text_to_copy)} {
+                aria-label=(format!("Copy: {}", self.text_to_copy)) {
                 span class="sh-copy-btn__icon" {
                     // Copy icon (clipboard)
                     svg

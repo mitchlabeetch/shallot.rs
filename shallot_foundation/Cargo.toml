@@ -3,6 +3,9 @@ name = "shallot_foundation"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+description = "Design tokens, theming engine, and animation primitives for Shallot.rs"
+documentation = "https://docs.rs/shallot_foundation"
+repository = "https://github.com/shallot-rs/shallot"
+readme = "README.md"
 
 [dependencies]
-

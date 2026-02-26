@@ -151,28 +151,7 @@
     font-style: normal;
 }
 
-/* Make code blocks visible by default as a robust fallback.
-   Root cause: the CSS-only tab switching assumes radio inputs are siblings
-   of code panels. In the generated markup the inputs were nested (inside
-   `.sh-code-tabs`) and the code panels were separate siblings of that
-   container, which broke the sibling selector used to toggle visibility.
 
-   The correct fix is to move the radio inputs so they are siblings of the
-   code panels (edit `showcase.rs`). As a non-destructive, backwards
-   compatible remediation we show code blocks by default and keep tab
-   styling behavior intact where it still works. */
-.sh-code-block {
-    display: block !important;
-    background: #0f1724;
-    color: #e6eef8;
-    padding: 1rem;
-    border-radius: 8px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-    font-size: 0.82rem;
-    overflow-x: auto;
-    line-height: 1.45;
-    margin-bottom: 0.75rem;
-}
 
 /* Improve readability for download button in code area */
 .sh-code-download {

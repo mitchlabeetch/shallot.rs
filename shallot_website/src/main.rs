@@ -2,6 +2,7 @@
 //!
 //! Generates the static website HTML and CSS files.
 
+use shallot_components::all_component_css;
 use shallot_website::{homepage, main_css, retro_hero, rss, showcase_css};
 use std::fs;
 use std::path::Path;
@@ -31,6 +32,9 @@ fn main() {
     fs::write(styles_dir.join("showcase.css"), showcase_css())
         .expect("Failed to write showcase.css");
 
+    fs::write(styles_dir.join("components.css"), all_component_css())
+        .expect("Failed to write components.css");
+
     println!("✅ Website generated successfully in {}/", out_dir);
     println!("📄 Files created:");
     println!("   - {}/index.html", out_dir);
@@ -38,6 +42,7 @@ fn main() {
     println!("   - {}/styles/main.css", out_dir);
     println!("   - {}/styles/retro.css", out_dir);
     println!("   - {}/styles/showcase.css", out_dir);
+    println!("   - {}/styles/components.css", out_dir);
     println!(
         "\n🚀 Open {}/index.html in your browser to view the website!",
         out_dir
