@@ -405,6 +405,11 @@ pub fn render() -> Markup {
                 }
             }
 
+            /* Category navigation */
+            nav class="sh-categories" aria-label="Component categories" {
+            }
+
+            /* Category navigation */
             /* Community themes section */
             (theme_marketplace::render())
 
