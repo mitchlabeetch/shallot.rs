@@ -57,6 +57,7 @@ pub const THEME_PRESETS: &[ThemePreset] = &[
         secondary: "#d97706",
         accent: "#fbbf24",
     },
+<<<<<<< HEAD
     ThemePreset {
         name: "Dark Ocean",
         primary: "#667eea",
@@ -75,6 +76,8 @@ pub const THEME_PRESETS: &[ThemePreset] = &[
         secondary: "#ef4444",
         accent: "#ec4899",
     },
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 ];
 
 /// Render the theme switcher
@@ -133,11 +136,14 @@ pub fn render() -> Markup {
                 }
 
                 label class="sh-theme-option" {
+<<<<<<< HEAD
                     input type="checkbox" id="option-dark-mode" class="sh-theme-option__input" ;
                     span class="sh-theme-option__label" { "Dark mode" }
                 }
 
                 label class="sh-theme-option" {
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                     input type="checkbox" id="option-radius" class="sh-theme-option__input" ;
                     span class="sh-theme-option__label" { "Rounded corners" }
                 }
@@ -379,6 +385,7 @@ pub fn theme_switcher_css() -> String {
     --sh-accent: #fbbf24;
 }
 
+<<<<<<< HEAD
 .sh-theme-switcher:has(#theme-7:checked) {
     --sh-primary: #667eea;
     --sh-primary-hover: #5a67d8;
@@ -412,6 +419,8 @@ pub fn theme_switcher_css() -> String {
     --sh-primary-bg: rgba(102, 126, 234, 0.2);
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 /* Option toggles using checkbox hack */
 #option-radius:not(:checked) ~ * {
     --sh-radius-sm: 0;

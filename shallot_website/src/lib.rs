@@ -5,11 +5,16 @@
 
 pub mod component_docs;
 pub mod retro_hero;
+<<<<<<< HEAD
 pub mod rss;
 pub mod showcase;
 pub mod theme_marketplace;
 pub mod theme_switcher;
 pub mod webring;
+=======
+pub mod showcase;
+pub mod theme_switcher;
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 
 use maud::{html, Markup, DOCTYPE};
 
@@ -68,11 +73,14 @@ pub fn homepage() -> Markup {
                 link rel="stylesheet" href="styles/components.css";
             }
             body {
+<<<<<<< HEAD
                 /* Skip to content link for accessibility */
                 a href="#showcase" class="sh-skip-link" {
                     "Skip to content"
                 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                 (hero)
                 (showcase)
 
@@ -86,6 +94,7 @@ pub fn homepage() -> Markup {
                         p class="sh-site-footer__tagline" {
                             "Iron logic. Glass aesthetics. Pure Rust."
                         }
+<<<<<<< HEAD
                         p class="sh-site-footer__links" {
                             a href="feed.xml" { "📰 RSS Feed" }
                             " | "
@@ -99,6 +108,8 @@ pub fn homepage() -> Markup {
                         }
                         /* Webring widget */
                         (webring::render())
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                     }
                 }
             }
@@ -108,6 +119,7 @@ pub fn homepage() -> Markup {
 
 /// Generate main CSS
 pub fn main_css() -> String {
+<<<<<<< HEAD
     let mut css = String::new();
     css.push_str(&main_css_content());
     css.push_str(&webring::webring_css());
@@ -116,6 +128,8 @@ pub fn main_css() -> String {
 }
 
 fn main_css_content() -> String {
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
     r#"
 /* ============================================
    SHALLOT WEBSITE - Main Styles
@@ -146,6 +160,7 @@ fn main_css_content() -> String {
     --sh-radius-full: 9999px;
 }
 
+<<<<<<< HEAD
 /* Dark mode support via data attribute */
 [data-theme="dark"] {
     --sh-text: #f9fafb;
@@ -158,6 +173,8 @@ fn main_css_content() -> String {
     --sh-primary-bg: rgba(102, 126, 234, 0.2);
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 /* Reset & Base */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -167,7 +184,10 @@ fn main_css_content() -> String {
 
 html {
     scroll-behavior: smooth;
+<<<<<<< HEAD
     scroll-padding-top: 100px;
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 }
 
 body {
@@ -218,6 +238,7 @@ a:hover {
     color: var(--sh-text-muted);
 }
 
+<<<<<<< HEAD
 .sh-site-footer__links {
     margin-top: 0.75rem;
     font-size: 0.75rem;
@@ -232,6 +253,8 @@ a:hover {
     text-decoration: underline;
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 .sh-heart {
     display: inline-block;
     animation: sh-heartbeat 1s ease-in-out infinite;
@@ -267,6 +290,7 @@ a:hover {
     outline-offset: 2px;
 }
 
+<<<<<<< HEAD
 /* Skip Link - Accessibility */
 .sh-skip-link {
     position: absolute;
@@ -301,6 +325,8 @@ a:hover {
     pointer-events: none;
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

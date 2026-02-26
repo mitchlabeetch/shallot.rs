@@ -3,6 +3,7 @@
 //! Displays all 129 components organized by category.
 //! Each component has a preview, description, and expandable code view.
 
+<<<<<<< HEAD
 use crate::theme_marketplace;
 use maud::{html, Markup, Render};
 use shallot_components::{
@@ -16,6 +17,9 @@ use shallot_components::{
     input::Input,
     skeleton::Skeleton,
 };
+=======
+use maud::{html, Markup};
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 
 /// Component category
 pub struct ComponentCategory {
@@ -250,6 +254,7 @@ pub const SAMPLE_COMPONENTS: &[(&str, &str, &str, &str)] = &[
     ),
 ];
 
+<<<<<<< HEAD
 /// Render a live preview for a component
 fn render_preview(name: &str) -> Markup {
     match name {
@@ -323,10 +328,13 @@ fn render_preview(name: &str) -> Markup {
     }
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 /// Render the showcase section
 pub fn render() -> Markup {
     html! {
         main class="sh-showcase" id="showcase" {
+<<<<<<< HEAD
             /* Search bar - CSS only using checkbox hack */
             div class="sh-search-container" {
                 input type="checkbox" id="search-toggle" class="sh-search-toggle" ;
@@ -351,6 +359,8 @@ pub fn render() -> Markup {
             /* Community themes section */
             (theme_marketplace::render())
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
             /* Category navigation */
             nav class="sh-categories" aria-label="Component categories" {
                 ul class="sh-categories__list" role="tablist" {
@@ -384,12 +394,23 @@ pub fn render() -> Markup {
                         }
 
                         div class="sh-component-grid" {
+<<<<<<< HEAD
                             @for (name, cat, description, _tagline) in SAMPLE_COMPONENTS {
                                 @if cat == &category.id {
                                     article class="sh-component-card" {
                                         div class="sh-component-card__preview" {
                                             /* Live component preview */
                                             (render_preview(name))
+=======
+                            @for (name, cat, description, tagline) in SAMPLE_COMPONENTS {
+                                @if cat == &category.id {
+                                    article class="sh-component-card" {
+                                        div class="sh-component-card__preview" {
+                                            /* Component preview placeholder */
+                                            div class="sh-component-card__placeholder" {
+                                                span { (tagline) }
+                                            }
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                         }
 
                                         div class="sh-component-card__content" {
@@ -411,16 +432,21 @@ pub fn render() -> Markup {
                                                     for=(format!("code-{}", name.to_lowercase()))
                                                     class="sh-code-dropdown__toggle"
                                                 {
+<<<<<<< HEAD
                                                     span class="sh-visually-hidden" {
                                                         "View code for " (name) " component"
                                                     }
                                                     span aria-hidden="true" { "View code" }
+=======
+                                                    span { "View code" }
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                     span class="sh-code-dropdown__icon" aria-hidden="true" {
                                                         "▼"
                                                     }
                                                 }
 
                                                 div class="sh-code-dropdown__content" {
+<<<<<<< HEAD
                                                     /* Download button */
                                                     a
                                                         href=(format!("data:text/plain;charset=utf-8,{}example%20code%20for%20{}", "%5B%20Example%20code%20%5D", name.to_lowercase()))
@@ -433,6 +459,10 @@ pub fn render() -> Markup {
 
                                                     /* Code tabs */
                                                     div class="sh-code-tabs" role="tablist" aria-label=(format!("Code view options for {}", name)) {
+=======
+                                                    /* Code tabs */
+                                                    div class="sh-code-tabs" role="tablist" {
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                         input
                                                             type="radio"
                                                             name=(format!("tabs-{}", name.to_lowercase()))
@@ -445,8 +475,11 @@ pub fn render() -> Markup {
                                                             for=(format!("full-{}", name.to_lowercase()))
                                                             class="sh-code-tab"
                                                             role="tab"
+<<<<<<< HEAD
                                                             aria-selected="true"
                                                             tabindex="0"
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                         {
                                                             "Full Code"
                                                         }
@@ -462,8 +495,11 @@ pub fn render() -> Markup {
                                                             for=(format!("library-{}", name.to_lowercase()))
                                                             class="sh-code-tab"
                                                             role="tab"
+<<<<<<< HEAD
                                                             aria-selected="false"
                                                             tabindex="-1"
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                         {
                                                             "In Library"
                                                         }
@@ -472,6 +508,7 @@ pub fn render() -> Markup {
                                                     /* Code blocks */
                                                     pre class="sh-code-block sh-code-block--full" {
                                                         code {
+<<<<<<< HEAD
                                                             "// " (name) " Component\n"
                                                             "// Source: shallot_components/src/" (name.to_lowercase()) ".rs\n"
                                                             "\n"
@@ -506,11 +543,17 @@ pub fn render() -> Markup {
                                                             "        }\n"
                                                             "    }\n"
                                                             "}"
+=======
+                                                            "/* Full self-contained code for " (name) " */"
+                                                            "\n/* This would show the complete component implementation */"
+                                                            "\n/* Including all CSS, HTML structure, and variants */"
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                         }
                                                     }
 
                                                     pre class="sh-code-block sh-code-block--library" {
                                                         code {
+<<<<<<< HEAD
                                                             "// 1. Add to your Cargo.toml:\n"
                                                             "// [dependencies]\n"
                                                             "// shallot_components = \"0.1\"\n"
@@ -522,6 +565,13 @@ pub fn render() -> Markup {
                                                             "html! {\n"
                                                             "    (" (name) "::new(\"Example\").render())\n"
                                                             "}"
+=======
+                                                            "/* Usage in your Rust project */"
+                                                            "\nuse shallot_components::" (name.to_lowercase()) "::" (name) ";"
+                                                            "\n\n" (name.to_lowercase()) "::new()"
+                                                            "\n    ." (name.to_lowercase()) "()"
+                                                            "\n    .render()"
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                                                         }
                                                     }
                                                 }
@@ -550,6 +600,7 @@ pub fn showcase_css() -> String {
 }
 
 /* Category Navigation */
+<<<<<<< HEAD
 /* Search Bar - CSS Only */
 .sh-search-container {
     position: relative;
@@ -633,6 +684,8 @@ pub fn showcase_css() -> String {
     color: var(--sh-text-muted);
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 .sh-categories {
     position: sticky;
     top: 0;
@@ -799,6 +852,7 @@ pub fn showcase_css() -> String {
     display: block;
 }
 
+<<<<<<< HEAD
 /* Code Download Button */
 .sh-code-download {
     display: inline-flex;
@@ -821,6 +875,8 @@ pub fn showcase_css() -> String {
 }
 
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 /* Code Tabs */
 .sh-code-tabs {
     display: flex;
@@ -847,6 +903,7 @@ pub fn showcase_css() -> String {
     background: var(--sh-surface-2);
 }
 
+<<<<<<< HEAD
 .sh-code-tab:focus {
     outline: 2px solid var(--sh-primary);
     outline-offset: 2px;
@@ -857,6 +914,8 @@ pub fn showcase_css() -> String {
     outline-offset: 2px;
 }
 
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 .sh-code-tab__radio:checked + .sh-code-tab {
     background: var(--sh-primary);
     color: white;
@@ -895,6 +954,7 @@ pub fn showcase_css() -> String {
         padding: 0;
     }
 }
+<<<<<<< HEAD
 
 /* Print Styles */
 @media print {
@@ -943,6 +1003,8 @@ pub fn showcase_css() -> String {
         padding: 0;
     }
 }
+=======
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
 "#
     .to_string()
 }

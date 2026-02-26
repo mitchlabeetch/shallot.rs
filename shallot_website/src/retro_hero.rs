@@ -97,11 +97,15 @@ pub fn render() -> Markup {
                     " | "
                     a href="#themes" { "🎨 Themes" }
                     " | "
+<<<<<<< HEAD
                     a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" {
                         "💾 GitHub"
                         span class="sh-visually-hidden" { " (opens in new tab)" }
                         span aria-hidden="true" { " ↗" }
                     }
+=======
+                    a href="https://github.com/shallot-rs/shallot" { "💾 GitHub" }
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
                 }
 
                 hr class="sh-retro-hero__divider" aria-hidden="true";
@@ -144,7 +148,11 @@ pub fn retro_css() -> String {
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
+<<<<<<< HEAD
     background: linear-gradient(180deg, #808080 0%, #9a9a9a 50%, #696969 100%);
+=======
+    background: linear-gradient(180deg, #000080 0%, #0000aa 50%, #000080 100%);
+>>>>>>> bdf16c3 (Initial commit: Shallot.rs project)
     overflow: hidden;
     font-family: 'Times New Roman', Times, serif;
 }
