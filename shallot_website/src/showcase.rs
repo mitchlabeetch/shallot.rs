@@ -316,8 +316,11 @@ fn render_preview(name: &str) -> Markup {
             }
         },
         _ => html! {
-            div class="sh-component-card__placeholder" aria-label=(format!("{} component preview placeholder", name)) {
+            div class="sh-component-card__placeholder" aria-label=(format!("{} component preview placeholder — live preview coming soon", name)) {
                 span { "Live preview" }
+                span style="display: block; font-size: 0.75rem; color: #999; margin-top: 0.25rem;" {
+                    "(coming soon)"
+                }
             }
         },
     }
