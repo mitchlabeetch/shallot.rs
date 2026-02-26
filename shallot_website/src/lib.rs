@@ -8,6 +8,7 @@ pub mod retro_hero;
 pub mod rss;
 pub mod showcase;
 pub mod theme_marketplace;
+pub mod theme_panel;
 pub mod theme_switcher;
 pub mod webring;
 
@@ -73,6 +74,9 @@ pub fn homepage() -> Markup {
                     "Skip to content"
                 }
 
+                /* Theme panel for zero-JS preview customization */
+                (theme_panel::render())
+
                 (hero)
                 (showcase)
 
@@ -112,6 +116,7 @@ pub fn main_css() -> String {
     css.push_str(&main_css_content());
     css.push_str(&webring::webring_css());
     css.push_str(&theme_marketplace::theme_marketplace_css());
+    css.push_str(&theme_panel::theme_panel_css());
     css
 }
 
