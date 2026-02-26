@@ -1,5 +1,30 @@
 /* ==========================================================================
    SHALLOT WEBSITE — Component Showcase
+   ========================================================================== */
+
+/* Hide raw checkboxes/radios used for CSS-only state - common patterns */
+input[type="checkbox"],
+input[type="radio"] {
+  /* Default: hide visually but keep accessible */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Show visually styled replacements instead */
+/* These classes are used as visual replacements for the hidden inputs */
+
+/* ==========================================================================
+   CATEGORY NAVIGATION
+   ========================================================================== */
+
+.sh-cat-nav {
+   SHALLOT WEBSITE — Component Showcase
    Column layout, IDE-style code panels, scroll-driven animations,
    CSS-only replay buttons. Zero JavaScript. Pure CSS state machine.
    ========================================================================== */
