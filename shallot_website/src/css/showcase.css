@@ -1247,3 +1247,212 @@ section:target .sh-cat-link {
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   COMPONENT GRID - One-by-One Layout
+   ========================================================================== */
+
+.sh-component-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   COMPONENT CARD - Individual Component Display
+   ========================================================================== */
+
+.sh-component-card {
+  background: var(--sh-surface);
+  border: 1px solid var(--sh-border);
+  border-radius: var(--sh-radius-lg);
+  overflow: hidden;
+  transition: all var(--sh-dur-med) var(--sh-ease-out);
+}
+
+.sh-component-card:hover {
+  border-color: var(--sh-primary);
+  box-shadow: var(--sh-shadow-md);
+  transform: translateY(-2px);
+}
+
+.sh-component-card__preview {
+  padding: 2rem 1.5rem;
+  background: var(--sh-surface-2);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.sh-component-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--sh-text-muted);
+  font-size: 0.875rem;
+}
+
+.sh-component-card__placeholder::before {
+  content: "◈";
+  font-size: 1.5rem;
+  opacity: 0.3;
+}
+
+.sh-component-card__content {
+  padding: 1.25rem 1.5rem;
+}
+
+.sh-component-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sh-text);
+  margin-bottom: 0.375rem;
+}
+
+.sh-component-card__description {
+  font-size: 0.875rem;
+  color: var(--sh-text-secondary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   CODE DROPDOWN - Toggle Code Snippets
+   ========================================================================== */
+
+.sh-code-dropdown {
+  margin-top: 1rem;
+}
+
+.sh-code-dropdown__checkbox {
+  display: none;
+}
+
+.sh-code-dropdown__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--sh-text-secondary);
+  background: var(--sh-surface-2);
+  border: 1px solid var(--sh-border);
+  border-radius: var(--sh-radius-md);
+  cursor: pointer;
+  transition: all var(--sh-dur-fast) ease;
+  font-family: ui-monospace, monospace;
+}
+
+.sh-code-dropdown__toggle:hover {
+  background: var(--sh-surface-3);
+  color: var(--sh-primary);
+  border-color: var(--sh-primary);
+}
+
+.sh-code-dropdown__toggle::before {
+  content: "▸";
+  font-size: 0.75rem;
+  transition: transform var(--sh-dur-fast) ease;
+}
+
+.sh-code-dropdown__checkbox:checked + .sh-code-dropdown__toggle::before {
+  transform: rotate(90deg);
+}
+
+.sh-code-dropdown__panel {
+  display: none;
+  margin-top: 0.5rem;
+  background: #1a1a2e;
+  border-radius: var(--sh-radius-md);
+  overflow: hidden;
+}
+
+.sh-code-dropdown__checkbox:checked ~ .sh-code-dropdown__panel {
+  display: block;
+}
+
+.sh-code-dropdown__code {
+  padding: 1rem 1.25rem;
+  background: #1a1a2e;
+  color: #e4e4e7;
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", Menlo, Monaco, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Syntax highlighting for code */
+.sh-code-dropdown__code .keyword { color: #c792ea; }
+.sh-code-dropdown__code .string { color: #c3e88d; }
+.sh-code-dropdown__code .comment { color: #546e7a; font-style: italic; }
+.sh-code-dropdown__code .type { color: #82aaff; }
+.sh-code-dropdown__code .function { color: #82aaff; }
+.sh-code-dropdown__code .macro { color: #89ddff; }
+
+/* ==========================================================================
+   COMPONENT SECTION - Category Headers
+   ========================================================================== */
+
+.sh-component-section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--sh-border);
+}
+
+.sh-component-section:last-child {
+  border-bottom: none;
+}
+
+.sh-component-section__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sh-text);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sh-component-section__title span {
+  font-size: 1.25rem;
+}
+
+.sh-component-section__description {
+  font-size: 1rem;
+  color: var(--sh-text-secondary);
+  margin-bottom: 2rem;
+  max-width: 60ch;
+}
+
+/* ==========================================================================
+   RESPONSIVE - Mobile Adjustments
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .sh-component-card__preview {
+    padding: 1.5rem 1rem;
+    min-height: 100px;
+  }
+  
+  .sh-component-card__content {
+    padding: 1rem 1.25rem;
+  }
+  
+  .sh-component-card__title {
+    font-size: 1rem;
+  }
+  
+  .sh-code-dropdown__code {
+    font-size: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+}
