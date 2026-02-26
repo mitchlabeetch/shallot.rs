@@ -1,47 +1,178 @@
-//! Shallot Website - Zero-JS Component Showcase
+//! Shallot Website — Zero-JS Component Showcase
 //!
-//! A fully interactive, themeable website showcasing the Shallot component library.
-//! Built with pure HTML/CSS - no JavaScript, fully Tor-compatible.
+//! COLOR THEMING (zero JS):
+//!   Seven `<input type="radio">` elements are the *first children of <body>*,
+//!   before `<div id="sh-app">`. CSS general-sibling selectors then override
+//!   `--sh-primary` / `--sh-accent` on #sh-app for every checked state.
+//!   The visible swatch labels live inside the navbar (inside #sh-app) —
+//!   HTML `<label for="…">` works across the entire document regardless of
+//!   DOM position, so this is fully spec-compliant and requires zero JavaScript.
+//!
+//! NO COMMUNITY THEMES:
+//!   The theme_marketplace module is no longer rendered anywhere.
+//!   The theme_panel floating widget has been removed; theming lives in navbar.
 
 pub mod component_docs;
 pub mod retro_hero;
 pub mod rss;
 pub mod showcase;
-pub mod theme_marketplace;
-pub mod theme_panel;
+pub mod theme_marketplace; // kept for compilation, not rendered
+pub mod theme_panel; // kept for compilation, not rendered
 pub mod theme_switcher;
 pub mod webring;
 
-use maud::{html, Markup, DOCTYPE};
+use maud::{html, Markup, PreEscaped, DOCTYPE};
 
-/// Main website layout
-pub fn website_layout(title: &str, content: Markup) -> Markup {
+// ── Static CSS files (embedded at compile time) ───────────────────────────────
+
+static MAIN_CSS_BASE: &str = include_str!("css/main_base.css");
+static NAVBAR_CSS: &str = include_str!("css/navbar.css");
+static MANIFESTO_CSS: &str = include_str!("css/manifesto.css");
+static FOOTER_CSS: &str = include_str!("css/footer.css");
+static SHOWCASE_CSS_FILE: &str = include_str!("css/showcase.css");
+
+// ── Inline Shallot logo SVG ───────────────────────────────────────────────────
+
+pub fn logo_svg(size: u32) -> PreEscaped<String> {
+    PreEscaped(format!(
+        r##"<svg xmlns="http://www.w3.org/2000/svg" width="{sz}" height="{sz}" viewBox="0 0 200 200" aria-hidden="true" focusable="false" style="display:block;flex-shrink:0"><g><path fill="#6e3565" d="M 94.5,45.5 C 101.58,44.193 105.58,47.0263 106.5,54C 101.378,62.9146 97.0442,72.2479 93.5,82C 95.8297,83.3454 98.1631,83.5121 100.5,82.5C 104.207,71.962 111.541,65.462 122.5,63C 146.093,58.971 164.593,66.8043 178,86.5C 182.273,94.7116 186.273,103.045 190,111.5C 190.667,114.833 190.667,118.167 190,121.5C 181.15,129.842 170.983,136.008 159.5,140C 149.127,141.823 139.461,139.989 130.5,134.5C 108.142,162.585 84.6421,163.585 60,137.5C 57.0545,132.664 54.8878,127.498 53.5,122C 46.543,122.539 39.543,123.039 32.5,123.5C 22.5494,124.108 15.0494,120.108 10,111.5C 8.566,107.594 8.23266,103.594 9,99.5C 13.1869,84.62 20.3536,71.4533 30.5,60C 40.3235,51.8919 51.6568,48.0586 64.5,48.5C 71.1638,49.2226 77.8304,49.3893 84.5,49C 88.2451,48.6978 91.5784,47.5312 94.5,45.5 Z"/></g><g><path fill="#d983a2" d="M 96.5,50.5 C 98.8242,49.1674 100.491,49.8341 101.5,52.5C 92.8671,59.4654 84.8671,67.1321 77.5,75.5C 74.8739,77.8235 72.2072,80.1568 69.5,82.5C 63.049,80.2487 57.049,77.2487 51.5,73.5C 54.4835,70.6742 57.8168,68.3409 61.5,66.5C 72.9529,63.7123 83.9529,59.5457 94.5,54C 95.5,53 96.5,52 97.5,51C 97.2716,50.6012 96.9382,50.4346 96.5,50.5 Z"/></g><g><path fill="#b47b9a" d="M 101.5,52.5 C 101.657,53.8734 101.49,55.2068 101,56.5C 97.0414,62.084 93.8747,68.084 91.5,74.5C 86.7858,74.3531 82.1191,74.6864 77.5,75.5C 84.8671,67.1321 92.8671,59.4654 101.5,52.5 Z"/></g><g><path fill="#d884a0" d="M 162.5,83.5 C 166.35,86.2608 170.017,89.2608 173.5,92.5C 175.423,95.6032 177.59,98.6032 180,101.5C 182.119,105.402 183.952,109.402 185.5,113.5C 181.538,111.205 178.205,108.205 175.5,104.5C 172.149,101.152 168.482,98.1518 164.5,95.5C 161.55,93.8847 158.884,91.8847 156.5,89.5C 159.478,88.5223 161.478,86.5223 162.5,83.5 Z"/></g></svg>"##,
+        sz = size
+    ))
+}
+
+// ── Color theme definitions ───────────────────────────────────────────────────
+
+struct ThemeColor {
+    id: &'static str,
+    name: &'static str,
+    hex: &'static str,
+    hex_hover: &'static str,
+    rgb: &'static str,
+}
+
+const THEME_COLORS: &[ThemeColor] = &[
+    ThemeColor {
+        id: "violet",
+        name: "Violet",
+        hex: "#8b5cf6",
+        hex_hover: "#7c3aed",
+        rgb: "139,92,246",
+    },
+    ThemeColor {
+        id: "azure",
+        name: "Azure",
+        hex: "#3b82f6",
+        hex_hover: "#2563eb",
+        rgb: "59,130,246",
+    },
+    ThemeColor {
+        id: "emerald",
+        name: "Emerald",
+        hex: "#10b981",
+        hex_hover: "#059669",
+        rgb: "16,185,129",
+    },
+    ThemeColor {
+        id: "rose",
+        name: "Rose",
+        hex: "#f43f5e",
+        hex_hover: "#e11d48",
+        rgb: "244,63,94",
+    },
+    ThemeColor {
+        id: "amber",
+        name: "Amber",
+        hex: "#f59e0b",
+        hex_hover: "#d97706",
+        rgb: "245,158,11",
+    },
+    ThemeColor {
+        id: "cyan",
+        name: "Cyan",
+        hex: "#06b6d4",
+        hex_hover: "#0891b2",
+        rgb: "6,182,212",
+    },
+    ThemeColor {
+        id: "indigo",
+        name: "Indigo",
+        hex: "#6366f1",
+        hex_hover: "#4f46e5",
+        rgb: "99,102,241",
+    },
+];
+
+// ── Hidden color-radio inputs (must be first children of <body>) ──────────────
+
+fn color_radio_inputs() -> Markup {
     html! {
-        (DOCTYPE)
-        html lang="en" {
-            head {
-                meta charset="utf-8";
-                meta name="viewport" content="width=device-width, initial-scale=1";
-                meta name="description" content="Shallot - Zero-JS Rust UI Component Library";
-                meta name="theme-color" content="#667eea";
-                title { (title) " - Shallot" }
-                link rel="stylesheet" href="/styles/main.css";
-                link rel="stylesheet" href="/styles/retro.css";
-                link rel="stylesheet" href="/styles/showcase.css";
-            }
-            body {
-                (content)
+        @for (i, tc) in THEME_COLORS.iter().enumerate() {
+            input
+                type="radio"
+                name="sh-theme-color"
+                id=(format!("sh-tc-{}", tc.id))
+                class="sh-tc-radio"
+                checked?[i == 0];
+        }
+    }
+}
 
-                footer class="sh-site-footer" {
-                    div class="sh-site-footer__content" {
-                        p {
-                            "© 2026 Shallot. Built with "
-                            span class="sh-heart" aria-label="love" { "❤" }
-                            " and zero JavaScript."
+// ── Sticky navbar ─────────────────────────────────────────────────────────────
+
+fn navbar() -> Markup {
+    html! {
+        header class="sh-navbar" role="banner" {
+            nav class="sh-navbar__inner" aria-label="Main navigation" {
+
+                a href="#" class="sh-navbar__brand" aria-label="Shallot home" {
+                    (logo_svg(32))
+                    span class="sh-navbar__brand-name" { "Shallot" }
+                    span class="sh-navbar__version" aria-label="version 0.1" { "v0.1" }
+                }
+
+                div class="sh-navbar__colors" role="group" aria-label="Choose accent color" {
+                    span class="sh-navbar__colors-label" aria-hidden="true" { "🎨" }
+                    @for tc in THEME_COLORS {
+                        label
+                            for=(format!("sh-tc-{}", tc.id))
+                            class="sh-color-swatch"
+                            title=(tc.name)
+                            style=(format!("--swatch-color:{}", tc.hex))
+                        {
+                            span class="sh-visually-hidden" { (tc.name) " theme" }
                         }
-                        p class="sh-site-footer__tagline" {
-                            "Iron logic. Glass aesthetics. Pure Rust."
+                    }
+                    div class="sh-navbar__custom-color" title="Pick any custom color" {
+                        label class="sh-custom-color-label" for="sh-custom-color" {
+                            "Custom:"
                         }
+                        input
+                            type="color"
+                            id="sh-custom-color"
+                            class="sh-custom-color-input"
+                            value="#8b5cf6"
+                            aria-label="Custom accent color"
+                            oninput="document.getElementById('sh-app').style.setProperty('--sh-primary', this.value); document.getElementById('sh-app').style.setProperty('--sh-accent', this.value); document.getElementById('sh-app').style.setProperty('--sh-primary-hover', this.value); document.getElementById('sh-app').style.setProperty('--sh-primary-bg', this.value + '20'); document.getElementById('sh-app').style.setProperty('--sh-focus-ring', this.value + '66')";
+                        input
+                            type="color"
+                            id="sh-custom-color"
+                            class="sh-custom-color-input"
+                            value="#8b5cf6"
+                            aria-label="Custom accent color (decorative — use presets for zero-JS live theming)";
+                    }
+                }
+
+                div class="sh-navbar__links" {
+                    a href="#showcase" class="sh-navbar__link" { "Components" }
+                    a
+                        href="https://github.com/shallot-rs/shallot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="sh-navbar__link sh-navbar__link--github"
+                    {
+                        "GitHub"
+                        span aria-hidden="true" { " ↗" }
+                        span class="sh-visually-hidden" { " (opens in new tab)" }
                     }
                 }
             }
@@ -49,594 +180,233 @@ pub fn website_layout(title: &str, content: Markup) -> Markup {
     }
 }
 
-/// Homepage with hero and showcase
-pub fn homepage() -> Markup {
-    let hero = retro_hero::render();
-    let showcase = showcase::render();
+// ── Modern manifesto strip ────────────────────────────────────────────────────
 
+fn manifesto_strip() -> Markup {
+    html! {
+        section class="sh-manifesto" aria-label="Shallot introduction" {
+            div class="sh-manifesto__inner" {
+
+                div class="sh-manifesto__brand" {
+                    div class="sh-manifesto__logo-wrap" { (logo_svg(72)) }
+                    div class="sh-manifesto__text" {
+                        h2 class="sh-manifesto__headline" {
+                            "Iron Logic. "
+                            span class="sh-manifesto__glass" { "Glass Aesthetics." }
+                        }
+                        p class="sh-manifesto__subline" {
+                            "129 production-ready UI components. "
+                            strong { "0 bytes of JavaScript." }
+                        }
+                    }
+                }
+
+                div class="sh-manifesto__stats" aria-label="Performance metrics" {
+                    div class="sh-manifesto__stat" {
+                        span class="sh-manifesto__stat-value" { "0ms" }
+                        span class="sh-manifesto__stat-label" { "Total Blocking Time" }
+                    }
+                    div class="sh-manifesto__stat-divider" aria-hidden="true" {}
+                    div class="sh-manifesto__stat" {
+                        span class="sh-manifesto__stat-value" { "0.00" }
+                        span class="sh-manifesto__stat-label" { "Layout Shift" }
+                    }
+                    div class="sh-manifesto__stat-divider" aria-hidden="true" {}
+                    div class="sh-manifesto__stat" {
+                        span class="sh-manifesto__stat-value" { "0kb" }
+                        span class="sh-manifesto__stat-label" { "JavaScript Bundle" }
+                    }
+                    div class="sh-manifesto__stat-divider" aria-hidden="true" {}
+                    div class="sh-manifesto__stat" {
+                        span class="sh-manifesto__stat-value" { "100" }
+                        span class="sh-manifesto__stat-label" { "Lighthouse Score" }
+                    }
+                }
+
+                div class="sh-manifesto__install" aria-label="Installation snippet" {
+                    span class="sh-manifesto__install-label" aria-hidden="true" { "Cargo.toml" }
+                    pre class="sh-manifesto__install-code" {
+                        code {
+                            "shallot_components = "
+                            span class="sh-syn-string" { "\"0.1\"" }
+                        }
+                    }
+                }
+
+                div class="sh-manifesto__ctas" {
+                    a href="#showcase" class="sh-manifesto__cta sh-manifesto__cta--primary" {
+                        "Browse Components"
+                    }
+                    a
+                        href="https://github.com/shallot-rs/shallot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="sh-manifesto__cta sh-manifesto__cta--ghost"
+                    {
+                        "GitHub"
+                        span aria-hidden="true" { " ↗" }
+                        span class="sh-visually-hidden" { " (opens in new tab)" }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ── Site footer ───────────────────────────────────────────────────────────────
+
+fn site_footer() -> Markup {
+    html! {
+        footer class="sh-site-footer" {
+            div class="sh-site-footer__inner" {
+                div class="sh-site-footer__brand" {
+                    (logo_svg(28))
+                    span class="sh-site-footer__brand-name" { "Shallot" }
+                }
+                p class="sh-site-footer__tagline" {
+                    "Iron logic. Glass aesthetics. Pure Rust."
+                }
+                p class="sh-site-footer__copy" {
+                    "© 2026 Shallot. Built with "
+                    span class="sh-heart" aria-label="love" { "❤" }
+                    " and " strong { "zero JavaScript." }
+                }
+                nav class="sh-site-footer__links" aria-label="Footer navigation" {
+                    a href="feed.xml" { "📰 RSS" }
+                    span aria-hidden="true" { " · " }
+                    a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" {
+                        "💾 GitHub"
+                        span class="sh-visually-hidden" { " (opens in new tab)" }
+                        span aria-hidden="true" { " ↗" }
+                    }
+                    span aria-hidden="true" { " · " }
+                    a href="https://docs.rs/shallot" target="_blank" rel="noopener noreferrer" {
+                        "📚 Docs"
+                        span class="sh-visually-hidden" { " (opens in new tab)" }
+                        span aria-hidden="true" { " ↗" }
+                    }
+                }
+                (webring::render())
+            }
+        }
+    }
+}
+
+// ── Public: full homepage ─────────────────────────────────────────────────────
+
+/// Generate the full homepage HTML.
+///
+/// The seven hidden color-radio inputs appear **before** `#sh-app` in the DOM
+/// so that `#sh-tc-X:checked ~ #sh-app { --sh-primary: … }` works without
+/// any JavaScript. HTML `<label for="…">` works across the entire document
+/// regardless of where the label lives relative to the input.
+pub fn homepage() -> Markup {
     html! {
         (DOCTYPE)
         html lang="en" {
             head {
                 meta charset="utf-8";
                 meta name="viewport" content="width=device-width, initial-scale=1";
-                meta name="description" content="Shallot - Zero-JS Rust UI Component Library. 129 production-ready components with CSS-only animations.";
-                meta name="theme-color" content="#667eea";
-                title { "Shallot - Zero-JS Rust UI Components" }
+                meta name="description" content="Shallot — Iron & Glass. 129 production-ready UI components built in Rust with zero JavaScript. Fully functional in TOR High Security.";
+                meta name="theme-color" content="#8b5cf6";
+                meta property="og:title" content="Shallot — Zero-JS Rust UI Components";
+                meta property="og:description" content="Beautiful, accessible UI components. 0 bytes of JavaScript. Works in NoScript TOR browser.";
+                title { "Shallot — Iron & Glass · Zero-JS Rust UI" }
                 link rel="stylesheet" href="styles/main.css";
                 link rel="stylesheet" href="styles/retro.css";
                 link rel="stylesheet" href="styles/showcase.css";
                 link rel="stylesheet" href="styles/components.css";
+                link rel="alternate" type="application/rss+xml" title="Shallot RSS" href="feed.xml";
             }
             body {
-                /* Skip to content link for accessibility */
-                a href="#showcase" class="sh-skip-link" {
-                    "Skip to content"
-                }
+                // Skip link for accessibility
+                a href="#showcase" class="sh-skip-link" { "Skip to component showcase" }
 
-                /* Theme panel for zero-JS preview customization */
-                (theme_panel::render())
+                // CRITICAL: color-theme radio inputs MUST appear before #sh-app
+                // so that `#sh-tc-X:checked ~ #sh-app { --sh-primary: … }` works.
+                (color_radio_inputs())
 
-                (hero)
-                (showcase)
-
-                footer class="sh-site-footer" {
-                    div class="sh-site-footer__content" {
-                        p {
-                            "© 2026 Shallot. Built with "
-                            span class="sh-heart" aria-label="love" { "❤" }
-                            " and zero JavaScript."
-                        }
-                        p class="sh-site-footer__tagline" {
-                            "Iron logic. Glass aesthetics. Pure Rust."
-                        }
-                        p class="sh-site-footer__links" {
-                            a href="feed.xml" { "📰 RSS Feed" }
-                            " | "
-                            a href="#community-themes" { "🎨 Community Themes" }
-                            " | "
-                            a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" {
-                                "💾 GitHub"
-                                span class="sh-visually-hidden" { " (opens in new tab)" }
-                                span aria-hidden="true" { " ↗" }
-                            }
-                        }
-                        /* Webring widget */
-                        (webring::render())
-                    }
+                // Main app wrapper — the target of all theme sibling selectors
+                div id="sh-app" {
+                    (navbar())
+                    (retro_hero::render())
+                    (manifesto_strip())
+                    (showcase::render())
+                    (site_footer())
                 }
             }
         }
     }
 }
 
-/// Generate main CSS
+// ── CSS generation ────────────────────────────────────────────────────────────
+
+/// Main CSS: color theme overrides + static base + navbar + manifesto + footer.
 pub fn main_css() -> String {
     let mut css = String::new();
-    css.push_str(&main_css_content());
+    // Dynamic: per-color theme variable overrides (7 rules, generated from THEME_COLORS)
+    css.push_str(&color_theme_css());
+    // Static: base reset, variables, utilities
+    css.push_str(MAIN_CSS_BASE);
+    // Static: navbar
+    css.push_str(NAVBAR_CSS);
+    // Static: manifesto strip
+    css.push_str(MANIFESTO_CSS);
+    // Static: site footer
+    css.push_str(FOOTER_CSS);
+    // Static: webring
     css.push_str(&webring::webring_css());
-    css.push_str(&theme_marketplace::theme_marketplace_css());
-    css.push_str(&theme_panel::theme_panel_css());
     css
 }
 
-fn main_css_content() -> String {
-    r#"
-/* ============================================
-   SHALLOT WEBSITE - Main Styles
-   Zero JavaScript. Pure CSS Magic.
-   ============================================ */
-
-:root {
-    /* Default theme - will be overridden by theme switcher */
-    --sh-primary: #667eea;
-    --sh-primary-hover: #5a67d8;
-    --sh-primary-bg: rgba(102, 126, 234, 0.1);
-    --sh-secondary: #764ba2;
-    --sh-accent: #f093fb;
-    --sh-success: #22c55e;
-    --sh-warning: #f59e0b;
-    --sh-error: #ef4444;
-    --sh-text: #1f2937;
-    --sh-text-secondary: #4b5563;
-    --sh-text-muted: #9ca3af;
-    --sh-surface: #ffffff;
-    --sh-surface-2: #f9fafb;
-    --sh-surface-hover: #f3f4f6;
-    --sh-border: #e5e7eb;
-    --sh-radius-sm: 0.25rem;
-    --sh-radius-md: 0.375rem;
-    --sh-radius-lg: 0.5rem;
-    --sh-radius-xl: 0.75rem;
-    --sh-radius-full: 9999px;
-}
-
-/* Dark mode support via data attribute */
-[data-theme="dark"] {
-    --sh-text: #f9fafb;
-    --sh-text-secondary: #d1d5db;
-    --sh-text-muted: #6b7280;
-    --sh-surface: #1f2937;
-    --sh-surface-2: #111827;
-    --sh-surface-hover: #374151;
-    --sh-border: #374151;
-    --sh-primary-bg: rgba(102, 126, 234, 0.2);
-}
-
-/* Reset & Base */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--sh-text);
-    background: var(--sh-surface);
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-a {
-    color: var(--sh-primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: var(--sh-primary-hover);
-}
-
-/* Site Footer */
-.sh-site-footer {
-    background: var(--sh-surface-2);
-    border-top: 1px solid var(--sh-border);
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-.sh-site-footer__content {
-    max-width: 64rem;
-    margin: 0 auto;
-}
-
-.sh-site-footer p {
-    color: var(--sh-text-secondary);
-    font-size: clamp(0.75rem, 2vw, 0.875rem);
-}
-
-.sh-site-footer__tagline {
-    margin-top: 0.5rem;
-    font-style: italic;
-    color: var(--sh-text-muted);
-    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
-}
-
-.sh-site-footer__links {
-    margin-top: 0.75rem;
-    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
-}
-
-.sh-site-footer__links a {
-    color: var(--sh-primary);
-    text-decoration: none;
-}
-
-.sh-site-footer__links a:hover {
-    text-decoration: underline;
-}
-
-.sh-heart {
-    display: inline-block;
-    animation: sh-heartbeat 1s ease-in-out infinite;
-}
-
-@keyframes sh-heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-
-/* Utility Classes */
-.sh-container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.sh-sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Focus styles */
-:focus-visible {
-    outline: 2px solid var(--sh-primary);
-    outline-offset: 2px;
-}
-
-/* Skip Link - Accessibility */
-.sh-skip-link {
-    position: absolute;
-    top: -100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--sh-primary);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--sh-radius-md);
-    text-decoration: none;
-    font-weight: 600;
-    z-index: 9999;
-    transition: top 0.2s ease;
-}
-
-.sh-skip-link:focus {
-    top: 1rem;
-}
-
-/* Visually Hidden - for screen readers */
-.sh-visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-    pointer-events: none;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    html {
-        scroll-behavior: auto;
-    }
-}
-"#
-    .to_string()
-}
-
-/// Generate showcase CSS
+/// Showcase CSS: column layout, code panels, scroll animations, replay.
 pub fn showcase_css() -> String {
-    r#"
-/* ============================================
-   SHALLOT SHOWCASE STYLES
-   ============================================ */
-
-/* Theme Switcher */
-.sh-theme-switcher {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    background: var(--sh-surface);
-    border: 1px solid var(--sh-border);
-    border-radius: var(--sh-radius-lg);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    max-width: 20rem;
+    String::from(SHOWCASE_CSS_FILE)
 }
 
-.sh-theme-switcher__title {
-    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
-    font-weight: 600;
-    color: var(--sh-text);
-    margin-bottom: 0.75rem;
-}
+/// Dynamically generated color-theme override rules.
+///
+/// Pattern: `#sh-tc-X:checked ~ #sh-app { --sh-primary: …; --sh-accent: …; }`
+///
+/// The hidden radio inputs sit before `#sh-app` in the DOM, making them
+/// valid general siblings. The `~` combinator requires no `:has()` support.
+fn color_theme_css() -> String {
+    let mut css = String::new();
 
-.sh-theme-switcher__presets {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
+    // Hide the body-level radio inputs
+    css.push_str("/* Color-theme radio inputs — hidden, placed at body root */\n");
+    css.push_str(".sh-tc-radio { display: none; }\n\n");
 
-.sh-theme-preset {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: var(--sh-radius-md);
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.sh-theme-preset:hover {
-    transform: scale(1.1);
-}
-
-.sh-theme-preset:focus-visible {
-    outline: 2px solid var(--sh-primary);
-    outline-offset: 2px;
-}
-
-.sh-theme-switcher__custom {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--sh-border);
-}
-
-.sh-theme-switcher__label {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--sh-text-muted);
-    margin-bottom: 0.5rem;
-}
-
-.sh-color-input {
-    width: 100%;
-    height: 2.5rem;
-    border: 1px solid var(--sh-border);
-    border-radius: var(--sh-radius-md);
-    cursor: pointer;
-}
-
-/* Category Navigation */
-.sh-categories {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--sh-surface);
-    border-bottom: 1px solid var(--sh-border);
-    padding: 1rem 0;
-}
-
-.sh-categories__list {
-    display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    scrollbar-width: thin;
-}
-
-.sh-category-link {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: var(--sh-surface-2);
-    border-radius: var(--sh-radius-full);
-    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
-    font-weight: 500;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.sh-category-link:hover {
-    background: var(--sh-primary-bg);
-    color: var(--sh-primary);
-}
-
-/* Component Grid */
-.sh-component-section {
-    padding: 3rem 0;
-}
-
-.sh-component-section__title {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-    margin-bottom: 0.5rem;
-    color: var(--sh-text);
-}
-
-.sh-component-section__description {
-    color: var(--sh-text-secondary);
-    margin-bottom: 2rem;
-    font-size: clamp(0.875rem, 2vw, 1rem);
-}
-
-.sh-component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: 1.5rem;
-}
-
-/* Component Card */
-.sh-component-card {
-    background: var(--sh-surface);
-    border: 1px solid var(--sh-border);
-    border-radius: var(--sh-radius-lg);
-    overflow: hidden;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    /* Performance: defer rendering of off-screen cards */
-    content-visibility: auto;
-    contain: layout style paint;
-}
-
-.sh-component-card:hover {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-}
-
-.sh-component-card:focus-within {
-    outline: 2px solid var(--sh-primary);
-    outline-offset: 2px;
-}
-
-.sh-component-card__preview {
-    padding: 2rem;
-    background: var(--sh-surface-2);
-    border-bottom: 1px solid var(--sh-border);
-    min-height: 8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sh-component-card__content {
-    padding: 1.5rem;
-}
-
-.sh-component-card__title {
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.sh-component-card__description {
-    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
-    color: var(--sh-text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-/* Code Dropdown */
-.sh-code-dropdown {
-    border-top: 1px solid var(--sh-border);
-}
-
-.sh-code-dropdown__toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1rem 1.5rem;
-    background: transparent;
-    border: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--sh-primary);
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.sh-code-dropdown__toggle:hover {
-    background: var(--sh-surface-2);
-}
-
-.sh-code-dropdown__icon {
-    transition: transform 0.3s ease;
-}
-
-/* CSS-only dropdown using checkbox hack */
-.sh-code-dropdown__checkbox {
-    display: none;
-}
-
-.sh-code-dropdown__content {
-    display: none;
-    padding: 1rem 1.5rem;
-    background: var(--sh-surface-2);
-    border-top: 1px solid var(--sh-border);
-}
-
-.sh-code-dropdown__checkbox:checked ~ .sh-code-dropdown__content {
-    display: block;
-}
-
-.sh-code-dropdown__checkbox:checked ~ .sh-code-dropdown__toggle .sh-code-dropdown__icon {
-    transform: rotate(180deg);
-}
-
-/* Code Tabs */
-.sh-code-tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.sh-code-tab {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid var(--sh-border);
-    border-radius: var(--sh-radius-md);
-    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sh-code-tab:hover {
-    background: var(--sh-surface-2);
-}
-
-.sh-code-tab:focus-visible {
-    outline: 2px solid var(--sh-primary);
-    outline-offset: 2px;
-}
-
-.sh-code-tab__radio:checked + .sh-code-tab {
-    background: var(--sh-primary);
-    color: white;
-    border-color: var(--sh-primary);
-}
-
-.sh-code-tab[aria-selected="true"] {
-    background: var(--sh-primary);
-    color: white;
-    border-color: var(--sh-primary);
-}
-
-/* CSS-only tabs using radio buttons */
-.sh-code-tab__radio {
-    display: none;
-}
-
-.sh-code-block {
-    display: none;
-    background: #1f2937;
-    color: #f3f4f6;
-    padding: 1rem;
-    border-radius: var(--sh-radius-md);
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
-    overflow-x: auto;
-    white-space: pre;
-}
-
-.sh-code-tab__radio[value="full"]:checked ~ .sh-code-block--full {
-    display: block;
-}
-
-.sh-code-tab__radio[value="library"]:checked ~ .sh-code-block--library {
-    display: block;
-}
-
-/* Responsive */
-/* Accessibility: Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-@media (max-width: 64rem) {
-    .sh-theme-switcher {
-        top: auto;
-        bottom: 1rem;
-        right: 1rem;
-        max-width: 16rem;
+    // Per-theme variable block
+    css.push_str("/* Per-theme CSS variable overrides (zero JS, CSS sibling selectors) */\n");
+    for tc in THEME_COLORS {
+        css.push_str(&format!(
+            "#sh-tc-{id}:checked ~ #sh-app {{\n  \
+             --sh-primary:       {hex};\n  \
+             --sh-primary-hover: {hover};\n  \
+             --sh-primary-bg:    rgba({rgb}, 0.12);\n  \
+             --sh-accent:        {hex};\n  \
+             --sh-focus-ring:    rgba({rgb}, 0.4);\n\
+             }}\n",
+            id = tc.id,
+            hex = tc.hex,
+            hover = tc.hex_hover,
+            rgb = tc.rgb,
+        ));
     }
 
-    .sh-component-grid {
-        grid-template-columns: 1fr;
+    // Swatch active ring via :has() — degrades gracefully if unsupported
+    css.push_str("\n/* Swatch selected-ring — uses :has(), degrades gracefully */\n");
+    for tc in THEME_COLORS {
+        css.push_str(&format!(
+            "body:has(#sh-tc-{id}:checked) .sh-color-swatch[for='sh-tc-{id}'] {{\n  \
+             box-shadow: 0 0 0 2px #fff, 0 0 0 4px {hex};\n  \
+             transform: scale(1.15);\n\
+             }}\n",
+            id = tc.id,
+            hex = tc.hex,
+        ));
     }
-}
-"#
-    .to_string()
+
+    css
 }
