@@ -1,5 +1,6 @@
 {
   "outputDirectory": "output",
-  "installCommand": "echo 'No npm install needed'",
-  "buildCommand": "echo 'Static site - no build needed'"
+  "installCommand": "echo 'Static site - no dependencies needed'",
+  "buildCommand": "echo 'Static output pre-built via GitHub Actions CI'",
+  "public": false
 }

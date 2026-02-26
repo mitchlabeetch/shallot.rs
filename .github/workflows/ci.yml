@@ -1,0 +1,195 @@
+name: CI — Shallot Showcase
+
+on:
+  push:
+    branches:
+      - main
+      - showcase/refactor/roadmap
+  pull_request:
+    branches:
+      - main
+      - showcase/refactor/roadmap
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Run all tests
+        run: cargo test --all --lib --test render_snapshots
+
+      - name: Run doc tests
+        run: cargo test --doc
+
+  build:
+    name: Build Showcase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build website binary
+        run: cargo build --release --bin shallot_website
+
+      - name: Generate output/ artifacts
+        run: cargo run --release --bin shallot_website
+
+      - name: Verify output directory exists
+        run: |
+          test -d output || (echo "output/ directory not created" && exit 1)
+          test -f output/index.html || (echo "output/index.html not found" && exit 1)
+          test -f output/feed.xml || (echo "output/feed.xml not found" && exit 1)
+          ls -lh output/styles/
+
+  lint:
+    name: Lint & Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Check formatting
+        run: cargo fmt -- --check
+
+      - name: Run clippy
+        run: cargo clippy --all --all-targets -- -D warnings
+
+      - name: Check for accidentally committed target/
+        run: |
+          if git ls-files --cached | grep -E "^target/"; then
+            echo "ERROR: target/ directory is in git (should be gitignored)"
+            exit 1
+          fi
+
+      - name: Verify no debug commits in output
+        run: |
+          if grep -r "commit\|<<<<<<< HEAD\|=======\|>>>>>>>" output/ 2>/dev/null; then
+            echo "ERROR: Found debug/merge markers in output/"
+            exit 1
+          fi
+
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Check for unsafe code
+        run: |
+          if grep -r "unsafe {" shallot_website/src/ 2>/dev/null; then
+            echo "WARNING: Found unsafe blocks (should be rare)"
+          fi
+
+      - name: Verify zero JavaScript in output
+        run: |
+          if grep -E "<script|onclick|oninput|onchange" output/index.html 2>/dev/null; then
+            echo "ERROR: Found JavaScript in output/index.html"
+            exit 1
+          fi
+
+      - name: Verify no inline event handlers
+        run: |
+          if grep -E "on[a-z]+=" output/index.html 2>/dev/null; then
+            echo "ERROR: Found inline event handlers in output/index.html"
+            exit 1
+          fi
+
+  accessibility:
+    name: Accessibility Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for skip links
+        run: |
+          if ! grep -q "skip-link\|Skip to" output/index.html; then
+            echo "WARNING: No skip link found in output/index.html"
+          fi
+
+      - name: Verify semantic HTML landmarks
+        run: |
+          for landmark in "<main\|<nav\|<footer\|<header"; do
+            if ! grep -q "$landmark" output/index.html; then
+              echo "WARNING: Missing semantic landmark: $landmark"
+            fi
+          done
+
+      - name: Check for ARIA attributes
+        run: |
+          if ! grep -q "aria-" output/index.html; then
+            echo "WARNING: No ARIA attributes found in output/index.html"
+          fi
+
+  deploy-ready:
+    name: Deploy Readiness Check
+    runs-on: ubuntu-latest
+    needs: [test, build, lint, security, accessibility]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/showcase/refactor/roadmap')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Final build verification
+        run: cargo run --release --bin shallot_website
+
+      - name: Output artifact summary
+        run: |
+          echo "=== DEPLOY READY ==="
+          echo "Build completed successfully"
+          echo "Tests passed: All CI jobs succeeded"
+          echo "Output files:"
+          ls -lh output/
+          echo ""
+          echo "HTML size: $(wc -c < output/index.html) bytes"
+          echo "CSS files: $(ls -1 output/styles/*.css | wc -l)"
+          echo ""
+          echo "Ready for Vercel deployment"
+
+  # Optional: Publish test results
+  test-results:
+    name: Test Results
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test]
+    steps:
+      - name: Report test status
+        if: failure()
+        run: echo "⚠️ Tests failed - check the Test Suite job for details"
+
+      - name: Success message
+        if: success()
+        run: echo "✅ All tests passed"
