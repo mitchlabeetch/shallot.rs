@@ -1,0 +1,348 @@
+/* ==========================================================================
+   SHALLOT WEBSITE — Manifesto Strip
+   The modern intro between the retro hero and the component showcase.
+   Iron & Glass aesthetic: layered shadows, glassmorphism, bionic motion.
+   ========================================================================== */
+
+/* ── Section wrapper ─────────────────────────────────────────────────────── */
+.sh-manifesto {
+    background: linear-gradient(
+        160deg,
+        #0f1724 0%,
+        #1a1f35 40%,
+        #0d1320 100%
+    );
+    padding: 5rem 1.5rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle background grid pattern */
+.sh-manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+}
+
+/* Ambient glow behind the content */
+.sh-manifesto::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(800px, 120%);
+    height: 400px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(139, 92, 246, 0.12) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.sh-manifesto__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+}
+
+/* ── Brand block: logo + headline ────────────────────────────────────────── */
+.sh-manifesto__brand {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sh-manifesto__logo-wrap {
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 24px rgba(139, 92, 246, 0.35));
+    transition: filter var(--sh-dur-slow) var(--sh-ease-out);
+}
+.sh-manifesto__logo-wrap:hover {
+    filter: drop-shadow(0 0 36px rgba(139, 92, 246, 0.55));
+}
+
+.sh-manifesto__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.sh-manifesto__headline {
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    color: #f8fafc;
+}
+
+.sh-manifesto__glass {
+    background: linear-gradient(
+        135deg,
+        var(--sh-primary, #8b5cf6) 0%,
+        #a78bfa 50%,
+        #c4b5fd 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sh-manifesto__subline {
+    font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
+    color: #94a3b8;
+    line-height: 1.55;
+    max-width: 36ch;
+}
+.sh-manifesto__subline strong {
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+/* ── Stats row ───────────────────────────────────────────────────────────── */
+.sh-manifesto__stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--sh-radius-xl);
+    padding: 0;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 4px 24px rgba(0, 0, 0, 0.24),
+        0 1px 4px rgba(0, 0, 0, 0.16);
+}
+
+.sh-manifesto__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 1.25rem 2.25rem;
+}
+
+.sh-manifesto__stat-value {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #f8fafc;
+    font-variant-numeric: tabular-nums;
+}
+
+.sh-manifesto__stat-label {
+    font-size: clamp(0.6875rem, 1.5vw, 0.75rem);
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.sh-manifesto__stat-divider {
+    width: 1px;
+    height: 3rem;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+}
+
+/* ── Install snippet ─────────────────────────────────────────────────────── */
+.sh-manifesto__install {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sh-manifesto__install-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #475569;
+    font-family: ui-monospace, "Cascadia Code", Menlo, Monaco, monospace;
+}
+
+.sh-manifesto__install-code {
+    display: inline-block;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: var(--sh-radius-lg);
+    padding: 0.75rem 1.5rem;
+    font-family: ui-monospace, "Cascadia Code", Menlo, Monaco,
+                 "Roboto Mono", "Courier New", monospace;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    color: #e2e8f0;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 4px 16px rgba(0, 0, 0, 0.24);
+    white-space: nowrap;
+}
+
+/* ── CTA buttons ─────────────────────────────────────────────────────────── */
+.sh-manifesto__ctas {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sh-manifesto__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: var(--sh-radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: transform var(--sh-dur-fast) var(--sh-ease-out),
+                box-shadow var(--sh-dur-fast) ease,
+                background var(--sh-dur-fast) ease;
+    will-change: transform;
+}
+.sh-manifesto__cta:hover  { transform: translateY(-2px); }
+.sh-manifesto__cta:active { transform: translateY(0); }
+
+.sh-manifesto__cta--primary {
+    background: var(--sh-primary, #8b5cf6);
+    color: #ffffff;
+    box-shadow:
+        0 1px 3px rgba(0,0,0,0.2),
+        0 4px 12px rgba(139, 92, 246, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.sh-manifesto__cta--primary:hover {
+    background: var(--sh-primary-hover, #7c3aed);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.2),
+        0 8px 24px rgba(139, 92, 246, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    color: #ffffff;
+}
+
+.sh-manifesto__cta--ghost {
+    background: rgba(255, 255, 255, 0.07);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.sh-manifesto__cta--ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f1f5f9;
+}
+
+/* ── Scroll-driven reveal ─────────────────────────────────────────────────── */
+.sh-manifesto__brand,
+.sh-manifesto__stats,
+.sh-manifesto__install,
+.sh-manifesto__ctas {
+    animation: sh-manifesto-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+}
+
+.sh-manifesto__stats   { animation-range: entry 5%  entry 40%; }
+.sh-manifesto__install { animation-range: entry 10% entry 45%; }
+.sh-manifesto__ctas    { animation-range: entry 15% entry 50%; }
+
+@keyframes sh-manifesto-reveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@supports not (animation-timeline: view()) {
+    .sh-manifesto__brand,
+    .sh-manifesto__stats,
+    .sh-manifesto__install,
+    .sh-manifesto__ctas {
+        animation: sh-manifesto-reveal-fb 0.7s var(--sh-ease-out) both;
+    }
+    .sh-manifesto__stats   { animation-delay: 0.1s; }
+    .sh-manifesto__install { animation-delay: 0.2s; }
+    .sh-manifesto__ctas    { animation-delay: 0.3s; }
+    @keyframes sh-manifesto-reveal-fb {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .sh-manifesto { padding: 3.5rem 1.25rem 3rem; }
+
+    .sh-manifesto__brand {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .sh-manifesto__text { text-align: center; }
+    .sh-manifesto__subline { max-width: none; }
+
+    .sh-manifesto__stats {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .sh-manifesto__stat {
+        flex: 1 1 calc(50% - 1px);
+        padding: 1rem 1rem;
+        min-width: 120px;
+    }
+    .sh-manifesto__stat-divider {
+        width: 1px;
+        height: auto;
+        align-self: stretch;
+    }
+    .sh-manifesto__stat-divider:nth-child(4) {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sh-manifesto__install-code { font-size: 0.8125rem; padding: 0.65rem 1rem; }
+}
+
+@media (max-width: 480px) {
+    .sh-manifesto__ctas { flex-direction: column; width: 100%; }
+    .sh-manifesto__cta  { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sh-manifesto__brand,
+    .sh-manifesto__stats,
+    .sh-manifesto__install,
+    .sh-manifesto__ctas {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    .sh-manifesto__cta:hover  { transform: none; }
+}

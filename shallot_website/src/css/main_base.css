@@ -1,0 +1,162 @@
+/* ==========================================================================
+   SHALLOT WEBSITE — Base Styles
+   Zero JavaScript. Every selector here runs in a NoScript TOR browser.
+   ========================================================================== */
+
+/* ── CSS custom property defaults (Violet theme — overridden by color picker) */
+:root {
+    --sh-primary:       #8b5cf6;
+    --sh-primary-hover: #7c3aed;
+    --sh-primary-bg:    rgba(139, 92, 246, 0.12);
+    --sh-accent:        #8b5cf6;
+    --sh-focus-ring:    rgba(139, 92, 246, 0.4);
+
+    --sh-success:  #22c55e;
+    --sh-warning:  #f59e0b;
+    --sh-error:    #ef4444;
+    --sh-info:     #3b82f6;
+
+    --sh-text:           #111827;
+    --sh-text-secondary: #4b5563;
+    --sh-text-muted:     #9ca3af;
+
+    --sh-surface:       #ffffff;
+    --sh-surface-2:     #f9fafb;
+    --sh-surface-3:     #f3f4f6;
+    --sh-surface-hover: #f0f0f5;
+    --sh-border:        #e5e7eb;
+    --sh-border-strong: #d1d5db;
+
+    --sh-radius-xs:   0.1875rem;
+    --sh-radius-sm:   0.25rem;
+    --sh-radius-md:   0.5rem;
+    --sh-radius-lg:   0.75rem;
+    --sh-radius-xl:   1rem;
+    --sh-radius-2xl:  1.5rem;
+    --sh-radius-full: 9999px;
+
+    --sh-shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+    --sh-shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --sh-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    --sh-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    --sh-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    --sh-shadow-glow: 0 0 0 1px rgba(255,255,255,0.08),
+                      0 4px 12px rgba(0,0,0,0.12),
+                      0 20px 40px rgba(0,0,0,0.08);
+
+    --sh-ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    --sh-ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+    --sh-ease-inout: cubic-bezier(0.87, 0, 0.13, 1);
+    --sh-dur-fast:   150ms;
+    --sh-dur-med:    300ms;
+    --sh-dur-slow:   500ms;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--sh-text);
+    background: var(--sh-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img, video, svg { display: block; max-width: 100%; }
+
+a {
+    color: var(--sh-primary);
+    text-decoration: none;
+    transition: color var(--sh-dur-fast) ease;
+}
+a:hover { color: var(--sh-primary-hover); }
+
+:focus-visible {
+    outline: 2px solid var(--sh-focus-ring);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* ── Skip link ───────────────────────────────────────────────────────────── */
+.sh-skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--sh-primary);
+    color: #fff;
+    border-radius: var(--sh-radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    z-index: 9999;
+    transition: top 0.2s ease;
+    white-space: nowrap;
+}
+.sh-skip-link:focus { top: 1rem; }
+
+/* ── Visually hidden (screen readers only) ───────────────────────────────── */
+.sh-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ── Layout container ────────────────────────────────────────────────────── */
+.sh-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ── Syntax highlight helpers (used in code panels) ─────────────────────── */
+.sh-syn-keyword { color: #c792ea; }
+.sh-syn-string  { color: #c3e88d; }
+.sh-syn-comment { color: #637777; font-style: italic; }
+.sh-syn-type    { color: #82aaff; }
+.sh-syn-macro   { color: #89ddff; }
+.sh-syn-attr    { color: #f78c6c; }
+.sh-syn-num     { color: #f78c6c; }
+.sh-syn-punct   { color: #89ddff; }
+
+/* ── Heart animation ─────────────────────────────────────────────────────── */
+.sh-heart {
+    display: inline-block;
+    animation: sh-heartbeat 1.2s ease-in-out infinite;
+}
+@keyframes sh-heartbeat {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.3); }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    html { scroll-behavior: auto; }
+    .sh-heart { animation: none; }
+}

@@ -1,0 +1,2885 @@
+## User
+
+Continue the implementation of Shallot revamp, without reading entire codebase this time so you can protect your context. Here is the context : "## User
+
+Please continue where we left off on previous iteration (reached token limit per chat). For context : initial prompt was "We need a thorough refactoring of this library and most importantly of its showcase website. First of all, the hero section : it has been revamped on last commit and stripped off its "early internet" era humorous aspect (<files at the end of prompt> these files are inspiration I made on the overall vibe of hero section (and hero section only), but to be fully readapated (obviously, as it is a tsx file). Currently, after hero section, a weird unexpected and fake "community theme" section comes out of nowhere, which was never asked for. The only customization is to be a nice No-JS (as always) component on right side of nav, which entitles user to choose a color between 7 curated colors you'll choose and see all ui lib components update live, or to pick their own in a custom rust&css only color picker (which will be appended to the components). In this fake community theme section to delete entirely, there is also a completely broken category navigation. Finally, the core : the components are for the most not shown at all. They must be fully present, interactive and functional ! Also, their code snippets are not displaying and the interactivity of their display is broken. Please refactor it as spoiler dropdowns, IDE style code snippets, where for each component, user can choose "lib import" (see code when package is installed) and "full code" (standalone). It must also display clearly and aesthetically separated sections when relevant (CSS/HTML/RUST). Another main point : the current grid card display bars user from actually seeing the components properly. Use a more aesthetic and demonstrative column layout, with a better display of each component, put more into situation, and with relevant data, render for all, fully ready for vercel deploy when pushed on remote main, with buttons to replay for animations, and animations triggered when user reached on scroll the component and not on page load. Check thoroughly principles before [@The Zero-JS Challenge.md](file:///Users/utilisateur/Desktop/shallot/The%20Zero-JS%20Challenge.md) [@The Shallot Manifesto.md](file:///Users/utilisateur/Desktop/shallot/The%20Shallot%20Manifesto.md) [@Project Overview.md](file:///Users/utilisateur/Desktop/shallot/Project%20Overview.md) . Also use [@shallot_logo_svg.svg](file:///Users/utilisateur/Desktop/shallot/shallot_logo_svg.svg)  on the website and documentation. Start with a complete, detailed, best in class, sota implementation plan with phases to scale this product from current state to fully ready package and showcase website with all working features and sota approach to change the web world. Of course : absolutely ZERO JS all across codebase. Never ANY line of code that could not be ran in a no script TOR browser."
+
+You were currently building the new showcase with all features. If needed, whole chat is available on root, but DO NOT read if not needed (huge context file)
+
+## Assistant
+
+<thinking>
+Let me start by understanding the current state of the project and what was being worked on in the previous iteration. Let me look at the project structure first.
+</thinking>
+
+**Tool Call: List the `shallot` directory's contents**
+Status: Completed
+
+# Folders:
+shallot/shallot/src
+
+# Files:
+shallot/shallot/Cargo.toml
+shallot/shallot/IMPLEMENTATION_PLAN.md
+shallot/shallot/README.md
+
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{
+  "offset": 0,
+  "current_matches_page": [],
+  "all_matches_len": 0
+}
+```
+
+**Tool Call: List the `shallot/shallot` directory's contents**
+Status: Completed
+
+# Folders:
+shallot/shallot/src
+
+# Files:
+shallot/shallot/Cargo.toml
+shallot/shallot/IMPLEMENTATION_PLAN.md
+shallot/shallot/README.md
+
+
+**Tool Call: List the `shallot/shallot/src` directory's contents**
+Status: Completed
+
+
+# Files:
+shallot/shallot/src/lib.rs
+
+
+## Assistant
+
+<thinking>
+It seems the project structure has changed. Let me look for the actual codebase more carefully.
+</thinking>
+
+**Tool Call: 14 matches**
+Status: Completed
+
+file:///Users/utilisateur/Desktop/shallot/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot_build/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot_components/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot_foundation/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot_testing/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot_build/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot_components/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot_foundation/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot_testing/Cargo.toml
+
+file:///Users/utilisateur/Desktop/shallot/shallot_website/Cargo.toml
+
+**Tool Call: 50 matches**
+Status: Completed
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/data_display/display.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/data_display/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/forms/controls.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/forms/input.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/forms/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/forms/specialized.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/foundation/animations.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/foundation/hsl.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/foundation/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/foundation/theme.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/navigation/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/navigation/nav.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/overlays/badges.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/overlays/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/overlays/modal.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/primitives/box.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/primitives/grid.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/primitives/layout.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/primitives/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/signature/hero.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/signature/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/typography/formatting.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/typography/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/components_individual/typography/text.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot/src/lib.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/data_display/display.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/data_display/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/forms/controls.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/forms/input.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/forms/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/forms/specialized.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/foundation/animations.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/foundation/hsl.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/foundation/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/foundation/theme.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/navigation/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/navigation/nav.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/overlays/badges.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/overlays/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/overlays/modal.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/primitives/box.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/primitives/grid.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/primitives/layout.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/primitives/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/signature/hero.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/signature/mod.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/typography/formatting.rs
+
+file:///Users/utilisateur/Desktop/shallot/shallot-clean/components_individual/typography/mod.rs
+
+**Tool Call: List the `shallot/shallot-clean` directory's contents**
+Status: Completed
+
+# Folders:
+shallot/shallot-clean/.qwen
+shallot/shallot-clean/.vercel
+shallot/shallot-clean/components_individual
+shallot/shallot-clean/conductor
+shallot/shallot-clean/output
+shallot/shallot-clean/qlogs
+shallot/shallot-clean/shallot
+shallot/shallot-clean/shallot-clean
+shallot/shallot-clean/shallot_build
+shallot/shallot-clean/shallot_components
+shallot/shallot-clean/shallot_foundation
+shallot/shallot-clean/shallot_testing
+shallot/shallot-clean/shallot_website
+shallot/shallot-clean/tests
+
+# Files:
+shallot/shallot-clean/.gitignore
+shallot/shallot-clean/.vercelignore
+shallot/shallot-clean/ACCESSIBILITY_REVIEW_TODO.md
+shallot/shallot-clean/AGENTS.md
+shallot/shallot-clean/CODE_REVIEW.md
+shallot/shallot-clean/COMPONENT_AUDIT.md
+shallot/shallot-clean/Cargo.lock
+shallot/shallot-clean/Cargo.toml
+shallot/shallot-clean/Component Catalog.md
+shallot/shallot-clean/Component Gallery.md
+shallot/shallot-clean/DEVELOPMENT_NOTES.md
+shallot/shallot-clean/Engineering Standards.md
+shallot/shallot-clean/INFRASTRUCTURE_IMPROVEMENTS.md
+shallot/shallot-clean/Lessons Learned.md
+shallot/shallot-clean/Project Overview.md
+shallot/shallot-clean/Quality Assurance.md
+shallot/shallot-clean/Strategic Roadmap.md
+shallot/shallot-clean/The Shallot Manifesto.md
+shallot/shallot-clean/The Zero-JS Challenge.md
+shallot/shallot-clean/all_component_mods.txt
+shallot/shallot-clean/components_with_css.txt
+shallot/shallot-clean/shallot_logo_svg.svg
+shallot/shallot-clean/takeover.md
+shallot/shallot-clean/vercel.json
+
+
+**Tool Call: Read file `shallot-clean/shallot_website/Cargo.toml`**
+Status: Completed
+
+```shallot/shallot-clean/shallot_website/Cargo.toml
+[package]
+name = "shallot_website"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+maud = "0.26"
+shallot_components = { path = "../shallot_components" }
+shallot_foundation = { path = "../shallot_foundation" }
+
+```
+
+
+## Assistant
+
+<thinking>
+I need to understand the current state of the project. Let me look at the main showcase/website file that's being used and the key components.
+</thinking>
+
+**Tool Call: List the `shallot/shallot-clean/shallot_website` directory's contents**
+Status: Completed
+
+# Folders:
+shallot/shallot-clean/shallot_website/src
+
+# Files:
+shallot/shallot-clean/shallot_website/Cargo.toml
+shallot/shallot-clean/shallot_website/README.md
+
+
+**Tool Call: Read file `shallot-clean/Cargo.toml`**
+Status: Completed
+
+```shallot/shallot-clean/Cargo.toml
+[workspace]
+members = [
+    "shallot",
+    "shallot_components",
+    "shallot_foundation",
+    "shallot_testing",
+    "shallot_build",
+    "shallot_website",
+]
+resolver = "2"
+
+[profile]
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+lto = true
+codegen-units = 1
+
+```
+
+
+**Tool Call: List the `shallot/shallot-clean/shallot_website/src` directory's contents**
+Status: Completed
+
+
+# Files:
+shallot/shallot-clean/shallot_website/src/component_docs.rs
+shallot/shallot-clean/shallot_website/src/lib.rs
+shallot/shallot-clean/shallot_website/src/main.rs
+shallot/shallot-clean/shallot_website/src/retro_hero.rs
+shallot/shallot-clean/shallot_website/src/rss.rs
+shallot/shallot-clean/shallot_website/src/showcase.rs
+shallot/shallot-clean/shallot_website/src/theme_marketplace.rs
+shallot/shallot-clean/shallot_website/src/theme_switcher.rs
+shallot/shallot-clean/shallot_website/src/webring.rs
+
+
+**Tool Call: Read file `shallot-clean/shallot_website/src/main.rs`**
+Status: Completed
+
+```shallot/shallot-clean/shallot_website/src/main.rs
+//! Shallot Website Binary
+//!
+//! Generates the static website HTML and CSS files.
+
+use shallot_website::{homepage, main_css, retro_hero, rss, showcase_css};
+use std::fs;
+use std::path::Path;
+
+fn main() {
+    // Create output directories
+    let out_dir = "output";
+    let styles_dir = Path::new(out_dir).join("styles");
+
+    fs::create_dir_all(&styles_dir).expect("Failed to create output directories");
+
+    // Generate main HTML
+    let html = homepage();
+    fs::write(Path::new(out_dir).join("index.html"), html.into_string())
+        .expect("Failed to write index.html");
+
+    // Generate RSS feed
+    fs::write(Path::new(out_dir).join("feed.xml"), rss::rss_string())
+        .expect("Failed to write feed.xml");
+
+    // Generate CSS files
+    fs::write(styles_dir.join("main.css"), main_css()).expect("Failed to write main.css");
+
+    fs::write(styles_dir.join("retro.css"), retro_hero::retro_css())
+        .expect("Failed to write retro.css");
+
+    fs::write(styles_dir.join("showcase.css"), showcase_css())
+        .expect("Failed to write showcase.css");
+
+    println!("✅ Website generated successfully in {}/", out_dir);
+    println!("📄 Files created:");
+    println!("   - {}/index.html", out_dir);
+    println!("   - {}/feed.xml", out_dir);
+    println!("   - {}/styles/main.css", out_dir);
+    println!("   - {}/styles/retro.css", out_dir);
+    println!("   - {}/styles/showcase.css", out_dir);
+    println!(
+        "\n🚀 Open {}/index.html in your browser to view the website!",
+        out_dir
+    );
+}
+
+```
+
+
+**Tool Call: Read file `shallot-clean/shallot_website/src/showcase.rs`**
+Status: Completed
+
+```shallot/shallot-clean/shallot_website/src/showcase.rs
+SUCCESS: File outline retrieved. This file is too large to read all at once, so the outline below shows the file's structure with line numbers.
+
+IMPORTANT: Do NOT retry this call without line numbers - you will get the same outline.
+Instead, use the line numbers below to read specific sections by calling this tool again with start_line and end_line parameters.
+
+# File outline for /Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs
+
+pub struct ComponentCategory [L21-26]
+ pub id [L22]
+ pub name [L23]
+ pub icon [L24]
+ pub description [L25]
+pub const CATEGORIES [L29-72]
+pub const SAMPLE_COMPONENTS [L75-251]
+fn render_preview [L254-324]
+pub fn render [L327-539]
+pub fn showcase_css [L542-948]
+
+Showing symbols 1-10 (total symbols: 10)
+
+
+NEXT STEPS: To read a specific symbol's implementation, call read_file with the same path plus start_line and end_line from the outline above.
+For example, to read a function shown as [L100-150], use start_line: 100 and end_line: 150.
+```
+
+
+**Tool Call: Read file `shallot-clean/shallot_website/src/lib.rs`**
+Status: Completed
+"
+
+And where we left off due to token limits :
+
+".sh-input {
+    width: 100%;
+    padding: 0.5rem 0.875rem;
+    background: var(--sh-surface);
+    border: 1.5px solid var(--sh-border);
+    border-radius: var(--sh-radius-md);
+    font-size: 0.9375rem;
+    color: var(--sh-text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sh-input:focus {
+    outline: none;
+    border-color: var(--sh-primary);
+    box-shadow: 0 0 0 3px var(--sh-primary-bg);
+}
+/* CSS :invalid — no JS validation needed for basic patterns */
+.sh-input:invalid:not(:placeholder-shown) {
+    border-color: var(--sh-error);
+}"#,
+                    r#"use shallot_components::input::{Input, InputType};
+
+html! {
+    (Input::new("email")
+        .input_type(InputType::Email)
+        .placeholder("you@example.com")
+        .label("Email address")
+        .required(true)
+        .render())
+}"#,
+                )
+                .render())
+
+                // Checkbox / Radio / Switch
+                (DemoRow::new(
+                    "checkbox-radio",
+                    "Checkbox, Radio & Switch",
+                    "sh-checkbox sh-radio sh-switch",
+                    "CSS :checked drives all toggle state — no JavaScript event handlers",
+                    html! {
+                        div class="sh-preview-row" style="align-items:flex-start;gap:2.5rem;" {
+                            div class="sh-preview-col sh-anim" {
+                                (Checkbox::new("Remember me").id("cb1").checked(false).render())
+                                (Checkbox::new("Subscribe").id("cb2").checked(true).render())
+                                (Checkbox::new("Disabled").id("cb3").disabled(true).render())
+                            }
+                            div class="sh-preview-col sh-anim" {
+                                (Radio::new("opt-a", "r1").label("Option A").render())
+                                (Radio::new("opt-a", "r2").label("Option B").checked(true).render())
+                                (Radio::new("opt-a", "r3").label("Option C").render())
+                            }
+                            div class="sh-preview-col sh-anim" {
+                                (Switch::new("notifications").id("sw1").label("Notifications").checked(true).render())
+                                (Switch::new("dark-mode").id("sw2").label("Dark mode").render())
+                            }
+                        }
+                    }
+                )
+                .code(
+                    r#"use shallot_components::input::{Checkbox, Radio, Switch};
+
+html! {
+    (Checkbox::new("Remember me").id("cb").checked(false).render())
+
+    (Radio::new("plan", "r1").label("Free").render())
+    (Radio::new("plan", "r2").label("Pro").checked(true).render())
+
+    (Switch::new("notifications").id("sw")
+        .label("Enable notifications").checked(true).render())
+}"#,
+                    r#"/* Input is hidden; label pseudo-element is the visible control */
+.sh-checkbox__input:checked + .sh-checkbox__label::before {
+    background: var(--sh-primary);
+    border-color: var(--sh-primary);
+}
+/* Switch — pure CSS transform on :checked */
+.sh-switch__input:checked + .sh-switch__label .sh-switch__track {
+    background: var(--sh-primary);
+}
+.sh-switch__input:checked + .sh-switch__label .sh-switch__thumb {
+    transform: translateX(100%);
+}"#,
+                    r#"use shallot_components::input::{Checkbox, Switch};
+
+html! {
+    (Checkbox::new("I agree to the terms").id("terms").render())
+    (Switch::new("newsletter").id("nl")
+        .label("Weekly digest").checked(true).render())
+}"#,
+                )
+                .render())
+
+                // Select
+                (DemoRow::new(
+                    "select",
+                    "Select",
+                    "sh-select",
+                    "Styled native <select> — fully accessible, keyboard navigable, no custom dropdown JS",
+                    html! {
+                        div class="sh-preview-col sh-anim" style="max-width:320px;" {
+                            (Select::new("framework").options(vec![
+                                SelectOption::new("rust",  "Rust + Shallot"),
+                                SelectOption::new("none",  "Vanilla CSS"),
+                                SelectOption::new("other", "Other Framework"),
+                            ]).label("UI Framework").render())
+                        }
+                    }
+                )
+                .code(
+                    r#"use shallot_components::input::{Select, SelectOption};
+
+html! {
+    (Select::new("framework")
+        .label("UI Framework")
+        .options(vec![
+            SelectOption::new("rust", "Rust + Shallot"),
+            SelectOption::new("none", "Vanilla CSS"),
+        ])
+        .render())
+}"#,
+                    r#".sh-select {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.875rem;
+    background: var(--sh-surface);
+    border: 1.5px solid var(--sh-border);
+    border-radius: var(--sh-radius-md);
+    appearance: none;
+    -webkit-appearance: none;
+    /* Custom chevron SVG via background-image — no icon font */
+    cursor: pointer;
+    color: var(--sh-text);
+}
+.sh-select:focus {
+    outline: none;
+    border-color: var(--sh-primary);
+    box-shadow: 0 0 0 3px var(--sh-primary-bg);
+}"#,
+                    r#"use shallot_components::input::{Select, SelectOption};
+
+html! {
+    (Select::new("category")
+        .label("Category")
+        .options(vec![
+            SelectOption::new("ui",     "UI Components"),
+            SelectOption::new("layout", "Layout"),
+        ])
+        .render())
+}"#,
+                )
+                .render())
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// SECTION: Navigation
+// ═══════════════════════════════════════════════════════════════════════════════
+
+fn section_navigation() -> Markup {
+    html! {
+        section id="navigation" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (section_header("navigation", "🧭", "Navigation",
+                    "Deep-linkable navigation powered by CSS :target and :checked — no JavaScript routing."))
+
+                // CSS-only Tabs
+                (DemoRow::new(
+                    "tabs",
+                    "Tabs",
+                    "sh-tabs",
+                    "Radio :checked sibling selectors switch panels — fully keyboard accessible",
+                    html! {
+                        // Radio inputs MUST precede .sh-dtabs as siblings for CSS selectors
+                        input type="radio" name="dtn" id="dtn-1" class="sh-dtabs-r" checked;
+                        input type="radio" name="dtn" id="dtn-2" class="sh-dtabs-r";
+                        input type="radio" name="dtn" id="dtn-3" class="sh-dtabs-r";
+                        div class="sh-dtabs" {
+                            div class="sh-dtabs-bar" role="tablist" {
+                                label for="dtn-1" class="sh-dtabs-btn" role="tab" { "⚡ Buttons" }
+                                label for="dtn-2" class="sh-dtabs-btn" role="tab" { "📋 Forms" }
+                                label for="dtn-3" class="sh-dtabs-btn" role="tab" { "✨ Effects" }
+                            }
+                            div class="sh-dtabs-body" {
+                                div class="sh-dtabs-panel sh-dtabs-panel--1" {
+                                    p { "Button, Badge, Progress, Rating — type-safe builder pattern." }
+                                }
+                                div class="sh-dtabs-panel sh-dtabs-panel--2" {
+                                    p { "Input, Select, Checkbox, Radio, Switch — CSS :checked state." }
+                                }
+                                div class="sh-dtabs-panel sh-dtabs-panel--3" {
+                                    p { "BorderBeam, Confetti, LiquidButton, MeshGradient, Marquee." }
+                                }
+                            }
+                        }
+                    }
+                )
+                .no
+
+```
+
+
+## Assistant
+
+<thinking>
+The edit was cut off again. Let me check the current state of the file and then add the rest of the missing content with another edit.
+</thinking>
+
+The edit got cut off. Let me check the state and continue with the remaining sections:
+
+**Tool Call: wc -l /Users/utilisateur/Desktop/shallot/shallot_website/src/showcase.rs && tail -10 /Users/utilisateur/Desktop/shallot/shallot_website/src/showcase.rs**
+Status: Completed
+
+Terminal:
+```
+    1452 /Users/utilisateur/Desktop/shallot/shallot_website/src/showcase.rs
+                                    p { "Input, Select, Checkbox, Radio, Switch — CSS :checked state." }
+                                }
+                                div class="sh-dtabs-panel sh-dtabs-panel--3" {
+                                    p { "BorderBeam, Confetti, LiquidButton, MeshGradient, Marquee." }
+                                }
+                            }
+                        }
+                    }
+                )
+                .no
+
+```
+
+
+## Assistant
+
+<thinking>
+The file is cut off again at `.no`. The problem seems to be that the edit_file tool is cutting off the content. This is because the content is too long for a single edit.
+
+Let me think of a better strategy. The issue is that I'm trying to write very long content in a single edit_file call. Let me split it into multiple smaller edit_file calls.
+
+Looking at the current state:
+- Lines 1-1452: current content, ends with `.no` (incomplete)
+- Need to: complete `.no_replay()` + rest of Tabs demo + add Breadcrumbs, Accordion, section_data, section_feedback, section_layout, pub fn render()
+
+
+- The cutoff is happening inside `DemoRow::new(...)`, right before `.no_replay()` should be called
+
+I need to switch to a different approach: write the remaining content in multiple smaller edits, each adding a specific section or part of the file. First, I'll complete the `.no_replay()` call and finish the Tabs demo, then add each remaining section one at a time.
+</thinking>
+
+The edit cuts off due to length. Let me use a different approach — write a shell script to append the complete remaining content at once:
+
+**Tool Call: **
+Status: Pending
+
+"`Image` [@RetroHero.tsx](file:///Users/utilisateur/Downloads/RetroHero.tsx)
+
+## Assistant
+
+<thinking>
+Let me look at the current state of the showcase.rs file and figure out what needs to be done to continue. Let me check the file structure and current implementation state.
+</thinking>
+
+Let me survey the current state of the codebase quickly to figure out exactly where we left off.
+
+**Tool Call: find shallot-clean/shallot_website/src -name "*.rs" | xargs wc -l 2>/dev/null**
+Status: Completed
+
+```
+606 shallot-clean/shallot_website/src/lib.rs
+      79 shallot-clean/shallot_website/src/rss.rs
+     441 shallot-clean/shallot_website/src/theme_switcher.rs
+     214 shallot-clean/shallot_website/src/theme_marketplace.rs
+     144 shallot-clean/shallot_website/src/component_docs.rs
+     414 shallot-clean/shallot_website/src/retro_hero.rs
+      45 shallot-clean/shallot_website/src/main.rs
+     113 shallot-clean/shallot_website/src/webring.rs
+     948 shallot-clean/shallot_website/src/showcase.rs
+    3004 total
+```
+
+**Tool Call: ls -la shallot-clean/output/ 2>/dev/null && echo "---" && ls -la shallot-clean/output/styles/ 2>/dev/null**
+Status: Completed
+
+```
+total 208
+drwxr-xr-x@  5 utilisateur  staff    160 Feb 24 14:28 .
+drwxr-xr-x@ 42 utilisateur  staff   1344 Feb 26 03:44 ..
+-rw-r--r--@  1 utilisateur  staff   1735 Feb 24 17:46 feed.xml
+-rw-r--r--@  1 utilisateur  staff  99902 Feb 24 17:46 index.html
+drwxr-xr-x@  5 utilisateur  staff    160 Feb 24 14:28 styles
+---
+total 48
+drwxr-xr-x@ 5 utilisateur  staff   160 Feb 24 14:28 .
+drwxr-xr-x@ 5 utilisateur  staff   160 Feb 24 14:28 ..
+-rw-r--r--@ 1 utilisateur  staff  7025 Feb 24 17:46 main.css
+-rw-r--r--@ 1 utilisateur  staff  5889 Feb 24 17:46 retro.css
+-rw-r--r--@ 1 utilisateur  staff  5833 Feb 24 17:46 showcase.css
+```
+
+**Tool Call: tail -80 shallot-clean/shallot_website/src/showcase.rs**
+Status: Completed
+
+```
+background: #1f2937;
+    color: #f3f4f6;
+    padding: 1rem;
+    border-radius: var(--sh-radius-md);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.75rem;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.5;
+}
+
+.sh-code-tab__radio[value="full"]:checked ~ .sh-code-block--full {
+    display: block;
+}
+
+.sh-code-tab__radio[value="library"]:checked ~ .sh-code-block--library {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 64rem) {
+    .sh-component-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sh-categories__list {
+        padding: 0;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sh-theme-switcher,
+    .sh-categories,
+    .sh-code-dropdown,
+    .sh-site-footer {
+        display: none !important;
+    }
+
+    .sh-component-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #000;
+        margin-bottom: 1rem;
+    }
+
+    .sh-component-card__preview {
+        background: #fff !important;
+        border: 1px solid #000;
+    }
+
+    .sh-component-section {
+        padding: 1rem 0;
+    }
+
+    .sh-component-section__title {
+        font-size: 1.25rem;
+        margin-top: 1.5rem;
+        page-break-after: avoid;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+        font-size: 10pt;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .sh-container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+"#
+    .to_string()
+}
+```
+
+**Tool Call: Read file `shallot-clean/shallot_website/src/lib.rs`**
+Status: Completed
+
+```json
+{
+  "Text": "//! Shallot Website - Zero-JS Component Showcase\n//!\n//! A fully interactive, themeable website showcasing the Shallot component library.\n//! Built with pure HTML/CSS - no JavaScript, fully Tor-compatible.\n\npub mod component_docs;\npub mod retro_hero;\npub mod rss;\npub mod showcase;\npub mod theme_marketplace;\npub mod theme_switcher;\npub mod webring;\n\nuse maud::{html, Markup, DOCTYPE};\n\n/// Main website layout\npub fn website_layout(title: &str, content: Markup) -> Markup {\n    html! {\n        (DOCTYPE)\n        html lang=\"en\" {\n            head {\n                meta charset=\"utf-8\";\n                meta name=\"viewport\" content=\"width=device-width, initial-scale=1\";\n                meta name=\"description\" content=\"Shallot - Zero-JS Rust UI Component Library\";\n                meta name=\"theme-color\" content=\"#667eea\";\n                title { (title) \" - Shallot\" }\n                link rel=\"stylesheet\" href=\"/styles/main.css\";\n                link rel=\"stylesheet\" href=\"/styles/retro.css\";\n                link rel=\"stylesheet\" href=\"/styles/showcase.css\";\n            }\n            body {\n                (content)\n\n                footer class=\"sh-site-footer\" {\n                    div class=\"sh-site-footer__content\" {\n                        p {\n                            \"© 2026 Shallot. Built with \"\n                            span class=\"sh-heart\" aria-label=\"love\" { \"❤\" }\n                            \" and zero JavaScript.\"\n                        }\n                        p class=\"sh-site-footer__tagline\" {\n                            \"Iron logic. Glass aesthetics. Pure Rust.\"\n                        }\n                    }\n                }\n            }\n        }\n    }\n}\n\n/// Homepage with hero and showcase\npub fn homepage() -> Markup {\n    let hero = retro_hero::render();\n    let showcase = showcase::render();\n\n    html! {\n        (DOCTYPE)\n        html lang=\"en\" {\n            head {\n                meta charset=\"utf-8\";\n                meta name=\"viewport\" content=\"width=device-width, initial-scale=1\";\n                meta name=\"description\" content=\"Shallot - Zero-JS Rust UI Component Library. 129 production-ready components with CSS-only animations.\";\n                meta name=\"theme-color\" content=\"#667eea\";\n                title { \"Shallot - Zero-JS Rust UI Components\" }\n                link rel=\"stylesheet\" href=\"styles/main.css\";\n                link rel=\"stylesheet\" href=\"styles/retro.css\";\n                link rel=\"stylesheet\" href=\"styles/showcase.css\";\n                link rel=\"stylesheet\" href=\"styles/components.css\";\n            }\n            body {\n                /* Skip to content link for accessibility */\n                a href=\"#showcase\" class=\"sh-skip-link\" {\n                    \"Skip to content\"\n                }\n\n                (hero)\n                (showcase)\n\n                footer class=\"sh-site-footer\" {\n                    div class=\"sh-site-footer__content\" {\n                        p {\n                            \"© 2026 Shallot. Built with \"\n                            span class=\"sh-heart\" aria-label=\"love\" { \"❤\" }\n                            \" and zero JavaScript.\"\n                        }\n                        p class=\"sh-site-footer__tagline\" {\n                            \"Iron logic. Glass aesthetics. Pure Rust.\"\n                        }\n                        p class=\"sh-site-footer__links\" {\n                            a href=\"feed.xml\" { \"📰 RSS Feed\" }\n                            \" | \"\n                            a href=\"#community-themes\" { \"🎨 Community Themes\" }\n                            \" | \"\n                            a href=\"https://github.com/shallot-rs/shallot\" target=\"_blank\" rel=\"noopener noreferrer\" {\n                                \"💾 GitHub\"\n                                span class=\"sh-visually-hidden\" { \" (opens in new tab)\" }\n                                span aria-hidden=\"true\" { \" ↗\" }\n                            }\n                        }\n                        /* Webring widget */\n                        (webring::render())\n                    }\n                }\n            }\n        }\n    }\n}\n\n/// Generate main CSS\npub fn main_css() -> String {\n    let mut css = String::new();\n    css.push_str(&main_css_content());\n    css.push_str(&webring::webring_css());\n    css.push_str(&theme_marketplace::theme_marketplace_css());\n    css\n}\n\nfn main_css_content() -> String {\n    r#\"\n/* ============================================\n   SHALLOT WEBSITE - Main Styles\n   Zero JavaScript. Pure CSS Magic.\n   ============================================ */\n\n:root {\n    /* Default theme - will be overridden by theme switcher */\n    --sh-primary: #667eea;\n    --sh-primary-hover: #5a67d8;\n    --sh-primary-bg: rgba(102, 126, 234, 0.1);\n    --sh-secondary: #764ba2;\n    --sh-accent: #f093fb;\n    --sh-success: #22c55e;\n    --sh-warning: #f59e0b;\n    --sh-error: #ef4444;\n    --sh-text: #1f2937;\n    --sh-text-secondary: #4b5563;\n    --sh-text-muted: #9ca3af;\n    --sh-surface: #ffffff;\n    --sh-surface-2: #f9fafb;\n    --sh-surface-hover: #f3f4f6;\n    --sh-border: #e5e7eb;\n    --sh-radius-sm: 0.25rem;\n    --sh-radius-md: 0.375rem;\n    --sh-radius-lg: 0.5rem;\n    --sh-radius-xl: 0.75rem;\n    --sh-radius-full: 9999px;\n}\n\n/* Dark mode support via data attribute */\n[data-theme=\"dark\"] {\n    --sh-text: #f9fafb;\n    --sh-text-secondary: #d1d5db;\n    --sh-text-muted: #6b7280;\n    --sh-surface: #1f2937;\n    --sh-surface-2: #111827;\n    --sh-surface-hover: #374151;\n    --sh-border: #374151;\n    --sh-primary-bg: rgba(102, 126, 234, 0.2);\n}\n\n/* Reset & Base */\n*, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\nhtml {\n    scroll-behavior: smooth;\n    scroll-padding-top: 100px;\n}\n\nbody {\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    font-size: 1rem;\n    line-height: 1.6;\n    color: var(--sh-text);\n    background: var(--sh-surface);\n}\n\n/* Typography */\nh1, h2, h3, h4, h5, h6 {\n    font-weight: 700;\n    line-height: 1.2;\n}\n\na {\n    color: var(--sh-primary);\n    text-decoration: none;\n    transition: color 0.2s ease;\n}\n\na:hover {\n    color: var(--sh-primary-hover);\n}\n\n/* Site Footer */\n.sh-site-footer {\n    background: var(--sh-surface-2);\n    border-top: 1px solid var(--sh-border);\n    padding: 2rem 1rem;\n    text-align: center;\n}\n\n.sh-site-footer__content {\n    max-width: 64rem;\n    margin: 0 auto;\n}\n\n.sh-site-footer p {\n    color: var(--sh-text-secondary);\n    font-size: 0.875rem;\n}\n\n.sh-site-footer__tagline {\n    margin-top: 0.5rem;\n    font-style: italic;\n    color: var(--sh-text-muted);\n}\n\n.sh-site-footer__links {\n    margin-top: 0.75rem;\n    font-size: 0.75rem;\n}\n\n.sh-site-footer__links a {\n    color: var(--sh-primary);\n    text-decoration: none;\n}\n\n.sh-site-footer__links a:hover {\n    text-decoration: underline;\n}\n\n.sh-heart {\n    display: inline-block;\n    animation: sh-heartbeat 1s ease-in-out infinite;\n}\n\n@keyframes sh-heartbeat {\n    0%, 100% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n}\n\n/* Utility Classes */\n.sh-container {\n    max-width: 80rem;\n    margin: 0 auto;\n    padding: 0 1rem;\n}\n\n.sh-sr-only {\n    position: absolute;\n    width: 1px;\n    height: 1px;\n    padding: 0;\n    margin: -1px;\n    overflow: hidden;\n    clip: rect(0, 0, 0, 0);\n    white-space: nowrap;\n    border: 0;\n}\n\n/* Focus styles */\n:focus-visible {\n    outline: 2px solid var(--sh-primary);\n    outline-offset: 2px;\n}\n\n/* Skip Link - Accessibility */\n.sh-skip-link {\n    position: absolute;\n    top: -100%;\n    left: 50%;\n    transform: translateX(-50%);\n    background: var(--sh-primary);\n    color: white;\n    padding: 0.75rem 1.5rem;\n    border-radius: var(--sh-radius-md);\n    text-decoration: none;\n    font-weight: 600;\n    z-index: 9999;\n    transition: top 0.2s ease;\n}\n\n.sh-skip-link:focus {\n    top: 1rem;\n}\n\n/* Visually Hidden - for screen readers */\n.sh-visually-hidden {\n    position: absolute;\n    width: 1px;\n    height: 1px;\n    padding: 0;\n    margin: -1px;\n    overflow: hidden;\n    clip: rect(0, 0, 0, 0);\n    white-space: nowrap;\n    border: 0;\n    pointer-events: none;\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n    *, *::before, *::after {\n        animation-duration: 0.01ms !important;\n        animation-iteration-count: 1 !important;\n        transition-duration: 0.01ms !important;\n    }\n\n    html {\n        scroll-behavior: auto;\n    }\n}\n\"#\n    .to_string()\n}\n\n/// Generate showcase CSS\npub fn showcase_css() -> String {\n    r#\"\n/* ============================================\n   SHALLOT SHOWCASE STYLES\n   ============================================ */\n\n/* Theme Switcher */\n.sh-theme-switcher {\n    position: fixed;\n    top: 1rem;\n    right: 1rem;\n    z-index: 1000;\n    background: var(--sh-surface);\n    border: 1px solid var(--sh-border);\n    border-radius: var(--sh-radius-lg);\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);\n    padding: 1rem;\n    max-width: 20rem;\n}\n\n.sh-theme-switcher__title {\n    font-size: 0.875rem;\n    font-weight: 600;\n    color: var(--sh-text);\n    margin-bottom: 0.75rem;\n}\n\n.sh-theme-switcher__presets {\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 0.5rem;\n    margin-bottom: 1rem;\n}\n\n.sh-theme-preset {\n    width: 100%;\n    aspect-ratio: 1;\n    border-radius: var(--sh-radius-md);\n    border: 2px solid transparent;\n    cursor: pointer;\n    transition: transform 0.2s ease, border-color 0.2s ease;\n}\n\n.sh-theme-preset:hover {\n    transform: scale(1.1);\n}\n\n.sh-theme-preset:focus-visible {\n    outline: 2px solid var(--sh-primary);\n    outline-offset: 2px;\n}\n\n.sh-theme-switcher__custom {\n    margin-top: 1rem;\n    padding-top: 1rem;\n    border-top: 1px solid var(--sh-border);\n}\n\n.sh-theme-switcher__label {\n    display: block;\n    font-size: 0.75rem;\n    color: var(--sh-text-muted);\n    margin-bottom: 0.5rem;\n}\n\n.sh-color-input {\n    width: 100%;\n    height: 2.5rem;\n    border: 1px solid var(--sh-border);\n    border-radius: var(--sh-radius-md);\n    cursor: pointer;\n}\n\n/* Category Navigation */\n.sh-categories {\n    position: sticky;\n    top: 0;\n    z-index: 100;\n    background: var(--sh-surface);\n    border-bottom: 1px solid var(--sh-border);\n    padding: 1rem 0;\n}\n\n.sh-categories__list {\n    display: flex;\n    gap: 0.5rem;\n    overflow-x: auto;\n    padding-bottom: 0.5rem;\n    scrollbar-width: thin;\n}\n\n.sh-category-link {\n    display: inline-block;\n    padding: 0.5rem 1rem;\n    background: var(--sh-surface-2);\n    border-radius: var(--sh-radius-full);\n    font-size: 0.875rem;\n    font-weight: 500;\n    white-space: nowrap;\n    transition: all 0.2s ease;\n}\n\n.sh-category-link:hover {\n    background: var(--sh-primary-bg);\n    color: var(--sh-primary);\n}\n\n/* Component Grid */\n.sh-component-section {\n    padding: 3rem 0;\n}\n\n.sh-component-section__title {\n    font-size: 1.5rem;\n    margin-bottom: 0.5rem;\n    color: var(--sh-text);\n}\n\n.sh-component-section__description {\n    color: var(--sh-text-secondary);\n    margin-bottom: 2rem;\n}\n\n.sh-component-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));\n    gap: 1.5rem;\n}\n\n/* Component Card */\n.sh-component-card {\n    background: var(--sh-surface);\n    border: 1px solid var(--sh-border);\n    border-radius: var(--sh-radius-lg);\n    overflow: hidden;\n    transition: box-shadow 0.3s ease, transform 0.3s ease;\n}\n\n.sh-component-card:hover {\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);\n    transform: translateY(-2px);\n}\n\n.sh-component-card__preview {\n    padding: 2rem;\n    background: var(--sh-surface-2);\n    border-bottom: 1px solid var(--sh-border);\n    min-height: 8rem;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.sh-component-card__content {\n    padding: 1.5rem;\n}\n\n.sh-component-card__title {\n    font-size: 1.125rem;\n    font-weight: 600;\n    margin-bottom: 0.5rem;\n}\n\n.sh-component-card__description {\n    font-size: 0.875rem;\n    color: var(--sh-text-secondary);\n    margin-bottom: 1rem;\n}\n\n/* Code Dropdown */\n.sh-code-dropdown {\n    border-top: 1px solid var(--sh-border);\n}\n\n.sh-code-dropdown__toggle {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    width: 100%;\n    padding: 1rem 1.5rem;\n    background: transparent;\n    border: none;\n    font-size: 0.875rem;\n    font-weight: 500;\n    color: var(--sh-primary);\n    cursor: pointer;\n    transition: background 0.2s ease;\n}\n\n.sh-code-dropdown__toggle:hover {\n    background: var(--sh-surface-2);\n}\n\n.sh-code-dropdown__icon {\n    transition: transform 0.3s ease;\n}\n\n/* CSS-only dropdown using checkbox hack */\n.sh-code-dropdown__checkbox {\n    display: none;\n}\n\n.sh-code-dropdown__content {\n    display: none;\n    padding: 1rem 1.5rem;\n    background: var(--sh-surface-2);\n    border-top: 1px solid var(--sh-border);\n}\n\n.sh-code-dropdown__checkbox:checked ~ .sh-code-dropdown__content {\n    display: block;\n}\n\n.sh-code-dropdown__checkbox:checked ~ .sh-code-dropdown__toggle .sh-code-dropdown__icon {\n    transform: rotate(180deg);\n}\n\n/* Code Tabs */\n.sh-code-tabs {\n    display: flex;\n    gap: 0.5rem;\n    margin-bottom: 1rem;\n}\n\n.sh-code-tab {\n    padding: 0.5rem 1rem;\n    background: transparent;\n    border: 1px solid var(--sh-border);\n    border-radius: var(--sh-radius-md);\n    font-size: 0.75rem;\n    font-weight: 500;\n    cursor: pointer;\n    transition: all 0.2s ease;\n}\n\n.sh-code-tab:hover {\n    background: var(--sh-surface-2);\n}\n\n/* CSS-only tabs using radio buttons */\n.sh-code-tab__radio {\n    display: none;\n}\n\n.sh-code-tab__radio:checked + .sh-code-tab {\n    background: var(--sh-primary);\n    color: white;\n    border-color: var(--sh-primary);\n}\n\n.sh-code-block {\n    display: none;\n    background: #1f2937;\n    color: #f3f4f6;\n    padding: 1rem;\n    border-radius: var(--sh-radius-md);\n    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;\n    font-size: 0.75rem;\n    overflow-x: auto;\n    white-space: pre;\n}\n\n.sh-code-tab__radio[value=\"full\"]:checked ~ .sh-code-block--full {\n    display: block;\n}\n\n.sh-code-tab__radio[value=\"library\"]:checked ~ .sh-code-block--library {\n    display: block;\n}\n\n/* Responsive */\n@media (max-width: 64rem) {\n    .sh-theme-switcher {\n        top: auto;\n        bottom: 1rem;\n        right: 1rem;\n        max-width: 16rem;\n    }\n\n    .sh-component-grid {\n        grid-template-columns: 1fr;\n    }\n}\n\"#\n    .to_string()\n}\n"
+}
+```
+
+## Assistant
+
+<thinking>
+Now I have a good picture of where we are. Let me read the current showcase.rs to understand its structure.
+</thinking>
+
+**Tool Call: Read file `shallot-clean/shallot_website/src/showcase.rs` (lines 1-200)**
+Status: Completed
+
+```json
+{
+  "Text": "//! Component Showcase - Interactive Component Gallery\n//!\n//! Displays all 129 components organized by category.\n//! Each component has a preview, description, and expandable code view.\n\nuse crate::theme_marketplace;\nuse maud::{html, Markup, Render};\nuse shallot_components::{\n    alert::{Alert, AlertKind},\n    avatar::Avatar,\n    badge::Badge,\n    border_beam::BorderBeam,\n    button::Button,\n    card::Card,\n    confetti::Confetti,\n    input::Input,\n    skeleton::Skeleton,\n};\n\n/// Component category\npub struct ComponentCategory {\n    pub id: &'static str,\n    pub name: &'static str,\n    pub icon: &'static str,\n    pub description: &'static str,\n}\n\n/// All component categories\npub const CATEGORIES: &[ComponentCategory] = &[\n    ComponentCategory {\n        id: \"layout\",\n        name: \"Layout & Primitives\",\n        icon: \"📐\",\n        description: \"Foundation components for structural integrity and spacing\",\n    },\n    ComponentCategory {\n        id: \"typography\",\n        name: \"Typography\",\n        icon: \"📝\",\n        description: \"Fluid scaling and refractive text effects\",\n    },\n    ComponentCategory {\n        id: \"forms\",\n        name: \"Forms & Inputs\",\n        icon: \"📋\",\n        description: \"Interactive form elements with CSS-only validation feedback\",\n    },\n    ComponentCategory {\n        id: \"navigation\",\n        name: \"Navigation\",\n        icon: \"🧭\",\n        description: \"Deep-linkable navigation components\",\n    },\n    ComponentCategory {\n        id: \"overlays\",\n        name: \"Overlays & Feedback\",\n        icon: \"🔔\",\n        description: \"Glass-effect overlays and contextual feedback\",\n    },\n    ComponentCategory {\n        id: \"data\",\n        name: \"Data Display\",\n        icon: \"📊\",\n        description: \"High-performance information rendering\",\n    },\n    ComponentCategory {\n        id: \"animated\",\n        name: \"Signature Animated\",\n        icon: \"✨\",\n        description: \"Breathtaking CSS-only animations and effects\",\n    },\n];\n\n/// Sample components for showcase (representative from each category)\npub const SAMPLE_COMPONENTS: &[(&str, &str, &str, &str)] = &[\n    // Layout\n    (\n        \"Box\",\n        \"layout\",\n        \"Universal container primitive\",\n        \"The fundamental building block\",\n    ),\n    (\n        \"Grid\",\n        \"layout\",\n        \"Two-dimensional CSS Grid layout\",\n        \"Responsive grid system\",\n    ),\n    (\n        \"Masonry\",\n        \"layout\",\n        \"CSS-only masonry layout\",\n        \"Pinterest-style columns\",\n    ),\n    (\n        \"ZStack\",\n        \"layout\",\n        \"Layered overlay layout\",\n        \"Stack elements with z-index\",\n    ),\n    // Typography\n    (\n        \"Heading\",\n        \"typography\",\n        \"Semantic heading levels\",\n        \"H1-H6 with fluid sizing\",\n    ),\n    (\n        \"GradientText\",\n        \"typography\",\n        \"Animated gradient text\",\n        \"Multi-stop color aura\",\n    ),\n    (\n        \"CapDrop\",\n        \"typography\",\n        \"Decorative drop cap\",\n        \"Initial letter styling\",\n    ),\n    // Forms\n    (\n        \"Input\",\n        \"forms\",\n        \"Text input with variants\",\n        \"Accessible form field\",\n    ),\n    (\n        \"Select\",\n        \"forms\",\n        \"Custom styled dropdown\",\n        \"GlassSelect component\",\n    ),\n    (\n        \"MultiSelect\",\n        \"forms\",\n        \"Tag-based selection\",\n        \"Multiple value picker\",\n    ),\n    (\n        \"CreditCardInput\",\n        \"forms\",\n        \"Card input with preview\",\n        \"Formatted card entry\",\n    ),\n    (\n        \"ImageUpload\",\n        \"forms\",\n        \"Drag-drop image upload\",\n        \"File upload interface\",\n    ),\n    // Navigation\n    (\n        \"Navbar\",\n        \"navigation\",\n        \"Top navigation bar\",\n        \"Responsive header\",\n    ),\n    (\n        \"Sidebar\",\n        \"navigation\",\n        \"Collapsible sidebar\",\n        \"Drawer navigation\",\n    ),\n    (\n        \"Breadcrumbs\",\n        \"navigation\",\n        \"Path navigation\",\n        \"Hierarchical links\",\n    ),\n    (\n        \"SiteMap\",\n        \"navigation\",\n        \"Hierarchical site map\",\n        \"SEO-friendly navigation\",\n    ),\n    (\n        \"TableOfContents\",\n        \"navigation\",\n        \"Auto-generated TOC\",\n        \"Heading navigator\",\n    ),\n    // Overlays\n    (\"Modal\", \"overlays\", \"Dialog overlay\", \"CSS-only modal\"),\n    (\"Drawer\", \"overlays\", \"Slide-out panel\", \"Side drawer\"),\n    (\n        \"Toast\",\n        \"overlays\",\n        \"Notification toast\",\n        \"Non-blocking alerts\",\n    ),\n    (\"Tooltip\", \"overlays\", \"Hover tooltip\", \"Contextual hint\"),\n    // Data Display\n    (\"Card\", \"data\", \"Universal container\", \"Content card\"),\n    (\"Table\", \"data\", \"Data table\", \"Sortable table\"),\n    (\"Avatar\", \"data\", \"User avatar\", \"Profile image\"),\n    (\n        \"Timeline\",\n        \"data\",\n        \"Chronological display\",\n        \"Event timeline\",\n"
+
+
+With 438 errors total, the first error is usually the root cause. The build output started with line 1569 errors, but there might be an even earlier error. I should re-run the build and capture the very first error to trace back to the actual problem.
+
+Actually, I think I need to approach this differently. Let me check if `r#"..."#` raw string syntax works when the Maud code snippets passed to `.code()` contain `"#` sequences.
+
+Wait, I think I see it now. Looking at the gen1.py code more carefully, the code snippets are regular Rust string literals with escaped quotes like `\"`. But what if a snippet contains `"#`? Looking at the modal button code snippet, it seems like there might be a hash character sequence that's breaking the raw string literal syntax.
+
+The issue is that when these code snippets are embedded as regular strings in the generated Rust file, something like `"#my-modal"` appears, and the escaped quote handling might be causing problems with how Rust parses the string boundaries. I'm realizing the issue: in gen2.py and gen3.py, the code snippets are Python strings that get written directly into the Rust file as string literals, so any quotes inside them need to be escaped with backslashes to work properly in Rust's `"..."` syntax. Let me trace through exactly how the modal example handles this escaping. I'm realizing the issue with quote escaping in these code snippets. When Python generates Rust string literals, it needs to escape quotes with backslashes so the Rust compiler interprets them correctly as part of the string content rather than string terminators. The Python strings use `\"` which, when written to the Rust file, become escaped quotes that Rust can parse properly. But I'm noticing something off in the nav code from gen4.py...
+
+Actually, wait—that nav code is inside Maud's `html!` macro, not a raw string literal, so the quote handling is completely different. The macro just treats `"#s-buttons"` as a normal Rust string, which is fine. Let me actually run the build and look at the first error message to see what's really going wrong.
+</thinking>
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep "^error" | head -5**
+Status: Completed
+
+```
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `Ghost` is unknown
+```
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep "^error\|^ -->" | head -20**
+Status: Completed
+
+```
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `md` is unknown
+error: prefix `Ghost` is unknown
+error: prefix `Docs` is unknown
+error: prefix `docs` is unknown
+error: prefix `badges` is unknown
+error: prefix `section` is unknown
+error: prefix `showcase__inner` is unknown
+error: prefix `badges` is unknown
+error: prefix `Status` is unknown
+error: unknown start of token: \u{2014}
+error: prefix `variants` is unknown
+error: prefix `Variants` is unknown
+error: unknown start of token: \u{2014}
+error: prefix `radius` is unknown
+error: prefix `wrap` is unknown
+error: prefix `JS` is unknown
+error: prefix `context` is unknown
+```
+
+## Assistant
+
+<thinking>
+The errors show `prefix 'md' is unknown` and similar errors. These are clearly coming from CSS content being parsed as Rust code. The issue is that something like `--md` is being parsed as an identifier with prefix `md`.
+
+But these are CSS custom property values like `var(--sh-radius-md)`. If the CSS were inside a raw string `r#"..."#`, none of these would be parse errors.
+
+The first errors being at the beginning suggest that the issue is very early in the file. Let me check where `prefix 'md' is unknown` would come from... This comes from something like `sh-btn--md` being split as `sh-btn` followed by `--md`. 
+
+So the Rust parser is interpreting `--md` as a double-negative prefix operator on the identifier `md`, which triggers the "unknown prefix" error. This happens when Rust encounters something like `md"some string"` or `md'c'` — a string or character literal with a prefix that doesn't exist. I need to find where in the file there's a pattern like `"sh-btn--md"` that's being misinterpreted this way.
+
+Actually, I'm realizing the CSS raw string errors cascading through the file might be symptoms of an earlier problem. Let me trace back to find the actual first error with its line number.
+</thinking>
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep -A1 "^error" | grep "\.rs:" | sort -t: -k2 -n | head -5**
+Status: Completed
+
+```
+--> shallot_website/src/showcase.rs:172:48
+   --> shallot_website/src/showcase.rs:173:49
+   --> shallot_website/src/showcase.rs:174:45
+   --> shallot_website/src/showcase.rs:175:46
+   --> shallot_website/src/showcase.rs:211:28
+```
+
+**Tool Call: sed -n '165,180p' shallot-clean/shallot_website/src/showcase.rs**
+Status: Completed
+
+```
+box-shadow: 0 4px 20px color-mix(in srgb,var(--sh-primary) 40%,transparent);
+}
+.sh-btn--ghost {
+    background: transparent;
+    color: var(--sh-primary);
+}
+.sh-btn--ghost:hover { background: var(--sh-primary-bg); }",
+"<button class="sh-btn sh-btn--primary sh-btn--md">Primary</button>
+<button class="sh-btn sh-btn--secondary sh-btn--md">Secondary</button>
+<button class="sh-btn sh-btn--ghost sh-btn--md">Ghost</button>
+<button class="sh-btn sh-btn--danger sh-btn--md">Danger</button>")
+                .render())
+
+                (DemoRow::new("btn-sizes", "Button Sizes", "ButtonSize",
+                    "Sm · Md · Lg — type-safe sizes, prevents typos like \"meduim\" at compile time",
+                    html! {
+```
+
+## Assistant
+
+<thinking>
+Found it! Line 172: `"<button class="sh-btn sh-btn--primary sh-btn--md">Primary</button>`
+
+The standalone HTML code snippet has UNESCAPED double quotes inside a Rust string literal:
+```rust
+"<button class="sh-btn sh-btn--primary sh-btn--md">Primary</button>
+```
+
+This is invalid Rust - the string opens with `"`, then `class=` is fine, but then `"sh-btn` immediately closes the first string and `sh-btn` is an identifier prefix. This is the root cause!
+
+This comes from gen1.py where I wrote:
+
+
+Generating button HTML strings... The real issue is that I need to escape the quotes properly for the Rust output—using `\\\"` in the Python strings to produce `\"` in the generated file, or switching to raw string literals in Rust to avoid the escaping problem altogether. I need to use double hash marks in the raw string literals—`r##"..."##`—to handle cases where the code snippets contain `"#` sequences, like in `href="#s-buttons"`.
+
+Actually, the most straightforward approach is to stick with regular Rust string literals and properly escape the double quotes in the Python generation script by using `\\\"` so it outputs `\"` in the final Rust file. I'm going to switch to raw string literals with `r##"..."##` for all the code snippets—this eliminates escaping headaches entirely since the only thing I'd need to avoid is the literal sequence `"##`, which won't appear in any of these code examples. I'll write a new Python script that regenerates the entire showcase.rs file from scratch, using a helper function to properly format each code snippet as a Rust raw string literal. I'm realizing that escaping quotes in Python strings for Rust code is getting complicated—I need `\\\"` to produce `\"` in the output. A much cleaner approach is using Rust raw string literals with hash marks in the generation scripts, so I can write HTML and other code directly without worrying about escape sequences.
+
+I'll rewrite the gen scripts to use Python raw triple-quoted strings containing Rust raw string syntax like `r##"..."##`, which lets me embed code snippets naturally. Then I can regenerate the showcase.rs file cleanly, passing these raw strings directly to the `code()` method.
+
+Generating showcase.rs with raw string literals... I'm realizing the scope of fixes needed is too large—nearly every code snippet has unescaped quotes in the HTML arguments. Rather than patching individual cases, I should regenerate the entire showcase.rs file using raw string literals throughout to avoid any escaping problems.
+
+Writing comprehensive gen script... I need to use raw strings in Rust to handle the HTML snippets with unescaped quotes—wrapping them with `r##"..."##` will preserve the quotes literally. I'm going through each broken snippet systematically: the button variants, form inputs, checkboxes, selects, and navigation sections all have the same issue where escaped quotes in Python become unescaped quotes in the Rust output, breaking the string syntax. escaped quotes in the Python string causing the Rust string literal to break prematurely—the unescaped `"` before `#my-modal` terminates the string, leaving `#my-modal"` as invalid syntax that Rust can't parse.
+
+The solution is to use raw string literals with the `r##"..."##` syntax for all code snippets, which treats everything inside as literal text without escape sequences. I'll regenerate the entire showcase.rs file using Python scripts that carefully construct each `.code()` call with raw strings, ensuring quotes and special characters in the HTML, CSS, and Rust code don't break the string boundaries. I'm realizing the core issue is that I'm trying to embed code with conflicting quote styles inside Rust raw strings, which creates escaping nightmares. Rather than regenerating the entire 2000-line file at once, I should take a surgical approach and fix just the problematic `.code()` calls where HTML or CSS snippets contain quotes that conflict with the Rust string delimiters. The real solution is to use Python triple-quoted strings to write out the complete file content in one go, since Python strings won't conflict with the Rust raw string syntax inside them. I'll write a fresh Python generator script using raw strings to properly handle all the code snippets with special characters, avoiding the escaping issues entirely.
+</thinking>
+
+The issue is clear: code snippet strings in `.code()` calls have unescaped double-quotes. The fix is to regenerate them using Rust raw string literals `r##"..."##`. Let me rewrite the file completely:
+
+**Tool Call: python3 -c "
+import pathlib
+OUT = pathlib.Path('/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs')
+
+# Read up to line 1519 (keep CSS function which starts at 1524)
+lines = OUT.read_text().splitlines()
+# Keep only from line 1519 onward (showcase_css)
+css_start = next(i for i,l in enumerate(lines) if 'pub fn showcase_css' in l)
+css_section = '\n'.join(lines[css_start:])
+print(f'CSS starts at line {css_start+1}, total file lines: {len(lines)}')
+print('CSS section starts:', css_section[:80])
+"**
+Status: Completed
+
+```
+CSS starts at line 1524, total file lines: 2170
+CSS section starts: pub fn showcase_css() -> String {
+    r#"
+/* ===================================
+```
+
+**Tool Call: python3 -c "
+import pathlib
+OUT = pathlib.Path('/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs')
+lines = OUT.read_text().splitlines()
+css_start = next(i for i,l in enumerate(lines) if 'pub fn showcase_css' in l)
+css_section = '\n'.join(lines[css_start:])
+# Save CSS section
+pathlib.Path('/tmp/showcase_css.txt').write_text(css_section)
+print(f'Saved {len(css_section)} bytes of CSS section')
+"**
+Status: Completed
+
+```
+Saved 31010 bytes of CSS section
+```
+
+## Assistant
+
+Good. The CSS section is saved. Now I'll regenerate the whole showcase.rs with proper raw strings, then append the CSS:
+
+**Tool Call: shallot-clean/gen1.py**
+Status: Completed
+
+Diff: shallot/shallot-clean/gen1.py
+```
+#!/usr/bin/env python3
+"""Generate showcase.rs — chunk 1: header, DemoRow, helpers, section_buttons, section_badges."""
+
+import pathlib
+
+OUT = pathlib.Path(
+    "/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs"
+)
+
+CHUNK = """//! Showcase — Interactive component gallery
+//! Zero JavaScript. CSS :has() theming. Scroll-reveal via CSS animation-timeline.
+
+use maud::{html, Markup, PreEscaped};
+use shallot_components::{
+    alert::{Alert, AlertKind},
+    avatar::Avatar,
+    badge::Badge,
+    border_beam::BorderBeam,
+    button::{Button, ButtonSize, ButtonVariant},
+    card::Card,
+    confetti::Confetti,
+    input::{Checkbox, Input, InputType, Radio, Select, SelectOption, Switch},
+    progress::ProgressBar,
+    rating::Rating,
+    skeleton::Skeleton,
+};
+
+// ═══════════════════════════════════════════════════════════════
+// DemoRow — universal showcase unit
+// ═══════════════════════════════════════════════════════════════
+
+struct DemoRow {
+    id: &\'static str,
+    title: &\'static str,
+    badge: &\'static str,
+    tagline: &\'static str,
+    preview: Markup,
+    rust_s: &\'static str,
+    css_s: &\'static str,
+    sa_s: &\'static str,
+    replay: bool,
+}
+
+impl DemoRow {
+    fn new(
+        id: &\'static str,
+        title: &\'static str,
+        badge: &\'static str,
+        tagline: &\'static str,
+        preview: Markup,
+    ) -> Self {
+        Self { id, title, badge, tagline, preview,
+               rust_s: "", css_s: "", sa_s: "", replay: false }
+    }
+    fn code(mut self, rust: &\'static str, css: &\'static str, sa: &\'static str) -> Self {
+        self.rust_s = rust; self.css_s = css; self.sa_s = sa; self
+    }
+    fn replay(mut self) -> Self { self.replay = true; self }
+
+    fn render(self) -> Markup {
+        let ct  = format!("ct-{}",  self.id);
+        let rid = format!("tr-{}",  self.id);
+        let cid = format!("tc-{}",  self.id);
+        let sid = format!("ts-{}",  self.id);
+        let rep = format!("rp-{}",  self.id);
+        let tn  = format!("tab-{}", self.id);
+        let has_sa   = !self.sa_s.is_empty();
+        let has_code = !self.rust_s.is_empty();
+        html! {
+            article class="sh-demo-row sh-scroll-reveal" id=(self.id) {
+                div class="sh-demo-row__hd" {
+                    div class="sh-demo-row__title-row" {
+                        h3 class="sh-demo-row__title" { (self.title) }
+                        code class="sh-demo-row__badge" { (self.badge) }
+                    }
+                    p class="sh-demo-row__tagline" { (self.tagline) }
+                }
+                div class="sh-demo-row__preview" {
+                    @if self.replay {
+                        input type="checkbox" id=(&rep) class="sh-replay-cb";
+                        label for=(&rep) class="sh-replay-btn" aria-hidden="true" { "↺ Replay" }
+                    }
+                    div class="sh-demo-row__stage" { (self.preview) }
+                }
+                @if has_code {
+                    div class="sh-demo-row__code-wrap" {
+                        input type="checkbox" id=(&ct) class="sh-ct-cb";
+                        label for=(&ct) class="sh-ct-toggle" {
+                            span class="sh-ct-open"  { "{ } View code" }
+                            span class="sh-ct-close" { "✕ Hide" }
+                        }
+                        div class="sh-ct-panel" {
+                            input type="radio" name=(&tn) id=(&rid) class="sh-tab-r sh-tab-r--rust" checked;
+                            input type="radio" name=(&tn) id=(&cid) class="sh-tab-r sh-tab-r--css";
+                            @if has_sa {
+                                input type="radio" name=(&tn) id=(&sid) class="sh-tab-r sh-tab-r--sa";
+                            }
+                            div class="sh-tab-bar" {
+                                label for=(&rid) class="sh-tab-label" { "Rust" }
+                                label for=(&cid) class="sh-tab-label" { "CSS" }
+                                @if has_sa { label for=(&sid) class="sh-tab-label" { "Standalone" } }
+                            }
+                            pre class="sh-codebox sh-codebox--rust" { code { (PreEscaped(self.rust_s)) } }
+                            pre class="sh-codebox sh-codebox--css"  { code { (PreEscaped(self.css_s))  } }
+                            @if has_sa {
+                                pre class="sh-codebox sh-codebox--sa" { code { (PreEscaped(self.sa_s)) } }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn sec_hd(id: &str, icon: &str, title: &str, desc: &str) -> Markup {
+    html! {
+        div class="sh-sec-hd" {
+            span class="sh-sec-hd__icon" aria-hidden="true" { (icon) }
+            div {
+                h2 class="sh-sec-hd__title" id=(id) { (title) }
+                p  class="sh-sec-hd__desc"  { (desc) }
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Buttons
+// ═══════════════════════════════════════════════════════════════
+
+fn section_buttons() -> Markup {
+    html! {
+        section id="s-buttons" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-buttons", "🔘", "Buttons",
+                    "Every variant is a Rust enum — no magic strings, compile-time checked, zero-cost abstraction."))
+
+                (DemoRow::new("btn-variants", "Button Variants", "Button, ButtonVariant",
+                    "Primary · Secondary · Ghost · Danger — all statically resolved, no runtime branching",
+                    html! {
+                        div class="sh-row sh-gap-sm sh-flex-wrap" {
+                            (Button::new("Primary").render())
+                            (Button::new("Secondary").variant(ButtonVariant::Secondary).render())
+                            (Button::new("Ghost").variant(ButtonVariant::Ghost).render())
+                            (Button::new("Danger").variant(ButtonVariant::Danger).render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::button::{Button, ButtonVariant};
+use maud::html;
+
+html! {
+    (Button::new("Primary").render())
+    (Button::new("Secondary")
+        .variant(ButtonVariant::Secondary).render())
+    (Button::new("Ghost")
+        .variant(ButtonVariant::Ghost).render())
+    (Button::new("Danger")
+        .variant(ButtonVariant::Danger).render())
+}"##,
+                    r##".sh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--sh-radius-full);
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+    cursor: pointer;
+    border: 1.5px solid transparent;
+}
+.sh-btn--primary {
+    background: var(--sh-primary);
+    color: white;
+    border-color: var(--sh-primary);
+}
+.sh-btn--primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 4px 20px color-mix(
+        in srgb, var(--sh-primary) 40%, transparent);
+}
+.sh-btn--ghost {
+    background: transparent;
+    color: var(--sh-primary);
+}
+.sh-btn--ghost:hover { background: var(--sh-primary-bg); }"##,
+                    r##"<button class="sh-btn sh-btn--primary sh-btn--md">Primary</button>
+<button class="sh-btn sh-btn--secondary sh-btn--md">Secondary</button>
+<button class="sh-btn sh-btn--ghost sh-btn--md">Ghost</button>
+<button class="sh-btn sh-btn--danger sh-btn--md">Danger</button>"##,
+                )
+                .render())
+
+                (DemoRow::new("btn-sizes", "Button Sizes", "ButtonSize",
+                    "Sm · Md · Lg — type-safe sizes prevent typos at compile time",
+                    html! {
+                        div class="sh-row sh-gap-sm sh-align-end" {
+                            (Button::new("Small").size(ButtonSize::Sm).render())
+                            (Button::new("Medium").render())
+                            (Button::new("Large").size(ButtonSize::Lg).render())
+                        }
+                    })
+                .code(
+                    r##"html! {
+    (Button::new("Small").size(ButtonSize::Sm).render())
+    (Button::new("Medium").render())
+    (Button::new("Large").size(ButtonSize::Lg).render())
+}"##,
+                    r##".sh-btn--sm { padding: 0.325rem 0.875rem;  font-size: 0.8125rem; }
+.sh-btn--md { padding: 0.5rem 1.25rem;    font-size: 0.9375rem; }
+.sh-btn--lg { padding: 0.675rem 1.625rem; font-size: 1.0625rem; }"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("btn-disabled", "Disabled State", "Button::disabled",
+                    "HTML disabled attribute — browser-native, no pointer-events, no JS event guards needed",
+                    html! {
+                        div class="sh-row sh-gap-sm sh-flex-wrap" {
+                            (Button::new("Disabled").disabled(true).render())
+                            (Button::new("Disabled Ghost").variant(ButtonVariant::Ghost).disabled(true).render())
+                            (Button::new("Disabled Danger").variant(ButtonVariant::Danger).disabled(true).render())
+                        }
+                    })
+                .code(
+                    r##"html! {
+    (Button::new("Disabled").disabled(true).render())
+    (Button::new("Disabled Ghost")
+        .variant(ButtonVariant::Ghost)
+        .disabled(true).render())
+}"##,
+                    r##".sh-btn:disabled,
+.sh-btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("btn-link", "Button as Anchor", "Button::href",
+                    "Renders as an anchor tag for correct semantics — same visual style, proper HTML element",
+                    html! {
+                        div class="sh-row sh-gap-sm" {
+                            (Button::new("View Docs").href("#s-buttons").render())
+                            (Button::new("GitHub").href("#").variant(ButtonVariant::Secondary).render())
+                        }
+                    })
+                .code(
+                    r##"html! {
+    (Button::new("View Docs").href("/docs").render())
+    (Button::new("GitHub")
+        .href("https://github.com")
+        .variant(ButtonVariant::Secondary).render())
+}"##,
+                    r##"/* Same .sh-btn styles — element changes, style stays */
+a.sh-btn { text-decoration: none; }
+a.sh-btn[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.45;
+}"##,
+                    "",
+                )
+                .render())
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Badges
+// ═══════════════════════════════════════════════════════════════
+
+fn section_badges() -> Markup {
+    html! {
+        section id="s-badges" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-badges", "🏷️", "Badges & Status",
+                    "Semantic inline markers — color, shape, and dot-status all from Rust enums."))
+
+                (DemoRow::new("badge-variants", "Badge Variants", "Badge",
+                    "Inline semantic labels — variant drives background, color, and border-radius",
+                    html! {
+                        div class="sh-row sh-gap-sm sh-flex-wrap" {
+                            (Badge::new("New").render())
+                            (Badge::new("Hot").render())
+                            (Badge::new("Free").render())
+                            (Badge::new("v1.0.0").render())
+                            (Badge::new("Beta").render())
+                            (Badge::new("Zero JS").render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::badge::Badge;
+use maud::html;
+
+html! {
+    (Badge::new("New").render())
+    (Badge::new("Hot").render())
+    (Badge::new("v1.0.0").render())
+    (Badge::new("Zero JS").render())
+}"##,
+                    r##".sh-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.175rem 0.625rem;
+    border-radius: var(--sh-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--sh-primary-bg);
+    color: var(--sh-primary);
+    border: 1px solid color-mix(
+        in srgb, var(--sh-primary) 25%, transparent
+    );
+}"##,
+                    r##"<span class="sh-badge">New</span>
+<span class="sh-badge">v1.0.0</span>"##,
+                )
+                .render())
+
+                (DemoRow::new("badge-context", "Badges in Context", "Badge inline",
+                    "Composable with any element — nav items, card headers, status lists",
+                    html! {
+                        div class="sh-col sh-gap-md" {
+                            div class="sh-demo-nav-item" {
+                                span { "Components" }
+                                (Badge::new("129").render())
+                            }
+                            div class="sh-demo-card-hd" {
+                                strong { "Shallot UI" }
+                                (Badge::new("v1.0").render())
+                                (Badge::new("Zero JS").render())
+                            }
+                            div class="sh-row sh-gap-md sh-flex-wrap" {
+                                div class="sh-row sh-gap-xs sh-align-center" {
+                                    span class="sh-dot sh-dot--online"  {}
+                                    span style="font-size:0.875rem" { "Online" }
+                                }
+                                div class="sh-row sh-gap-xs sh-align-center" {
+                                    span class="sh-dot sh-dot--busy"    {}
+                                    span style="font-size:0.875rem" { "Busy" }
+                                }
+                                div class="sh-row sh-gap-xs sh-align-center" {
+                                    span class="sh-dot sh-dot--offline" {}
+                                    span style="font-size:0.875rem" { "Offline" }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"html! {
+    // Badge next to nav label:
+    span { "Components" }
+    (Badge::new("129").render())
+
+    // Status dot:
+    span class="sh-dot sh-dot--online" {}
+    span { "Online" }
+}"##,
+                    r##".sh-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+.sh-dot--online  { background: #22c55e; }
+.sh-dot--busy    { background: #f59e0b; }
+.sh-dot--offline { background: var(--sh-text-muted); }"##,
+                    "",
+                )
+                .render())
+            }
+        }
+    }
+}
+"""
+
+OUT.write_text(CHUNK)
+print("Chunk 1 written:", OUT.stat().st_size, "bytes")
+
+```
+
+
+**Tool Call: python3 shallot-clean/gen1.py**
+Status: Completed
+
+```
+Chunk 1 written: 15469 bytes
+```
+
+## Assistant
+
+Now fix gen2 (forms + navigation) with proper raw strings:
+
+**Tool Call: shallot-clean/gen2.py**
+Status: Completed
+
+Diff: shallot/shallot-clean/gen2.py
+```
+#!/usr/bin/env python3
+"""Generate showcase.rs chunk 2: section_forms + section_navigation."""
+
+import pathlib
+
+OUT = pathlib.Path(
+    "/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs"
+)
+
+CHUNK = """
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Forms
+// ═══════════════════════════════════════════════════════════════
+
+fn section_forms() -> Markup {
+    html! {
+        section id="s-forms" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-forms", "📋", "Forms & Inputs",
+                    "CSS :focus-within, :valid/:invalid, :checked — every interaction state without a single JS event handler."))
+
+                (DemoRow::new("input-text", "Text Input", "Input, InputType",
+                    "CSS :focus draws the ring; :invalid:not(:placeholder-shown) shows red — no JS validation logic",
+                    html! {
+                        div class="sh-col sh-gap-sm" style="max-width:22rem;" {
+                            (Input::new("uname")
+                                .placeholder("john_doe")
+                                .render())
+                            (Input::new("email2")
+                                .input_type(InputType::Email)
+                                .placeholder("you@example.com")
+                                .render())
+                            (Input::new("pwd")
+                                .input_type(InputType::Password)
+                                .placeholder("••••••••")
+                                .render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::input::{Input, InputType};
+use maud::html;
+
+html! {
+    (Input::new("username").placeholder("john_doe").render())
+    (Input::new("email")
+        .input_type(InputType::Email)
+        .placeholder("you@example.com")
+        .render())
+    (Input::new("password")
+        .input_type(InputType::Password)
+        .render())
+}"##,
+                    r##".sh-input {
+    width: 100%;
+    padding: 0.5rem 0.875rem;
+    background: var(--sh-surface);
+    border: 1.5px solid var(--sh-border);
+    border-radius: var(--sh-radius-md);
+    font-size: 0.9375rem;
+    color: var(--sh-text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.sh-input:focus {
+    outline: none;
+    border-color: var(--sh-primary);
+    box-shadow: 0 0 0 3px var(--sh-primary-bg);
+}
+/* Pure CSS validation — no JS needed */
+.sh-input:invalid:not(:placeholder-shown) {
+    border-color: var(--sh-error);
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+}"##,
+                    r##"<input
+  type="email"
+  class="sh-input"
+  placeholder="you@example.com"
+  required
+/>"##,
+                )
+                .render())
+
+                (DemoRow::new("checkbox-radio", "Checkbox, Radio & Switch",
+                    "Checkbox · Radio · Switch",
+                    "Hidden inputs, styled labels — CSS :checked drives every visual state, WCAG-compliant",
+                    html! {
+                        div class="sh-row sh-gap-xl sh-flex-wrap" style="align-items:flex-start;" {
+                            div class="sh-col sh-gap-sm" {
+                                (Checkbox::new("Remember me").id("cb1").render())
+                                (Checkbox::new("Subscribe to updates").id("cb2").checked(true).render())
+                                (Checkbox::new("Disabled option").id("cb3").disabled(true).render())
+                            }
+                            div class="sh-col sh-gap-sm" {
+                                (Radio::new("plan", "r-free").label("Free tier").render())
+                                (Radio::new("plan", "r-pro").label("Pro — $12/mo").checked(true).render())
+                                (Radio::new("plan", "r-ent").label("Enterprise").render())
+                            }
+                            div class="sh-col sh-gap-sm" {
+                                (Switch::new("notifs").id("sw1").label("Notifications").checked(true).render())
+                                (Switch::new("dark2").id("sw2").label("Dark mode").render())
+                                (Switch::new("beta").id("sw3").label("Beta features").render())
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::input::{Checkbox, Radio, Switch};
+
+html! {
+    (Checkbox::new("Remember me").id("cb").render())
+    (Checkbox::new("Subscribe").id("cb2").checked(true).render())
+
+    (Radio::new("plan", "r1").label("Free").render())
+    (Radio::new("plan", "r2").label("Pro").checked(true).render())
+
+    (Switch::new("notifs").id("sw")
+        .label("Enable notifications").checked(true).render())
+}"##,
+                    r##"/* Input is visually hidden; label is the visible control */
+.sh-checkbox__input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+.sh-checkbox__input:checked + .sh-checkbox__label::before {
+    background: var(--sh-primary);
+    border-color: var(--sh-primary);
+}
+/* Switch: CSS transform on :checked */
+.sh-switch__input:checked + .sh-switch__label .sh-switch__track {
+    background: var(--sh-primary);
+}
+.sh-switch__input:checked + .sh-switch__label .sh-switch__thumb {
+    transform: translateX(1.125rem);
+}"##,
+                    r##"<label class="sh-checkbox">
+  <input type="checkbox" class="sh-checkbox__input" id="my-cb">
+  <span class="sh-checkbox__label">Option A</span>
+</label>
+
+<label class="sh-switch">
+  <input type="checkbox" class="sh-switch__input" id="my-sw">
+  <span class="sh-switch__label">
+    <span class="sh-switch__track">
+      <span class="sh-switch__thumb"></span>
+    </span>
+    Enable feature
+  </span>
+</label>"##,
+                )
+                .render())
+
+                (DemoRow::new("select", "Select", "Select, SelectOption",
+                    "Styled native select — fully keyboard-navigable, accessible, no custom dropdown JS",
+                    html! {
+                        div class="sh-col sh-gap-sm" style="max-width:22rem;" {
+                            (Select::new("framework")
+                                .options(vec![
+                                    SelectOption::new("shallot", "Rust + Shallot"),
+                                    SelectOption::new("vanilla", "Vanilla CSS"),
+                                    SelectOption::new("other",   "Other"),
+                                ])
+                                .render())
+                            (Select::new("country")
+                                .options(vec![
+                                    SelectOption::new("fr", "France"),
+                                    SelectOption::new("us", "United States"),
+                                    SelectOption::new("de", "Germany"),
+                                    SelectOption::new("jp", "Japan"),
+                                ])
+                                .render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::input::{Select, SelectOption};
+
+html! {
+    (Select::new("framework")
+        .options(vec![
+            SelectOption::new("shallot", "Rust + Shallot"),
+            SelectOption::new("vanilla", "Vanilla CSS"),
+        ])
+        .render())
+}"##,
+                    r##".sh-select {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.875rem;
+    background: var(--sh-surface);
+    border: 1.5px solid var(--sh-border);
+    border-radius: var(--sh-radius-md);
+    appearance: none;
+    -webkit-appearance: none;
+    /* Custom chevron via background-image — no icon font */
+    color: var(--sh-text);
+    cursor: pointer;
+}
+.sh-select:focus {
+    outline: none;
+    border-color: var(--sh-primary);
+    box-shadow: 0 0 0 3px var(--sh-primary-bg);
+}"##,
+                    r##"<select class="sh-select">
+  <option value="rust">Rust + Shallot</option>
+  <option value="css">Vanilla CSS</option>
+</select>"##,
+                )
+                .render())
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Navigation
+// ═══════════════════════════════════════════════════════════════
+
+fn section_navigation() -> Markup {
+    html! {
+        section id="s-nav" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-nav", "🧭", "Navigation",
+                    "CSS :checked radio siblings drive tab panels. CSS :target enables deep-linked modals and drawers."))
+
+                (DemoRow::new("tabs-demo", "Tabs", "sh-dtabs",
+                    "Radio :checked + general sibling selector switches panels — no JavaScript routing, keyboard accessible",
+                    html! {
+                        input type="radio" name="dtn" id="dtn-1" class="sh-dtabs-r" checked;
+                        input type="radio" name="dtn" id="dtn-2" class="sh-dtabs-r";
+                        input type="radio" name="dtn" id="dtn-3" class="sh-dtabs-r";
+                        div class="sh-dtabs" {
+                            div class="sh-dtabs-bar" role="tablist" {
+                                label for="dtn-1" class="sh-dtabs-tab" role="tab" { "Buttons" }
+                                label for="dtn-2" class="sh-dtabs-tab" role="tab" { "Forms" }
+                                label for="dtn-3" class="sh-dtabs-tab" role="tab" { "Effects" }
+                            }
+                            div class="sh-dtabs-body" {
+                                div class="sh-dtabs-panel sh-dtabs-panel--1" role="tabpanel" {
+                                    p { strong { "Button · Badge · Progress · Rating" } }
+                                    p style="font-size:0.85rem;color:var(--sh-text-secondary);margin-top:0.5rem;" {
+                                        "All variants are Rust enums — compile-time checked."
+                                    }
+                                }
+                                div class="sh-dtabs-panel sh-dtabs-panel--2" role="tabpanel" {
+                                    p { strong { "Input · Select · Checkbox · Radio · Switch" } }
+                                    p style="font-size:0.85rem;color:var(--sh-text-secondary);margin-top:0.5rem;" {
+                                        "CSS :checked drives all toggle state — no JS event handlers."
+                                    }
+                                }
+                                div class="sh-dtabs-panel sh-dtabs-panel--3" role="tabpanel" {
+                                    p { strong { "BorderBeam · Confetti · Marquee · GlowCard" } }
+                                    p style="font-size:0.85rem;color:var(--sh-text-secondary);margin-top:0.5rem;" {
+                                        "CSS @keyframes only — works in NoScript environments."
+                                    }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"// Radio inputs MUST precede the tab wrapper as DOM siblings
+html! {
+    input type="radio" name="tabs" id="t1" class="sh-dtabs-r" checked;
+    input type="radio" name="tabs" id="t2" class="sh-dtabs-r";
+    input type="radio" name="tabs" id="t3" class="sh-dtabs-r";
+    div class="sh-dtabs" {
+        div class="sh-dtabs-bar" {
+            label for="t1" class="sh-dtabs-tab" { "Tab 1" }
+            label for="t2" class="sh-dtabs-tab" { "Tab 2" }
+            label for="t3" class="sh-dtabs-tab" { "Tab 3" }
+        }
+        div class="sh-dtabs-body" {
+            div class="sh-dtabs-panel sh-dtabs-panel--1" { "Content 1" }
+            div class="sh-dtabs-panel sh-dtabs-panel--2" { "Content 2" }
+            div class="sh-dtabs-panel sh-dtabs-panel--3" { "Content 3" }
+        }
+    }
+}"##,
+                    r##"/* Hidden radio acts as state store */
+.sh-dtabs-r { display: none; }
+
+/* All panels hidden by default */
+.sh-dtabs-panel { display: none; }
+
+/* Show panel N when radio N is checked */
+#t1:checked ~ .sh-dtabs .sh-dtabs-panel--1 { display: block; }
+#t2:checked ~ .sh-dtabs .sh-dtabs-panel--2 { display: block; }
+#t3:checked ~ .sh-dtabs .sh-dtabs-panel--3 { display: block; }
+
+/* Active tab highlight */
+#t1:checked ~ .sh-dtabs .sh-dtabs-tab:nth-child(1),
+#t2:checked ~ .sh-dtabs .sh-dtabs-tab:nth-child(2),
+#t3:checked ~ .sh-dtabs .sh-dtabs-tab:nth-child(3) {
+    color: var(--sh-primary);
+    border-bottom-color: var(--sh-primary);
+}"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("accordion", "Accordion", "details / summary",
+                    "Native HTML details/summary — browser-native disclosure, no JS needed, animatable with CSS grid trick",
+                    html! {
+                        div class="sh-accordion" {
+                            details class="sh-accordion__item" {
+                                summary class="sh-accordion__trigger" {
+                                    span { "What is Shallot UI?" }
+                                    span class="sh-accordion__icon" aria-hidden="true" { "▼" }
+                                }
+                                div class="sh-accordion__body" {
+                                    p { "Shallot UI is a zero-JavaScript Rust component library. Every component renders to semantic HTML with CSS-only interactivity." }
+                                }
+                            }
+                            details class="sh-accordion__item" {
+                                summary class="sh-accordion__trigger" {
+                                    span { "How does CSS-only interaction work?" }
+                                    span class="sh-accordion__icon" aria-hidden="true" { "▼" }
+                                }
+                                div class="sh-accordion__body" {
+                                    p { "We use CSS selectors like :checked, :target, :focus-within, and :has() to react to user input — all resolved by the CSS engine with zero JavaScript overhead." }
+                                }
+                            }
+                            details class="sh-accordion__item" open {
+                                summary class="sh-accordion__trigger" {
+                                    span { "Does it work in TOR Browser?" }
+                                    span class="sh-accordion__icon" aria-hidden="true" { "▼" }
+                                }
+                                div class="sh-accordion__body" {
+                                    p { "Yes — every component in Shallot UI functions perfectly with JavaScript disabled, including in high-security TOR Browser configurations." }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"html! {
+    details class="sh-accordion__item" {
+        summary class="sh-accordion__trigger" {
+            span { "Click to expand" }
+            span class="sh-accordion__icon" { "▼" }
+        }
+        div class="sh-accordion__body" {
+            p { "Content here..." }
+        }
+    }
+}"##,
+                    r##"/* CSS grid-template-rows trick — smooth height animation */
+.sh-accordion__body {
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+details[open] .sh-accordion__body {
+    grid-template-rows: 1fr;
+}
+/* Rotate chevron */
+.sh-accordion__icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+details[open] .sh-accordion__icon {
+    transform: rotate(180deg);
+}"##,
+                    r##"<details class="sh-accordion__item">
+  <summary class="sh-accordion__trigger">
+    <span>What is Shallot?</span>
+    <span class="sh-accordion__icon">▼</span>
+  </summary>
+  <div class="sh-accordion__body">
+    <div><p>Content here...</p></div>
+  </div>
+</details>"##,
+                )
+                .render())
+
+                (DemoRow::new("modal-target", "Modal via :target", "CSS :target",
+                    "URL hash change triggers :target selector — modal opens with an anchor link, deep-linkable, no JS",
+                    html! {
+                        div class="sh-col sh-gap-sm" {
+                            a href="#demo-modal" class="sh-btn sh-btn--primary sh-btn--md" {
+                                "Open Modal"
+                            }
+                            div id="demo-modal" class="sh-modal-backdrop"
+                                role="dialog" aria-modal="true" aria-label="Demo modal" {
+                                div class="sh-modal-box" {
+                                    div class="sh-modal-hd" {
+                                        h3 { "Zero-JS Modal" }
+                                        a href="#" class="sh-modal-close" aria-label="Close modal" { "✕" }
+                                    }
+                                    div class="sh-modal-body" {
+                                        p {
+                                            "Triggered purely by the URL hash "
+                                            code { "#demo-modal" }
+                                            ". No JavaScript."
+                                        }
+                                        p { "Deep-linkable. Works on TOR Browser High Security." }
+                                    }
+                                    div class="sh-modal-ft" {
+                                        a href="#" class="sh-btn sh-btn--primary sh-btn--sm" { "Confirm" }
+                                        a href="#" class="sh-btn sh-btn--ghost sh-btn--sm" { "Cancel" }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"html! {
+    // Trigger: just a link that changes the URL hash
+    a href="#settings-modal" class="sh-btn sh-btn--primary sh-btn--md" {
+        "Open Settings"
+    }
+    // The modal — hidden until its id matches :target
+    div id="settings-modal" class="sh-modal-backdrop"
+        role="dialog" aria-modal="true" {
+        div class="sh-modal-box" {
+            div class="sh-modal-hd" {
+                h3 { "Settings" }
+                a href="#" class="sh-modal-close" { "✕" }
+            }
+            div class="sh-modal-body" {
+                p { "Modal content here" }
+            }
+            div class="sh-modal-ft" {
+                a href="#" class="sh-btn sh-btn--primary sh-btn--sm" { "Save" }
+                a href="#" class="sh-btn sh-btn--ghost sh-btn--sm" { "Cancel" }
+            }
+        }
+    }
+}"##,
+                    r##"/* Hidden by default */
+.sh-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    place-items: center;
+}
+/* :target shows the modal when URL hash matches */
+.sh-modal-backdrop:target {
+    display: grid;
+    animation: sh-modal-in 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes sh-modal-in {
+    from { opacity: 0; scale: 0.95; }
+    to   { opacity: 1; scale: 1; }
+}
+/* Close link resets hash */
+.sh-modal-close { color: var(--sh-text-muted); }"##,
+                    "",
+                )
+                .render())
+            }
+        }
+    }
+}
+"""
+
+with open(OUT, "a") as f:
+    f.write(CHUNK)
+print("Chunk 2 appended:", OUT.stat().st_size, "bytes")
+
+```
+
+
+**Tool Call: python3 shallot-clean/gen2.py && python3 shallot-clean/gen3.py && python3 shallot-clean/gen4.py**
+Status: Completed
+
+```
+Chunk 2 appended: 35418 bytes
+Chunk 3 appended: 52889 bytes
+Chunk 4 appended: 67675 bytes
+```
+
+## Assistant
+
+Now append the CSS section we saved earlier:
+
+**Tool Call: python3 -c "
+import pathlib
+OUT = pathlib.Path('/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs')
+css = pathlib.Path('/tmp/showcase_css.txt').read_text()
+with open(OUT, 'a') as f:
+    f.write('\n' + css)
+print('CSS appended, total:', OUT.stat().st_size, 'bytes,', OUT.read_text().count(chr(10)), 'lines')
+"**
+Status: Completed
+
+```
+CSS appended, total: 98688 bytes, 2169 lines
+```
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep "^error\|^warning: unused\|Compiling\|Finished\|error\[" | head -30**
+Status: Completed
+
+```
+Compiling shallot_website v0.1.0 (/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website)
+error: prefix `Martin` is unknown
+error: prefix `group` is unknown
+error: prefix `overflow` is unknown
+error: prefix `Glass` is unknown
+error: prefix `skeleton` is unknown
+error: prefix `skeleton` is unknown
+error: prefix `success` is unknown
+error: prefix `alert__icon` is unknown
+error: prefix `alert__title` is unknown
+error: prefix `alert__body` is unknown
+error: prefix `wrap` is unknown
+error: prefix `top` is unknown
+error: prefix `S` is unknown
+error: prefix `wrap` is unknown
+error: prefix `sm` is unknown
+error: prefix `top` is unknown
+error: prefix `here` is unknown
+error: prefix `Rust` is unknown
+error: prefix `JS` is unknown
+error: prefix `UI` is unknown
+error: prefix `card` is unknown
+error: prefix `card__icon` is unknown
+error: prefix `card__title` is unknown
+error: prefix `Native` is unknown
+error: prefix `card__body` is unknown
+error: expected one of `)`, `,`, `.`, `?`, or an operator, found `Martin`
+error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `{`, or an operator, found `").initials("AM`
+error: expected one of `)`, `,`, `.`, `?`, or an operator, found `").render())
+error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `{`, or an operator, found `" {
+```
+
+## Assistant
+
+<thinking>
+Still errors! The error `prefix 'Martin' is unknown` at a line involving `Avatar::new("Alice Martin")` suggests that strings in the Maud code in gen3.py are also broken.
+
+Let me check the actual lines where these errors are occurring. The `prefix 'Martin' is unknown` error comes from something like `"Alice Martin"` being parsed incorrectly. This means `"Alice Martin"` is at a place where Rust is not expecting a string with `Martin` as prefix.
+
+Actually wait - "prefix X is unknown" in Rust 2021 means something like `'Martin` is being parsed as a lifetime or character prefix. 
+
+Hmm, I'm wondering if the string isn't properly closed somewhere, causing Rust to interpret `"Alice ` as the end of the string and then `Martin` as a prefix on the next token. That would explain why it's treating `Martin` as an unknown prefix rather than part of the string content.
+
+Actually, I think I've been looking at this wrong. The real issue might be in gen3.py and gen4.py - they're still using the old Python string escaping with `\"` that doesn't properly translate to Rust strings when written to the file. I fixed this in gen1.py and gen2.py, but those later generators have the same problem, which is why the Rust code is breaking when it tries to parse those string literals. Looking at the actual error lines in the generated file to pinpoint where the syntax breaks down.
+</thinking>
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep "showcase.rs:" | sort -t: -k2 -n | head -10**
+Status: Completed
+
+```
+--> shallot_website/src/showcase.rs:820:5
+   --> shallot_website/src/showcase.rs:852:25
+   --> shallot_website/src/showcase.rs:852:25
+   --> shallot_website/src/showcase.rs:852:31
+   --> shallot_website/src/showcase.rs:852:46
+   --> shallot_website/src/showcase.rs:855:26
+   --> shallot_website/src/showcase.rs:855:31
+   --> shallot_website/src/showcase.rs:856:28
+   --> shallot_website/src/showcase.rs:856:43
+   --> shallot_website/src/showcase.rs:857:26
+```
+
+**Tool Call: sed -n '815,860p' shallot-clean/shallot_website/src/showcase.rs**
+Status: Completed
+
+```
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Data Display
+// ═══════════════════════════════════════════════════════════════
+
+fn section_data() -> Markup {
+    html! {
+        section id="s-data" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-data", "📊", "Data Display",
+                    "High-performance information rendering — no virtual DOM, pure Maud templates with O(n) render time."))
+
+                // Avatar
+                (DemoRow::new("avatar-demo", "Avatar", "Avatar, AvatarShape",
+                    "Fallback initials when no image — CSS background-color from name hash, multiple sizes and shapes",
+                    html! {
+                        div class="sh-col sh-gap-lg" {
+                            div class="sh-row sh-gap-sm sh-align-center sh-flex-wrap" {
+                                (Avatar::new("Alice Martin").initials("AM").render())
+                                (Avatar::new("Bob Chen").initials("BC").render())
+                                (Avatar::new("Clara Diaz").initials("CD").render())
+                                (Avatar::new("David Kim").initials("DK").render())
+                                (Avatar::new("Eva Russo").initials("ER").render())
+                            }
+                            // Stacked / overlapping group
+                            div class="sh-avatar-group" {
+                                (Avatar::new("Alice Martin").initials("AM").render())
+                                (Avatar::new("Bob Chen").initials("BC").render())
+                                (Avatar::new("Clara Diaz").initials("CD").render())
+                                span class="sh-avatar-overflow" { "+12" }
+                            }
+                        }
+                    })
+                .code(
+"use shallot_components::avatar::Avatar;
+
+html! {
+    // Single avatar with initials fallback
+    (Avatar::new("Alice Martin").initials("AM").render())
+
+    // Stacked group
+    div class="sh-avatar-group" {
+        (Avatar::new("Alice").initials("AM").render())
+        (Avatar::new("Bob").initials("BC").render())
+        span class="sh-avatar-overflow" { "+12" }
+    }
+}",
+```
+
+## Assistant
+
+<thinking>
+Found it! Line 852 and following - the `.code(` call has:
+```rust.code(
+"use shallot_components::avatar::Avatar;
+
+html! {
+    // Single avatar with initials fallback
+    (Avatar::new("Alice Martin").initials("AM").render())
+    ...
+}",
+```
+
+The string contains unescaped double quotes (`"Alice Martin"`, `"AM"`, etc.) so the Rust string literal is broken.
+
+I need to fix gen3.py as well. Let me rewrite it with proper `r##"..."##` raw strings for all code snippets.
+
+
+Now I should check gen4.py for the same issue in the section_effects, color_picker, and render() sections, then apply the raw string fix across both files.
+</thinking>
+
+Same issue in gen3.py and gen4.py. Let me fix them both:
+
+**Tool Call: shallot-clean/gen3.py**
+Status: Completed
+
+Diff: shallot/shallot-clean/gen3.py
+```
+#!/usr/bin/env python3
+"""Generate showcase.rs chunk 3: section_data + section_feedback."""
+
+import pathlib
+
+OUT = pathlib.Path(
+    "/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs"
+)
+
+CHUNK = """
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Data Display
+// ═══════════════════════════════════════════════════════════════
+
+fn section_data() -> Markup {
+    html! {
+        section id="s-data" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-data", "📊", "Data Display",
+                    "High-performance information rendering — no virtual DOM, pure Maud templates with O(n) render time."))
+
+                (DemoRow::new("avatar-demo", "Avatar", "Avatar",
+                    "Fallback initials when no image — multiple sizes and shapes, group overlap via CSS negative margin",
+                    html! {
+                        div class="sh-col sh-gap-lg" {
+                            div class="sh-row sh-gap-sm sh-align-center sh-flex-wrap" {
+                                (Avatar::new("Alice Martin").initials("AM").render())
+                                (Avatar::new("Bob Chen").initials("BC").render())
+                                (Avatar::new("Clara Diaz").initials("CD").render())
+                                (Avatar::new("David Kim").initials("DK").render())
+                                (Avatar::new("Eva Russo").initials("ER").render())
+                            }
+                            div class="sh-avatar-group" {
+                                (Avatar::new("Alice Martin").initials("AM").render())
+                                (Avatar::new("Bob Chen").initials("BC").render())
+                                (Avatar::new("Clara Diaz").initials("CD").render())
+                                span class="sh-avatar-overflow" { "+12" }
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::avatar::Avatar;
+
+html! {
+    // Single avatar with initials fallback
+    (Avatar::new("Alice Martin").initials("AM").render())
+
+    // Overlapping group
+    div class="sh-avatar-group" {
+        (Avatar::new("Alice").initials("AM").render())
+        (Avatar::new("Bob").initials("BC").render())
+        span class="sh-avatar-overflow" { "+12" }
+    }
+}"##,
+                    r##".sh-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--sh-primary-bg);
+    color: var(--sh-primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    border: 2px solid var(--sh-surface);
+}
+/* Overlapping group — CSS negative margin */
+.sh-avatar-group { display: flex; }
+.sh-avatar-group .sh-avatar {
+    margin-left: -0.75rem;
+    box-shadow: 0 0 0 2px var(--sh-surface);
+}
+.sh-avatar-group .sh-avatar:first-child { margin-left: 0; }"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("card-demo", "Card", "Card",
+                    "Universal container with Glass elevation — backdrop-filter plus layered shadows, no dynamic JS",
+                    html! {
+                        div class="sh-row sh-gap-md sh-flex-wrap" {
+                            div class="sh-card" style="max-width:18rem;" {
+                                div class="sh-card__img-area" style="height:7rem;background:linear-gradient(135deg,var(--sh-primary),#764ba2);border-radius:0.5rem 0.5rem 0 0;" {}
+                                div class="sh-card__body" {
+                                    div class="sh-row sh-gap-xs sh-flex-wrap" style="margin-bottom:0.5rem;" {
+                                        (Badge::new("Design").render())
+                                        (Badge::new("Open Source").render())
+                                    }
+                                    h4 style="font-size:1.0625rem;font-weight:700;margin-bottom:0.375rem;" { "Iron & Glass" }
+                                    p style="font-size:0.875rem;color:var(--sh-text-secondary);line-height:1.5;" {
+                                        "A Rust-native UI library. Zero JavaScript. Breathtaking aesthetics."
+                                    }
+                                }
+                                div class="sh-card__footer" {
+                                    (Button::new("Read More").size(ButtonSize::Sm).render())
+                                    (Button::new("Star").size(ButtonSize::Sm).variant(ButtonVariant::Ghost).render())
+                                }
+                            }
+                            div class="sh-col sh-gap-sm" {
+                                div class="sh-stat-card" {
+                                    span class="sh-stat-card__label" { "Components" }
+                                    strong class="sh-stat-card__value" { "129" }
+                                    span class="sh-stat-card__note sh-stat-card__note--up" { "14 new" }
+                                }
+                                div class="sh-stat-card" {
+                                    span class="sh-stat-card__label" { "JavaScript" }
+                                    strong class="sh-stat-card__value" { "0 kb" }
+                                    span class="sh-stat-card__note sh-stat-card__note--up" { "Zero" }
+                                }
+                                div class="sh-stat-card" {
+                                    span class="sh-stat-card__label" { "Total Blocking Time" }
+                                    strong class="sh-stat-card__value" { "0 ms" }
+                                    span class="sh-stat-card__note sh-stat-card__note--up" { "Perfect" }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::card::Card;
+use maud::html;
+
+html! {
+    (Card::new(html! {
+        h3 { "Iron & Glass" }
+        p { "Zero JavaScript. Pure Rust." }
+    }).render())
+}"##,
+                    r##".sh-card {
+    background: var(--sh-surface);
+    border: 1px solid var(--sh-border);
+    border-radius: var(--sh-radius-xl);
+    overflow: hidden;
+    /* Layered shadows = Glass elevation */
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 12px rgba(0,0,0,0.06),
+        0 12px 32px rgba(0,0,0,0.04),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sh-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.06),
+        0 12px 40px rgba(0,0,0,0.1),
+        0 24px 64px rgba(0,0,0,0.06);
+}"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("progress-rating", "Progress & Rating",
+                    "ProgressBar, Rating",
+                    "CSS bar fill via inline style width; rating stars via server-rendered class — no JS polling",
+                    html! {
+                        div class="sh-col sh-gap-lg" style="max-width:24rem;" {
+                            div class="sh-col sh-gap-sm" {
+                                div class="sh-progress-row" {
+                                    span class="sh-progress-label" { "Rust proficiency" }
+                                    span class="sh-progress-pct" { "92%" }
+                                }
+                                (ProgressBar::new(92).render())
+                                div class="sh-progress-row" {
+                                    span class="sh-progress-label" { "Zero-JS coverage" }
+                                    span class="sh-progress-pct" { "100%" }
+                                }
+                                (ProgressBar::new(100).render())
+                                div class="sh-progress-row" {
+                                    span class="sh-progress-label" { "TypeScript used" }
+                                    span class="sh-progress-pct" { "0%" }
+                                }
+                                (ProgressBar::new(0).render())
+                            }
+                            div class="sh-col sh-gap-xs" {
+                                (Rating::new(5).render())
+                                (Rating::new(4).render())
+                                (Rating::new(3).render())
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::{
+    progress::ProgressBar,
+    rating::Rating,
+};
+
+html! {
+    (ProgressBar::new(75).render())
+    (ProgressBar::new(100).render())
+    (Rating::new(4).render())  // 4 out of 5 stars
+}"##,
+                    r##".sh-progress {
+    width: 100%;
+    height: 0.5rem;
+    background: var(--sh-border);
+    border-radius: var(--sh-radius-full);
+    overflow: hidden;
+}
+.sh-progress__bar {
+    height: 100%;
+    background: var(--sh-primary);
+    border-radius: var(--sh-radius-full);
+    /* Width is set via inline style — server-rendered */
+    transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.sh-rating { display: flex; gap: 0.25rem; }
+.sh-rating__star--full  { color: #f59e0b; }
+.sh-rating__star--empty { color: var(--sh-border); }"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("skeleton-demo", "Skeleton Loading",
+                    "Skeleton, SkeletonAnimation",
+                    "Shimmer uses CSS @keyframes on linear-gradient background-position — no JS polling or observers",
+                    html! {
+                        div class="sh-col sh-gap-lg" style="max-width:24rem;" {
+                            div class="sh-row sh-gap-sm sh-align-center" {
+                                (Skeleton::new().width("3rem").height("3rem").border_radius("50%").render())
+                                div class="sh-col sh-gap-xs" style="flex:1;" {
+                                    (Skeleton::new().width("60%").height("1rem").render())
+                                    (Skeleton::new().width("40%").height("0.75rem").render())
+                                }
+                            }
+                            div class="sh-col sh-gap-xs" {
+                                (Skeleton::new().width("100%").height("1rem").render())
+                                (Skeleton::new().width("90%").height("1rem").render())
+                                (Skeleton::new().width("70%").height("1rem").render())
+                            }
+                            (Skeleton::new().width("100%").height("8rem").render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::skeleton::Skeleton;
+
+html! {
+    // Circle avatar placeholder
+    (Skeleton::new()
+        .width("3rem").height("3rem")
+        .border_radius("50%").render())
+
+    // Text line placeholders
+    (Skeleton::new().width("80%").height("1rem").render())
+    (Skeleton::new().width("60%").height("1rem").render())
+
+    // Card placeholder
+    (Skeleton::new().width("100%").height("8rem").render())
+}"##,
+                    r##".sh-skeleton {
+    border-radius: var(--sh-radius-md);
+    background: linear-gradient(
+        90deg,
+        var(--sh-border) 25%,
+        color-mix(in srgb, var(--sh-border) 60%, transparent) 50%,
+        var(--sh-border) 75%
+    );
+    background-size: 200% 100%;
+    animation: sh-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes sh-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sh-skeleton { animation: none; opacity: 0.5; }
+}"##,
+                    r##"<div class="sh-skeleton" style="width:3rem;height:3rem;border-radius:50%"></div>
+<div class="sh-skeleton" style="width:80%;height:1rem;margin-top:0.5rem"></div>
+<div class="sh-skeleton" style="width:60%;height:1rem;margin-top:0.375rem"></div>"##,
+                )
+                .render())
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Feedback
+// ═══════════════════════════════════════════════════════════════
+
+fn section_feedback() -> Markup {
+    html! {
+        section id="s-feedback" class="sh-section" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-feedback", "🔔", "Feedback & Overlays",
+                    "Alerts, Toasts, Tooltips — CSS :target for overlays, :hover for hints, zero JavaScript event listeners."))
+
+                (DemoRow::new("alerts", "Alert Variants", "Alert, AlertKind",
+                    "Semantic alert roles with ARIA — color and icon from Rust enum, no className prop hunting",
+                    html! {
+                        div class="sh-col sh-gap-sm" style="max-width:28rem;" {
+                            (Alert::new(AlertKind::Info,    "Info",    "Your session will expire in 30 minutes.").render())
+                            (Alert::new(AlertKind::Success, "Success", "Component compiled with 0 warnings.").render())
+                            (Alert::new(AlertKind::Warning, "Warning", "TypeScript detected in adjacent project.").render())
+                            (Alert::new(AlertKind::Error,   "Error",   "JavaScript bundle size exceeds limit.").render())
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::alert::{Alert, AlertKind};
+
+html! {
+    (Alert::new(AlertKind::Info, "Info",
+        "Your session expires soon.").render())
+    (Alert::new(AlertKind::Success, "Success",
+        "Compiled with 0 warnings.").render())
+    (Alert::new(AlertKind::Warning, "Warning",
+        "Deprecated API used.").render())
+    (Alert::new(AlertKind::Error, "Error",
+        "Build failed.").render())
+}"##,
+                    r##".sh-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--sh-radius-md);
+    border-left: 4px solid;
+    font-size: 0.9375rem;
+}
+.sh-alert--info    { background: rgba(59,130,246,.08);  border-color: #3b82f6; color: #1e40af; }
+.sh-alert--success { background: rgba(34,197,94,.08);   border-color: #22c55e; color: #166534; }
+.sh-alert--warning { background: rgba(245,158,11,.08);  border-color: #f59e0b; color: #92400e; }
+.sh-alert--error   { background: rgba(239,68,68,.08);   border-color: #ef4444; color: #991b1b; }"##,
+                    r##"<div class="sh-alert sh-alert--success" role="alert">
+  <span class="sh-alert__icon">✓</span>
+  <div>
+    <strong class="sh-alert__title">Success</strong>
+    <p class="sh-alert__body">Operation completed.</p>
+  </div>
+</div>"##,
+                )
+                .render())
+
+                (DemoRow::new("tooltip-demo", "Tooltip", "CSS :hover + ::after",
+                    "Pure CSS pseudo-element tooltip — :hover triggers visibility, no JavaScript positioning needed",
+                    html! {
+                        div class="sh-row sh-gap-lg sh-flex-wrap" style="padding:2rem 0;" {
+                            span class="sh-tooltip-wrap" {
+                                (Button::new("Hover me").size(ButtonSize::Sm).render())
+                                span class="sh-tooltip sh-tooltip--top" { "Zero JavaScript!" }
+                            }
+                            span class="sh-tooltip-wrap" {
+                                (Button::new("Below").size(ButtonSize::Sm).variant(ButtonVariant::Secondary).render())
+                                span class="sh-tooltip sh-tooltip--bottom" { "Pure CSS tooltip" }
+                            }
+                            span class="sh-tooltip-wrap" {
+                                (Button::new("Right").size(ButtonSize::Sm).variant(ButtonVariant::Ghost).render())
+                                span class="sh-tooltip sh-tooltip--right" { "No JS needed" }
+                            }
+                        }
+                    })
+                .code(
+                    r##"html! {
+    span class="sh-tooltip-wrap" {
+        (Button::new("Save").render())
+        span class="sh-tooltip sh-tooltip--top" { "Ctrl+S" }
+    }
+}"##,
+                    r##".sh-tooltip-wrap {
+    position: relative;
+    display: inline-flex;
+}
+.sh-tooltip {
+    position: absolute;
+    padding: 0.375rem 0.75rem;
+    background: var(--sh-text);
+    color: var(--sh-surface);
+    border-radius: var(--sh-radius-md);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease, translate 0.15s ease;
+    z-index: 100;
+}
+.sh-tooltip-wrap:hover .sh-tooltip { opacity: 1; }
+.sh-tooltip--top {
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    translate: -50% 0;
+}"##,
+                    r##"<span class="sh-tooltip-wrap">
+  <button class="sh-btn sh-btn--primary sh-btn--sm">Save</button>
+  <span class="sh-tooltip sh-tooltip--top">Ctrl+S</span>
+</span>"##,
+                )
+                .render())
+            }
+        }
+    }
+}
+"""
+
+with open(OUT, "a") as f:
+    f.write(CHUNK)
+print("Chunk 3 appended:", OUT.stat().st_size, "bytes")
+
+```
+
+
+**Tool Call: shallot-clean/gen4.py**
+Status: Completed
+
+Diff: shallot/shallot-clean/gen4.py
+```
+#!/usr/bin/env python3
+"""Generate showcase.rs chunk 4: section_effects + color_picker + render()."""
+
+import pathlib
+
+OUT = pathlib.Path(
+    "/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs"
+)
+
+CHUNK = """
+// ═══════════════════════════════════════════════════════════════
+// SECTION: Signature Effects
+// ═══════════════════════════════════════════════════════════════
+
+fn section_effects() -> Markup {
+    html! {
+        section id="s-effects" class="sh-section sh-section--dark" {
+            div class="sh-showcase__inner" {
+                (sec_hd("s-effects", "✨", "Signature Effects",
+                    "Hardware-accelerated CSS @keyframes — glass aesthetics, physics-based easing, zero JavaScript."))
+
+                (DemoRow::new("border-beam", "Border Beam", "BorderBeam",
+                    "CSS @property + conic-gradient rotated via @keyframes — the animated border is a rotating conic mask, no canvas",
+                    html! {
+                        div class="sh-row sh-gap-md sh-flex-wrap sh-justify-center" {
+                            div class="sh-beam-demo" {
+                                (BorderBeam::new().render())
+                                div class="sh-beam-demo__inner" {
+                                    code { "Zero JavaScript" }
+                                    p style="font-size:0.8rem;margin-top:0.375rem;color:var(--sh-text-secondary);" {
+                                        "Rotating beam border"
+                                    }
+                                }
+                            }
+                            div class="sh-beam-demo" {
+                                (BorderBeam::new().render())
+                                div class="sh-beam-demo__inner" {
+                                    code { "Shallot UI" }
+                                    p style="font-size:0.8rem;margin-top:0.375rem;color:var(--sh-text-secondary);" {
+                                        "CSS @keyframes only"
+                                    }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::border_beam::BorderBeam;
+
+html! {
+    // Wrap any content — border beam overlays via position:absolute
+    div style="position:relative;" {
+        (BorderBeam::new().render())
+        div { "Your content here" }
+    }
+}"##,
+                    r##"/* @property enables CSS variable animation */
+@property --sh-beam-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+.sh-border-beam {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+}
+.sh-border-beam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--sh-beam-angle, 0deg),
+        transparent 0deg,
+        var(--sh-primary) 60deg,
+        transparent 120deg
+    );
+    animation: sh-beam-spin 2s linear infinite;
+    mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: 1.5px;
+}
+@keyframes sh-beam-spin {
+    to { --sh-beam-angle: 360deg; }
+}"##,
+                    "",
+                )
+                .replay()
+                .render())
+
+                (DemoRow::new("confetti-demo", "Confetti", "Confetti",
+                    "CSS @keyframes with multiple translate/rotate transforms — each piece is an independently timed span element",
+                    html! {
+                        div class="sh-row sh-gap-md sh-flex-wrap sh-justify-center" {
+                            div class="sh-confetti-stage" {
+                                (Confetti::new().render())
+                                div class="sh-confetti-cta" {
+                                    span style="font-size:2rem;" { "🎉" }
+                                    p style="font-weight:600;margin-top:0.375rem;" { "Zero JS Confetti" }
+                                    p style="font-size:0.8rem;color:var(--sh-text-secondary);" {
+                                        "CSS @keyframes"
+                                    }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::confetti::Confetti;
+
+html! {
+    div style="position:relative;overflow:hidden;" {
+        (Confetti::new().render())
+        div { "Celebrate! 🎉" }
+    }
+}"##,
+                    r##"/* Each piece is animated independently via CSS custom properties */
+.sh-confetti__piece {
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2px;
+    background: var(--sh-cf-color, var(--sh-primary));
+    animation:
+        sh-cf-fall var(--sh-cf-dur, 2s)
+            cubic-bezier(0.25, 1, 0.5, 1)
+            var(--sh-cf-delay, 0s) both,
+        sh-cf-spin var(--sh-cf-dur, 2s) linear
+            var(--sh-cf-delay, 0s) infinite;
+}
+@keyframes sh-cf-fall {
+    from { transform: translateY(-2rem); opacity: 1; }
+    to   { transform: translateY(12rem)
+               translateX(var(--sh-cf-drift, 20px)); opacity: 0; }
+}
+@keyframes sh-cf-spin { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+    .sh-confetti__piece { animation: none; opacity: 0; }
+}"##,
+                    "",
+                )
+                .replay()
+                .render())
+
+                (DemoRow::new("marquee-demo", "Marquee", "Marquee",
+                    "CSS animation-play-state:paused on :hover — the entire scroll stops without any JavaScript event handler",
+                    html! {
+                        div class="sh-col sh-gap-md" {
+                            div class="sh-marquee" style="--sh-marquee-speed:25s;" {
+                                div class="sh-marquee__track" {
+                                    span class="sh-marquee__item" { "Rust" }
+                                    span class="sh-marquee__item" { "Zero JS" }
+                                    span class="sh-marquee__item" { "Secure" }
+                                    span class="sh-marquee__item" { "CSS-only" }
+                                    span class="sh-marquee__item" { "Glass UI" }
+                                    span class="sh-marquee__item" { "Fast" }
+                                    span class="sh-marquee__item" { "Accessible" }
+                                    span class="sh-marquee__item" { "Universal" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Rust" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Zero JS" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Secure" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "CSS-only" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Glass UI" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Fast" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Accessible" }
+                                    span class="sh-marquee__item" aria-hidden="true" { "Universal" }
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"use shallot_components::marquee::Marquee;
+use maud::html;
+
+html! {
+    (Marquee::new(vec![
+        html! { span { "Rust" } },
+        html! { span { "Zero JS" } },
+        html! { span { "Glass UI" } },
+    ]).render())
+}"##,
+                    r##".sh-marquee { overflow: hidden; white-space: nowrap; }
+.sh-marquee__track {
+    display: inline-flex;
+    gap: 2rem;
+    animation: sh-marquee var(--sh-marquee-speed, 20s) linear infinite;
+}
+/* Pause on hover — zero JS, pure CSS */
+.sh-marquee:hover .sh-marquee__track {
+    animation-play-state: paused;
+}
+@keyframes sh-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sh-marquee__track { animation: none; }
+}"##,
+                    "",
+                )
+                .render())
+
+                (DemoRow::new("glass-card", "Glass Glow Cards", "CSS backdrop-filter",
+                    "Glassmorphism via backdrop-filter:blur() — glow on hover via box-shadow transition, zero JavaScript",
+                    html! {
+                        div class="sh-row sh-gap-md sh-flex-wrap sh-justify-center" {
+                            div class="sh-glass-card" {
+                                div class="sh-glass-card__icon" aria-hidden="true" { "🦀" }
+                                h4 class="sh-glass-card__title" { "Rust-Native" }
+                                p class="sh-glass-card__body" {
+                                    "Type-safe UI components compiled from Rust enums."
+                                }
+                            }
+                            div class="sh-glass-card" {
+                                div class="sh-glass-card__icon" aria-hidden="true" { "⚡" }
+                                h4 class="sh-glass-card__title" { "Zero-JS" }
+                                p class="sh-glass-card__body" {
+                                    "0 bytes JavaScript. Works on TOR Browser High Security."
+                                }
+                            }
+                            div class="sh-glass-card" {
+                                div class="sh-glass-card__icon" aria-hidden="true" { "💎" }
+                                h4 class="sh-glass-card__title" { "Glass Aesthetic" }
+                                p class="sh-glass-card__body" {
+                                    "Layered shadows, refractive blur, physics-based easing."
+                                }
+                            }
+                        }
+                    })
+                .code(
+                    r##"html! {
+    div class="sh-glass-card" {
+        div class="sh-glass-card__icon" { "🦀" }
+        h4 class="sh-glass-card__title" { "Rust-Native" }
+        p class="sh-glass-card__body" {
+            "Type-safe, compile-time checked components."
+        }
+    }
+}"##,
+                    r##".sh-glass-card {
+    padding: 1.5rem;
+    border-radius: var(--sh-radius-xl);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.06),
+        0 4px 24px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.sh-glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.14),
+        0 8px 40px rgba(0,0,0,0.2),
+        0 0 60px color-mix(
+            in srgb, var(--sh-primary) 20%, transparent);
+}"##,
+                    "",
+                )
+                .render())
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COLOR PICKER (placed in the sticky nav)
+// ═══════════════════════════════════════════════════════════════
+
+fn color_picker() -> Markup {
+    html! {
+        div class="sh-color-picker" role="group" aria-label="Choose accent color theme" {
+            span class="sh-color-picker__label" { "Theme" }
+            // Hidden radio inputs — CSS :has() on html updates --sh-primary globally
+            input type="radio" name="sh-tc" id="tc-violet"  class="sh-tc" checked;
+            input type="radio" name="sh-tc" id="tc-indigo"  class="sh-tc";
+            input type="radio" name="sh-tc" id="tc-cyan"    class="sh-tc";
+            input type="radio" name="sh-tc" id="tc-emerald" class="sh-tc";
+            input type="radio" name="sh-tc" id="tc-rose"    class="sh-tc";
+            input type="radio" name="sh-tc" id="tc-amber"   class="sh-tc";
+            input type="radio" name="sh-tc" id="tc-pink"    class="sh-tc";
+            div class="sh-color-picker__swatches" {
+                label for="tc-violet"  class="sh-swatch" style="--sw:#7c3aed;" title="Violet"  {
+                    span class="sh-sr-only" { "Violet"  }
+                }
+                label for="tc-indigo"  class="sh-swatch" style="--sw:#4f46e5;" title="Indigo"  {
+                    span class="sh-sr-only" { "Indigo"  }
+                }
+                label for="tc-cyan"    class="sh-swatch" style="--sw:#0891b2;" title="Cyan"    {
+                    span class="sh-sr-only" { "Cyan"    }
+                }
+                label for="tc-emerald" class="sh-swatch" style="--sw:#059669;" title="Emerald" {
+                    span class="sh-sr-only" { "Emerald" }
+                }
+                label for="tc-rose"    class="sh-swatch" style="--sw:#e11d48;" title="Rose"    {
+                    span class="sh-sr-only" { "Rose"    }
+                }
+                label for="tc-amber"   class="sh-swatch" style="--sw:#d97706;" title="Amber"   {
+                    span class="sh-sr-only" { "Amber"   }
+                }
+                label for="tc-pink"    class="sh-swatch" style="--sw:#db2777;" title="Pink"    {
+                    span class="sh-sr-only" { "Pink"    }
+                }
+            }
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PUBLIC RENDER
+// ═══════════════════════════════════════════════════════════════
+
+pub fn render() -> Markup {
+    html! {
+        main class="sh-showcase" id="showcase" {
+            // Sticky nav: section links + live color picker
+            nav class="sh-showcase-nav" aria-label="Component sections" {
+                div class="sh-showcase-nav__inner" {
+                    ul class="sh-showcase-nav__list" role="list" {
+                        li { a href="#s-buttons"  class="sh-nav-link" { "Buttons"    } }
+                        li { a href="#s-badges"   class="sh-nav-link" { "Badges"     } }
+                        li { a href="#s-forms"    class="sh-nav-link" { "Forms"      } }
+                        li { a href="#s-nav"      class="sh-nav-link" { "Navigation" } }
+                        li { a href="#s-data"     class="sh-nav-link" { "Data"       } }
+                        li { a href="#s-feedback" class="sh-nav-link" { "Feedback"   } }
+                        li { a href="#s-effects"  class="sh-nav-link" { "Effects"    } }
+                    }
+                    (color_picker())
+                }
+            }
+
+            (section_buttons())
+            (section_badges())
+            (section_forms())
+            (section_navigation())
+            (section_data())
+            (section_feedback())
+            (section_effects())
+        }
+    }
+}
+"""
+
+with open(OUT, "a") as f:
+    f.write(CHUNK)
+print("Chunk 4 appended:", OUT.stat().st_size, "bytes")
+
+```
+
+
+**Tool Call: python3 shallot-clean/gen1.py && python3 shallot-clean/gen2.py && python3 shallot-clean/gen3.py && python3 shallot-clean/gen4.py**
+Status: Completed
+
+```
+Chunk 1 written: 15469 bytes
+Chunk 2 appended: 35418 bytes
+Chunk 3 appended: 52924 bytes
+Chunk 4 appended: 68424 bytes
+```
+
+**Tool Call: python3 -c "
+import pathlib
+OUT = pathlib.Path('/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website/src/showcase.rs')
+css = pathlib.Path('/tmp/showcase_css.txt').read_text()
+with open(OUT, 'a') as f:
+    f.write('\n' + css)
+print('Done, total lines:', OUT.read_text().count(chr(10)))
+"**
+Status: Completed
+
+```
+Done, total lines: 2179
+```
+
+**Tool Call: cd shallot-clean && cargo build -p shallot_website 2>&1 | grep "^error\|Compiling\|Finished\|warning: unused import" | head -30**
+Status: Completed
+
+```
+Compiling shallot_website v0.1.0 (/Users/utilisateur/Desktop/shallot/shallot-clean/shallot_website)
+warning: unused import: `card::Card`
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `shallot_components::Badge<'a>` in the current scope
+error[E0599]: no method named `render` found for struct `Input<'a>` in the current scope
+error[E0599]: no method named `input_type` found for struct `Input<'a>` in the current scope
+error[E0599]: no method named `input_type` found for struct `Input<'a>` in the current scope
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+error[E0599]: no method named `id` found for struct `Checkbox<'a>` in the current scope
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+error[E0599]: no method named `id` found for struct `Checkbox<'a>` in the current scope
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+error[E0599]: no method named `id` found for struct `Checkbox<'a>` in the current scope
+error[E0061]: this function takes 3 arguments but 2 arguments were supplied
+error[E0599]: no method named `label` found for struct `Radio<'a>` in the current scope
+error[E0061]: this function takes 3 arguments but 2 arguments were supplied
+error[E0599]: no method named `label` found for struct `Radio<'a>` in the current scope
+error[E0061]: this function takes 3 arguments but 2 arguments were supplied
+error[E0599]: no method named `label` found for struct `Radio<'a>` in the current scope
+error[E0599]: no method named `id` found for struct `Switch<'a>` in the current scope
+error[E0599]: no method named `id` found for struct `Switch<'a>` in the current scope
+error[E0599]: no method named `id` found for struct `Switch<'a>` in the current scope
+error[E0061]: this function takes 2 arguments but 1 argument was supplied
+```
+
+## Assistant
+
+<thinking>
+The code now compiles past the string escaping issues, but now we have API mismatch errors. Let me check the actual APIs of the components to use them correctly. The errors are:1. `Badge` doesn't have `.render()` - it implements `Render` trait, so it should be `(badge_instance)` or use the Render trait2. `Input` doesn't have `.input_type()` or `.render()` methods  3. `Checkbox` takes 2 args but 1 given, doesn't have `.id()`
+4. `Radio` takes 3 args but 2 given, doesn't have `.label()`5. 
+
+Checking the component APIs...
+</thinking>
+
+Good — string errors fixed! Now it's API mismatches. Let me check the actual component APIs:
+
+**Tool Call: grep -n "pub fn\|pub struct\|impl.*Render\|fn new\|fn render\|fn id\|fn label\|fn input_type\|fn checked\|fn disabled" shallot-clean/shallot_components/src/badge.rs | head -20**
+Status: Completed
+
+```
+13:pub struct Badge<'a> {
+54:    pub fn new(label: &'a str) -> Self {
+69:    pub fn size(mut self, size: ComponentSize) -> Self {
+75:    pub fn color(mut self, color: ComponentColor) -> Self {
+81:    pub fn variant(mut self, variant: BadgeVariant) -> Self {
+87:    pub fn shape(mut self, shape: ComponentShape) -> Self {
+93:    pub fn icon(mut self, icon: Icon) -> Self {
+99:    pub fn icon_position(mut self, position: IconPosition) -> Self {
+105:    pub fn dismissible(mut self, dismissible: bool) -> Self {
+111:    pub fn custom_class(mut self, class: &'a str) -> Self {
+165:impl<'a> Render for Badge<'a> {
+166:    fn render(&self) -> Markup {
+208:pub struct StatusDot {
+215:    pub fn new() -> Self {
+223:    pub fn color(mut self, color: ComponentColor) -> Self {
+228:    pub fn pulse(mut self, pulse: bool) -> Self {
+233:    pub fn size(mut self, size: ComponentSize) -> Self {
+245:impl Render for StatusDot {
+246:    fn render(&self) -> Markup {
+265:pub struct CountBadge {
+```
+
+## User
+
+continuecontinue
+

@@ -1,0 +1,91 @@
+/* ==========================================================================
+   SHALLOT WEBSITE — Site Footer
+   ========================================================================== */
+
+.sh-site-footer {
+    background: #0a0f1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 3rem 1.5rem 2.5rem;
+    color: #94a3b8;
+}
+
+.sh-site-footer__inner {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+/* ── Brand row ───────────────────────────────────────────────────────────── */
+.sh-site-footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f1f5f9;
+}
+
+.sh-site-footer__brand-name {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    color: inherit;
+}
+
+/* ── Tagline ─────────────────────────────────────────────────────────────── */
+.sh-site-footer__tagline {
+    font-size: 0.875rem;
+    color: #475569;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ── Copyright ───────────────────────────────────────────────────────────── */
+.sh-site-footer__copy {
+    font-size: 0.8125rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+}
+.sh-site-footer__copy strong {
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* ── Nav links ───────────────────────────────────────────────────────────── */
+.sh-site-footer__links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sh-site-footer__links a {
+    font-size: 0.8125rem;
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.15s ease;
+    padding: 0.2rem 0.1rem;
+}
+.sh-site-footer__links a:hover {
+    color: var(--sh-primary, #8b5cf6);
+}
+
+.sh-site-footer__links span[aria-hidden] {
+    color: #1e293b;
+    user-select: none;
+}
+
+/* ── Divider above footer ────────────────────────────────────────────────── */
+.sh-site-footer::before {
+    content: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .sh-site-footer { padding: 2.5rem 1rem 2rem; }
+    .sh-site-footer__links { gap: 0.35rem; }
+}
