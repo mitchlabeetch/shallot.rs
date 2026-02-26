@@ -1,5 +1,70 @@
 /* ==========================================================================
    SHALLOT WEBSITE — Base Styles
+   "Iron & Glass" — Signature Design
+   Zero JavaScript. Every selector here runs in a NoScript TOR browser.
+   ========================================================================== */
+
+/* ── CSS custom property defaults (Violet theme — overridden by color picker) */
+:root {
+    /* Signature accent — violet with edge */
+    --sh-primary:       #6d28d9;
+    --sh-primary-hover:  #5b21b6;
+    --sh-primary-bg:     rgba(109, 40, 217, 0.08);
+    --sh-accent:         #7c3aed;
+    --sh-focus-ring:     rgba(109, 40, 217, 0.35);
+
+    --sh-success:  #059669;
+    --sh-warning:  #d97706;
+    --sh-error:    #dc2626;
+    --sh-info:     #0284c7;
+
+    /* Warm, paper-like surfaces — avoid clinical white */
+    --sh-text:           #1c1917;
+    --sh-text-secondary: #57534e;
+    --sh-text-muted:    #a8a29e;
+
+    --sh-surface:       #fafaf9;
+    --sh-surface-2:     #f5f5f4;
+    --sh-surface-3:     #e7e5e4;
+    --sh-surface-hover: #e5e5e5;
+    --sh-border:        #d6d3d1;
+    --sh-border-strong: #a8a29e;
+
+    /* Subtle, architectural radii */
+    --sh-radius-xs:   0.25rem;
+    --sh-radius-sm:   0.375rem;
+    --sh-radius-md:   0.5rem;
+    --sh-radius-lg:   0.75rem;
+    --sh-radius-xl:   1rem;
+    --sh-radius-2xl:  1.5rem;
+    --sh-radius-full: 9999px;
+
+    /* Sharp, precise shadows */
+    --sh-shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.05);
+    --sh-shadow-sm: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+    --sh-shadow-md: 0 4px 6px -1px rgba(28, 25, 23, 0.08), 0 2px 4px -2px rgba(28, 25, 23, 0.04);
+    --sh-shadow-lg: 0 10px 15px -3px rgba(28, 25, 23, 0.08), 0 4px 6px -4px rgba(28, 25, 23, 0.04);
+    --sh-shadow-xl: 0 20px 25px -5px rgba(28, 25, 23, 0.1), 0 8px 10px -6px rgba(28, 25, 23, 0.05);
+    --sh-shadow-glow: 0 0 0 1px rgba(255,255,255,0.12),
+                      0 4px 12px rgba(28, 25, 23, 0.08),
+                      0 20px 40px rgba(28, 25, 23, 0.04);
+
+    /* Precise, elegant easing */
+    --sh-ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+    --sh-ease-in:    cubic-bezier(0.55, 0, 1, 0.45);
+    --sh-ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+    --sh-dur-fast:   120ms;
+    --sh-dur-med:    250ms;
+    --sh-dur-slow:   400ms;
+}
+
+/* Light dark mode */
+:root {
+    --sh-primary:       #7c3aed;
+    --sh-primary-hover: #6d28d9;
+    --sh-primary-bg:    rgba(124, 58, 237, 0.1);
+}
+   SHALLOT WEBSITE — Base Styles
    Zero JavaScript. Every selector here runs in a NoScript TOR browser.
    ========================================================================== */
 

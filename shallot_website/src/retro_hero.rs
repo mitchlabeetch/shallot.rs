@@ -1,113 +1,133 @@
-//! Retro Hero Section - 90s Web Aesthetic (updated)
+//! Retro Hero Section - 90s Geocities Style with Punchline
 //!
-//! Changes in this version:
-//! 1) Hero background changed to a plain, lighter grey (no gradient).
-
-//! 3) Improved placeholder styling for component previews so the "Live preview"
-//!    placeholder is clearer and includes a subtle hint when an actual preview
-//!    is not rendered server-side.
+//! A lovingly accurate recreation of 1998 Geocities/Netscape era,
+//! built entirely in pure Rust + CSS. No JavaScript.
 //!
-//! Notes on the "audit" findings (also represented below as comments in CSS):
-//! - Many components displayed the placeholder because the server-side showcase
-//!   render function falls back to a placeholder when a concrete component
-//!   renderer is not matched/imported. That is a logic/templating issue in
-//!   `showcase.rs` (no runtime JS involved).
-//! - Code snippets were present in the HTML but not visible because the CSS
-//!   selector used to show/hide them assumes the radio inputs are siblings of
-//!   the code blocks. In the generated markup the inputs are nested inside a
-//!   `.sh-code-tabs` element while the `<pre>` code blocks are later siblings of
-//!   that element, which breaks the intended sibling selector. Two practical
-//!   non-destructive fixes:
-//!     a) Move the radio inputs out to be direct siblings of the code blocks
-//!        (change in `showcase.rs`) — the most correct fix.
-//!     b) Provide a CSS fallback that shows code blocks by default (done here)
-//!        so the site is usable even without changing markup structure.
-//!
-//! If you want, I can open a follow-up edit that moves radio inputs in the
-//! `showcase.rs` markup to make the CSS tab-toggle pattern reliable and still
-//! keep the CSS fallback as a safety net.
+//! Structure:
+//!   1. The "90s Webpage" — authentically terrible, deliberately so
+//!   2. The Punchline — "☝️ No JavaScript doesn't have to look like this."
 
 use maud::{html, Markup};
 
-/// Render the retro hero section
+/// Render the retro hero section - 90s Geocities style with punchline
 pub fn render() -> Markup {
     html! {
-        section class="sh-retro-hero" {
-            /* Scanlines overlay - decorative */
-            div class="sh-retro-hero__scanlines" aria-hidden="true" {}
-
-            /* CRT flicker effect - decorative */
+        section class="sh-retro-hero scanlines" {
+            /* CRT vignette overlay */
             div class="sh-retro-hero__crt" aria-hidden="true" {}
 
             div class="sh-retro-hero__content" {
-                /* Under construction GIF placeholder */
+                /* Under construction GIF */
                 div class="sh-retro-hero__construction" {
                     img
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='50'%3E%3Crect fill='%23ffcc00' width='200' height='50'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='14' fill='%23000'%3E🚧 UNDER CONSTRUCTION 🚧%3C/text%3E%3C/svg%3E"
+                        src="https://web.archive.org/web/2009/http://www.geocities.com/SouthBeach/Marina/4942/underconstruction.gif"
                         alt="Under construction"
                         class="sh-retro-hero__gif"
-                    ;
+                        loading="lazy";
                 }
 
-                /* Marquee-style scrolling text */
+                /* Marquee - 90s style */
                 div class="sh-retro-hero__marquee-container" {
                     div class="sh-retro-hero__marquee" {
                         span {
-                            "⭐ Welcome to the Shallot showcase — elegant Rust UI components, zero JS. ⭐"
+                            "⭐ Welcome to my homepage! ⭐ Best viewed in Netscape Navigator 4.0 at 800x600 ⭐ You are visitor #000,042 ⭐ This site is Y2K compliant ⭐ Sign my guestbook! ⭐"
                         }
                     }
                 }
 
-                hr class="sh-retro-hero__divider" aria-hidden="true";
+                hr class="sh-retro-hero__divider";
 
-                /* Main heading */
+                /* Main heading - Comic Sans */
                 h1 class="sh-retro-hero__title" {
-                    "Shallot — Zero-JS Rust UI Components"
+                    "🚧 RustUI Component Library 🚧"
                 }
 
                 p class="sh-retro-hero__subtitle" {
-                    i {
-                        "Beautiful, accessible UI components built in Rust and CSS (no client JS)."
+                    i { "The " } b { "BEST" } " no-JavaScript UI framework!"
+                }
+
+                /* Classic 90s announcement table */
+                table class="sh-retro-hero__table" role="presentation" {
+                    tbody {
+                        tr {
+                            td class="sh-retro-hero__table-cell sh-retro-hero__table-cell--yellow" {
+                                b { "📢 NEW!" } " v0.1.0 released!"
+                            }
+                        }
+                        tr {
+                            td class="sh-retro-hero__table-cell" {
+                                a href="#showcase" class="sh-retro-hero__link" { "Click here" } " to download (56k modem friendly)"
+                            }
+                        }
                     }
                 }
 
-                /* Small CTA row */
-                div class="sh-retro-hero__cta" {
-                    a href="#showcase" class="sh-retro-hero__cta-link" { "Browse components" }
-                    " "
-                    a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" {
-                        "View on GitHub"
-                    }
+                /* Badge row - shields.io style */
+                div class="sh-retro-hero__badges" {
+                    img src="https://img.shields.io/badge/JavaScript-NONE-red?style=flat-square" alt="No JS" class="sh-retro-hero__badge" loading="lazy";
+                    img src="https://img.shields.io/badge/Rust-🦀-orange?style=flat-square" alt="Rust" class="sh-retro-hero__badge" loading="lazy";
+                    img src="https://img.shields.io/badge/bundle_size-0kb_JS-brightgreen?style=flat-square" alt="0kb" class="sh-retro-hero__badge" loading="lazy";
                 }
+
+                /* Classic 90s links */
+                p class="sh-retro-hero__links" {
+                    a href="#showcase" class="sh-retro-hero__link" { "Sign my guestbook!" }
+                    " | "
+                    a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" class="sh-retro-hero__link" { "Webring" }
+                    " | "
+                    a href="https://github.com/shallot-rs/shallot" target="_blank" rel="noopener noreferrer" class="sh-retro-hero__link" { "Links" }
+                }
+
+                hr class="sh-retro-hero__divider";
+
+                /* Footer - Times New Roman */
+                p class="sh-retro-hero__footer" {
+                    "© 1998-2026"
+                    " | "
+                    "Made with " code { "<table>" } " and love"
+                }
+
+                hr class="sh-retro-hero__divider";
+            }
+        }
+
+        /* THE PUNCHLINE */
+        div class="sh-retro-punchline" {
+            p class="sh-retro-punchline__text" {
+                "☝️ No JavaScript doesn't have to look like this."
+            }
+            p class="sh-retro-punchline__arrow" aria-hidden="true" {
+                "👇"
             }
         }
     }
 }
 
-/// Generate retro hero CSS.
-/// code blocks.
+/// Generate retro hero CSS - 90s Geocities style
 pub fn retro_css() -> String {
     r#"
 /* ============================================
-   RETRO HERO - updated background + fallbacks
+   RETRO HERO - 90s Geocities Style
    ============================================ */
 
 .sh-retro-hero {
     position: relative;
-    min-height: 60vh;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 1rem;
-    /* Changed: plain lighter grey background (no gradient) */
-    background: #f5f7fa; /* light neutral grey, good contrast with retro styles */
+    padding: 2rem 1rem;
+    /* Classic Windows 95 grey background */
+    background: #c0c0c0;
     overflow: hidden;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: #222;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
+    color: #000;
 }
 
-/* Subtle scanlines and CRT effects kept but toned down to be unobtrusive */
-.sh-retro-hero__scanlines {
+/* Scanlines overlay */
+.sh-retro-hero.scanlines::before {
+    content: '';
     position: absolute;
     inset: 0;
     background: repeating-linear-gradient(
@@ -115,61 +135,59 @@ pub fn retro_css() -> String {
         rgba(0, 0, 0, 0.03) 0px,
         rgba(0, 0, 0, 0.03) 1px,
         transparent 1px,
-        transparent 3px
-    );
-    pointer-events: none;
-    z-index: 0;
-}
-
-.sh-retro-hero__crt {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(255,255,255,0.02) 0%,
-        rgba(0,0,0,0.04) 100%
+        transparent 2px
     );
     pointer-events: none;
     z-index: 1;
 }
 
-/* Content sits above decorations */
+/* CRT vignette */
+.sh-retro-hero__crt {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
 .sh-retro-hero__content {
     position: relative;
     z-index: 10;
-    max-width: 72rem;
+    max-width: 42rem;
     width: 100%;
     text-align: center;
-    color: #0f1724;
-    padding: 2rem;
-    box-sizing: border-box;
+    background: #c0c0c0;
+    padding: 1rem;
 }
 
-.sh-retro-hero__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    margin: 0 0 0.5rem 0;
-    font-weight: 700;
-    color: #0b1220;
+/* Under construction GIF */
+.sh-retro-hero__construction {
+    margin-bottom: 0.5rem;
 }
 
-.sh-retro-hero__subtitle {
-    color: #374151;
-    margin: 0 0 1.25rem 0;
+.sh-retro-hero__gif {
+    height: 3rem;
+    width: auto;
+    image-rendering: pixelated;
 }
 
+/* Marquee - classic 90s style */
 .sh-retro-hero__marquee-container {
     overflow: hidden;
-    margin-bottom: 1rem;
-    background: transparent;
+    margin-bottom: 0.5rem;
+    background: #000080;
+    color: #fff;
+    padding: 0.25rem 0;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
 }
 
 .sh-retro-hero__marquee {
     display: inline-block;
     white-space: nowrap;
-    animation: sh-retro-marquee 18s linear infinite;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-    font-size: 0.9rem;
-    color: #6b7280;
+    animation: sh-retro-marquee 15s linear infinite;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.75rem;
 }
 
 @keyframes sh-retro-marquee {
@@ -177,98 +195,154 @@ pub fn retro_css() -> String {
     100% { transform: translateX(-100%); }
 }
 
+/* Classic HR divider */
 .sh-retro-hero__divider {
     border: none;
-    border-top: 1px solid rgba(15,23,36,0.06);
-    margin: 1.25rem auto;
-    width: 60%;
+    border-top: 2px groove #fff;
+    border-bottom: 1px solid #808080;
+    margin: 0.75rem auto;
+    width: 90%;
 }
 
-.sh-retro-hero__construction { margin-bottom: 0.75rem; }
-.sh-retro-hero__gif { height: 2.5rem; display:block; margin: 0 auto; }
-
-.sh-retro-hero__cta {
-    margin-top: 1rem;
+/* Title - big and bold */
+.sh-retro-hero__title {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    margin: 0.5rem 0;
+    font-weight: bold;
+    color: #000080;
+    text-shadow: 1px 1px 0 #fff;
 }
 
-.sh-retro-hero__cta-link {
+/* Subtitle */
+.sh-retro-hero__subtitle {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    color: #000;
+}
+
+/* Classic 90s table */
+.sh-retro-hero__table {
+    margin: 1rem auto;
+    border: 2px solid #000;
+    border-collapse: collapse;
+    width: auto;
     display: inline-block;
-    padding: 0.6rem 1rem;
-    background: #0b74ff;
-    color: #fff;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-right: 0.5rem;
 }
 
-.sh-retro-hero__cta-link:hover {
-    background: #095ec1;
+.sh-retro-hero__table-cell {
+    border: 1px solid #000;
+    padding: 0.5rem 1rem;
+    background: #c0c0c0;
+    font-size: 0.9rem;
 }
 
-/* Reduced motion respects user preference */
+.sh-retro-hero__table-cell--yellow {
+    background: #ffff00;
+    color: #000;
+    font-weight: bold;
+}
+
+.sh-retro-hero__link {
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.sh-retro-hero__link:visited {
+    color: #551a8b;
+}
+
+.sh-retro-hero__link:hover {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+/* Badge row */
+.sh-retro-hero__badges {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.sh-retro-hero__badge {
+    height: 1.5rem;
+    width: auto;
+}
+
+/* Links row */
+.sh-retro-hero__links {
+    font-size: 0.85rem;
+    margin: 0.75rem 0;
+}
+
+/* Footer */
+.sh-retro-hero__footer {
+    font-size: 0.75rem;
+    font-family: "Times New Roman", Times, serif;
+    margin: 0.5rem 0;
+    color: #000;
+}
+
+/* PUNCHLINE SECTION */
+.sh-retro-punchline {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+}
+
+.sh-retro-punchline__text {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-weight: bold;
+    font-family: "Comic Sans MS", "Chalkboard SE", sans-serif;
+    color: #1e293b;
+    animation: sh-punchline-fade 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes sh-punchline-fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sh-retro-punchline__arrow {
+    font-size: 2.5rem;
+    margin-top: 1.5rem;
+    animation: sh-bounce 1s ease-in-out infinite;
+    display: block;
+}
+
+@keyframes sh-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+/* Responsive */
+@media (max-width: 48rem) {
+    .sh-retro-hero__content {
+        padding: 0.5rem;
+    }
+    .sh-retro-hero__title {
+        font-size: 1.25rem;
+    }
+    .sh-retro-hero__badges {
+        gap: 0.25rem;
+    }
+    .sh-retro-hero__badge {
+        height: 1.25rem;
+    }
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .sh-retro-hero__marquee { animation: none; }
+    .sh-retro-punchline__text { animation: none; opacity: 1; transform: none; }
+    .sh-retro-punchline__arrow { animation: none; }
 }
-
-/* ============================================
-   Global fallbacks & showcase improvements
-   (safe, non-invasive CSS to improve UX)
-   ============================================ */
-
-/* Improve "Live preview" placeholder visuals so missing previews are clearer */
-.sh-component-card__placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6b7280;
-    font-size: 0.95rem;
-    font-style: italic;
-    padding: 1rem;
-    background: linear-gradient(180deg, rgba(15,23,36,0.02), rgba(15,23,36,0.01));
-    border-radius: 8px;
-    border: 1px dashed rgba(15,23,36,0.06);
-}
-
-/* Add a subtle hint inside the placeholder (visually only) */
-.sh-component-card__placeholder::after {
-    content: " — preview not rendered server-side";
-    display: block;
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin-top: 0.25rem;
-    font-style: normal;
-}
-
-
-
-/* Improve readability for download button in code area */
-.sh-code-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.45rem 0.75rem;
-    background: #111827;
-    color: #f8fafc;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.81rem;
-    margin-bottom: 0.75rem;
-}
-
-/* Ensure the code tab labels remain keyboard focusable and visible */
-.sh-code-tab:focus {
-    outline: 2px solid rgba(11,116,255,0.9);
-    outline-offset: 2px;
-}
-
-/* Small responsive tweaks */
-@media (max-width: 64rem) {
-    .sh-retro-hero__content { padding: 1.25rem; }
-    .sh-retro-hero__title { font-size: 1.5rem; }
-}
-
-/* End of CSS fallbacks and hero styles */
 "#
     .to_string()
 }
