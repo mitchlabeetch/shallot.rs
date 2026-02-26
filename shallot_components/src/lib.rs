@@ -358,7 +358,7 @@ pub use credit_card_input::{credit_card_input_css, CardType, CreditCardInput};
 pub use data_display::{data_display_css, Chip};
 pub use file_list::{file_list_css, FileList};
 pub use glass_select::{glass_select_css, GlassSelect};
-pub use icon::{icon_css, Icon, IconButton};
+pub use icon::{icon_css, Icon, IconButton as SimpleIconButton};
 pub use image_upload::{image_upload_css, ImageUpload};
 pub use multi_select::{multi_select_css, MultiSelect};
 pub use rich_text::{rich_text_css, RichText};
