@@ -214,18 +214,19 @@ a:hover {
 
 .sh-site-footer p {
     color: var(--sh-text-secondary);
-    font-size: 0.875rem;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
 }
 
 .sh-site-footer__tagline {
     margin-top: 0.5rem;
     font-style: italic;
     color: var(--sh-text-muted);
+    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
 }
 
 .sh-site-footer__links {
     margin-top: 0.75rem;
-    font-size: 0.75rem;
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
 }
 
 .sh-site-footer__links a {
@@ -344,7 +345,7 @@ pub fn showcase_css() -> String {
 }
 
 .sh-theme-switcher__title {
-    font-size: 0.875rem;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
     font-weight: 600;
     color: var(--sh-text);
     margin-bottom: 0.75rem;
@@ -419,7 +420,7 @@ pub fn showcase_css() -> String {
     padding: 0.5rem 1rem;
     background: var(--sh-surface-2);
     border-radius: var(--sh-radius-full);
-    font-size: 0.875rem;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
     font-weight: 500;
     white-space: nowrap;
     transition: all 0.2s ease;
@@ -436,7 +437,7 @@ pub fn showcase_css() -> String {
 }
 
 .sh-component-section__title {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
     margin-bottom: 0.5rem;
     color: var(--sh-text);
 }
@@ -444,6 +445,7 @@ pub fn showcase_css() -> String {
 .sh-component-section__description {
     color: var(--sh-text-secondary);
     margin-bottom: 2rem;
+    font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .sh-component-grid {
@@ -459,11 +461,19 @@ pub fn showcase_css() -> String {
     border-radius: var(--sh-radius-lg);
     overflow: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* Performance: defer rendering of off-screen cards */
+    content-visibility: auto;
+    contain: layout style paint;
 }
 
 .sh-component-card:hover {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
+}
+
+.sh-component-card:focus-within {
+    outline: 2px solid var(--sh-primary);
+    outline-offset: 2px;
 }
 
 .sh-component-card__preview {
@@ -481,15 +491,16 @@ pub fn showcase_css() -> String {
 }
 
 .sh-component-card__title {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 .sh-component-card__description {
-    font-size: 0.875rem;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
     color: var(--sh-text-secondary);
     margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
 /* Code Dropdown */
@@ -552,7 +563,7 @@ pub fn showcase_css() -> String {
     background: transparent;
     border: 1px solid var(--sh-border);
     border-radius: var(--sh-radius-md);
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -562,15 +573,26 @@ pub fn showcase_css() -> String {
     background: var(--sh-surface-2);
 }
 
-/* CSS-only tabs using radio buttons */
-.sh-code-tab__radio {
-    display: none;
+.sh-code-tab:focus-visible {
+    outline: 2px solid var(--sh-primary);
+    outline-offset: 2px;
 }
 
 .sh-code-tab__radio:checked + .sh-code-tab {
     background: var(--sh-primary);
     color: white;
     border-color: var(--sh-primary);
+}
+
+.sh-code-tab[aria-selected="true"] {
+    background: var(--sh-primary);
+    color: white;
+    border-color: var(--sh-primary);
+}
+
+/* CSS-only tabs using radio buttons */
+.sh-code-tab__radio {
+    display: none;
 }
 
 .sh-code-block {
@@ -580,7 +602,7 @@ pub fn showcase_css() -> String {
     padding: 1rem;
     border-radius: var(--sh-radius-md);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
     overflow-x: auto;
     white-space: pre;
 }
@@ -594,6 +616,15 @@ pub fn showcase_css() -> String {
 }
 
 /* Responsive */
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 @media (max-width: 64rem) {
     .sh-theme-switcher {
         top: auto;

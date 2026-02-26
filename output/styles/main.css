@@ -91,18 +91,19 @@ a:hover {
 
 .sh-site-footer p {
     color: var(--sh-text-secondary);
-    font-size: 0.875rem;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
 }
 
 .sh-site-footer__tagline {
     margin-top: 0.5rem;
     font-style: italic;
     color: var(--sh-text-muted);
+    font-size: clamp(0.7rem, 1.5vw, 0.8125rem);
 }
 
 .sh-site-footer__links {
     margin-top: 0.75rem;
-    font-size: 0.75rem;
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
 }
 
 .sh-site-footer__links a {
