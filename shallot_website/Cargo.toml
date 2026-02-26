@@ -1,0 +1,10 @@
+[package]
+name = "shallot_website"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+maud = "0.26"
+shallot_components = { path = "../shallot_components" }
+shallot_foundation = { path = "../shallot_foundation" }

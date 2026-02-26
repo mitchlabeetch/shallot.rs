@@ -1,0 +1,5 @@
+{
+  "outputDirectory": "output",
+  "installCommand": "echo 'No npm install needed'",
+  "buildCommand": "echo 'Static site - no build needed'"
+}

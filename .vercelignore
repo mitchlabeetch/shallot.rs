@@ -1,0 +1,4 @@
+target/
+qlogs/
+.git/
+*.DS_Store

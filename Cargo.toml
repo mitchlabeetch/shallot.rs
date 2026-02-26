@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "shallot",
+    "shallot_components",
+    "shallot_foundation",
+    "shallot_testing",
+    "shallot_build",
+    "shallot_website",
+]
+resolver = "2"
+
+[profile]
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+lto = true
+codegen-units = 1

@@ -1,0 +1,25 @@
+[package]
+name = "shallot_build"
+version = "0.1.0"
+edition = "2021"
+authors = ["Shallot.rs Team"]
+description = "Multi-format build system for Shallot.rs components"
+license = "MIT"
+repository = "https://github.com/shallot-rs/shallot"
+keywords = ["build", "wasm", "native", "ssr", "static"]
+categories = ["development-tools::build-utils"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+walkdir = "2.4"
+
+[dev-dependencies]
+tempfile = "3.8"
+
+[features]
+default = []
+wasm = []
+native = []
+ssr = []
+static = []
